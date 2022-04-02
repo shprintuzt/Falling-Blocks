@@ -25,41 +25,125 @@ export const getPieceShape = (currentPiece: CurrentPiece) => {
                 {x: x, y: y - 1},
                 {x: x + 1, y: y - 1}]
         case Piece.I:
-            return [
-                {x: x - 1, y: y},
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x + 2, y: y}]
+            if ([0, 180].includes(degree)) {
+                return [
+                    {x: x - 1, y: y},
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 2, y: y}]
+            } else {
+                return [
+                    {x: x, y: y},
+                    {x: x, y: y - 1},
+                    {x: x, y: y - 2},
+                    {x: x, y: y - 3}]
+            }
         case Piece.Z:
-            return [
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x + 1, y: y - 1},
-                {x: x + 2, y: y - 1}]
+            if ([0, 180].includes(degree)) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 2, y: y - 1}]
+            } else {
+                return [
+                    {x: x + 1, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 1, y: y - 2}]
+            }
         case Piece.S:
-            return [
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x - 1, y: y - 1},
-                {x: x, y: y - 1}]
+            if ([0, 180].includes(degree)) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x - 1, y: y - 1},
+                    {x: x, y: y - 1}]
+            } else {
+                return [
+                    {x: x, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 1, y: y - 2}]
+            }
         case Piece.L:
-            return [
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x + 2, y: y},
-                {x: x, y: y - 1}]
+            if (0 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 2, y: y},
+                    {x: x, y: y - 1}]
+            } else if (90 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 1, y: y - 2}]
+            } else if (180 == degree) {
+                return [
+                    {x: x + 1, y: y},
+                    {x: x - 1, y: y - 1},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1}]
+            } else if (270 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x, y: y - 1},
+                    {x: x, y: y - 2},
+                    {x: x + 1, y: y - 2}]
+            }
         case Piece.LR:
-            return [
-                {x: x - 1, y: y},
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x + 1, y: y - 1}]
+            if (0 == degree) {
+                return [
+                    {x: x - 1, y: y},
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 1, y: y - 1}]
+            } else if (90 == degree) {
+                return [
+                    {x: x + 1, y: y},
+                    {x: x + 1, y: y - 1},
+                    {x: x, y: y - 2},
+                    {x: x + 1, y: y - 2}]
+            } else if (180 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 2, y: y - 1}]
+            } else if (270 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x, y: y - 1},
+                    {x: x, y: y - 2}]
+            }
         case Piece.T:
-            return [
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x + 2, y: y},
-                {x: x + 1, y: y - 1}]
+            if (0 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x + 1, y: y},
+                    {x: x + 2, y: y},
+                    {x: x + 1, y: y - 1}]
+            } else if (90 == degree) {
+                return [
+                    {x: x + 1, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 1, y: y - 2}]
+            } else if (180 == degree) {
+                return [
+                    {x: x + 1, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x + 2, y: y - 1}]
+            } else if (270 == degree) {
+                return [
+                    {x: x, y: y},
+                    {x: x, y: y - 1},
+                    {x: x + 1, y: y - 1},
+                    {x: x, y: y - 2}]
+            }
         default:
             return []
     }
