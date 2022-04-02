@@ -7,7 +7,7 @@ export class Board {
    
     constructor(width: number, height: number) {
         this._board = new Array(width);
-        this._currentPiece = new CurrentPiece(Piece.O)
+        this._currentPiece = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
         for (let x = 0; x < width; ++x) {
             this._board[x] = new Array(height);
             for (let y = 0; y < height; ++y) {
@@ -25,6 +25,10 @@ export class Board {
         return this._board[0].length;
     }
 
+    get currentPiece() {
+        return this._currentPiece
+    }
+
     isEmpty = (x: number, y: number): boolean => {
         return this._board[x][y];
     }
@@ -36,7 +40,10 @@ export class Board {
     }
 
     updateCurrentPiece = (piece: PieceType) => {
-        this._currentPiece = new CurrentPiece(piece);
+        this._currentPiece = new CurrentPiece(piece, this.width / 2 - 1, this.height - 1);
+    }
+
+    updateBoard = () => {
         this._board[4][29] = true;
         this._board[5][29] = true;
         this._board[4][28] = true;

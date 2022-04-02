@@ -25,9 +25,13 @@ describe('Board test', () => {
             }
         }
     });
-    test('add a current piece', () => {
+    test('update a current piece and board', () => {
         let board = new Board(10, 30)
         board.updateCurrentPiece(Piece.O)
+        expect(board.currentPiece.degree).toBe(0)
+        expect(board.currentPiece.x).toBe(10 / 2 - 1)
+        expect(board.currentPiece.y).toBe(30 - 1)
+        board.updateBoard()
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29
