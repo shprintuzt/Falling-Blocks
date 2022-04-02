@@ -25,7 +25,7 @@ describe('Board test', () => {
             }
         }
     });
-    test('update a current piece and board', () => {
+    test('update a current piece to O and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.O)
         expect(board.currentPiece.degree).toBe(0)
@@ -37,6 +37,108 @@ describe('Board test', () => {
                 if (x == 4 && y == 29
                     || x == 5 && y == 29
                     || x == 4 && y == 28
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to I and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.I)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 3 && y == 29
+                    || x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 6 && y == 29) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to Z and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.Z)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 5 && y == 28
+                    || x == 6 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to S and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.S)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 3 && y == 28
+                    || x == 4 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to L and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.L)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 6 && y == 29
+                    || x == 4 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to LR and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.LR)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 3 && y == 29
+                    || x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+    test('update a current piece to T and board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.T)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 6 && y == 29
                     || x == 5 && y == 28) {
                     expect(board.isEmpty(x, y)).toBe(true)
                 } else {

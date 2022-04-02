@@ -57,6 +57,42 @@ export class Board {
                 this._board[x][y - 1] = true;
                 this._board[x + 1][y - 1] = true;
                 break;
+            case Piece.I:
+                this._board[x - 1][y] = true;
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x + 2][y] = true;
+                break;
+            case Piece.Z:
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x + 1][y - 1] = true;
+                this._board[x + 2][y - 1] = true;
+                break;
+            case Piece.S:
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x - 1][y - 1] = true;
+                this._board[x][y - 1] = true;
+                break;
+            case Piece.L:
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x + 2][y] = true;
+                this._board[x][y - 1] = true;
+                break;
+            case Piece.LR:
+                this._board[x - 1][y] = true;
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x + 1][y - 1] = true;
+                break;
+            case Piece.T:
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x + 2][y] = true;
+                this._board[x + 1][y - 1] = true;
+                break;
             // case Piece.O:
             //     console.log('Oranges are $0.59 a pound.');
             //     break;
