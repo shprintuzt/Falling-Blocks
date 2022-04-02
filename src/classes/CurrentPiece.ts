@@ -13,6 +13,10 @@ export class CurrentPiece {
         this._y = y;
     }
 
+    get type() {
+        return this._type;
+    }
+
     get degree() {
         return this._degree;
     }

@@ -44,10 +44,36 @@ export class Board {
     }
 
     updateBoard = () => {
-        this._board[4][29] = true;
-        this._board[5][29] = true;
-        this._board[4][28] = true;
-        this._board[5][28] = true;
+        let x = this.currentPiece.x;
+        let y = this.currentPiece.y;
+        switch (this.currentPiece.type) {
+            case Piece.O:
+                this._board[x][y] = true;
+                this._board[x + 1][y] = true;
+                this._board[x][y - 1] = true;
+                this._board[x + 1][y - 1] = true;
+                break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            // case Piece.O:
+            //     console.log('Oranges are $0.59 a pound.');
+            //     break;
+            default:
+                console.error('invalid PieceType')
+        }
     }
 
 }
