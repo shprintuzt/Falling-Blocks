@@ -25,12 +25,26 @@ export class CurrentPiece {
         return this._y;
     }
 
+    set x(x: number) {
+        this._x = x;
+    }
+
+    set y(y: number) {
+        this._y = y;
+    }
+
     rotateRight = (): void => {
         this._degree = (this._degree + 90) % 360
     }
     
     rotateLeft = (): void => {
         this._degree = (this._degree + 270) % 360
+    }
+
+    reset = (piece: PieceType, x: number, y: number) => {
+        this._type = piece;
+        this.x = x;
+        this.y = y;
     }
     
 }
