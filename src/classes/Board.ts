@@ -8,12 +8,7 @@ export class Board {
     constructor(width: number, height: number) {
         this._board = new Array(width);
         this._currentPiece = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
-        for (let x = 0; x < width; ++x) {
-            this._board[x] = new Array(height);
-            for (let y = 0; y < height; ++y) {
-                this._board[x][y] = false;
-            }
-        }
+        this.clearBoard(width, height)
     }
 
     get width() {
@@ -27,6 +22,15 @@ export class Board {
 
     get currentPiece() {
         return this._currentPiece
+    }
+
+    clearBoard = (width: number, height: number) => {
+        for (let x = 0; x < width; ++x) {
+            this._board[x] = new Array(height);
+            for (let y = 0; y < height; ++y) {
+                this._board[x][y] = false;
+            }
+        }
     }
 
     isEmpty = (x: number, y: number): boolean => {
