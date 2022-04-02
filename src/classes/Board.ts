@@ -1,4 +1,3 @@
-import { popScopeId, proxyRefs } from 'vue';
 import { CurrentPiece } from './CurrentPiece';
 import { getPieceShape, Piece, PieceType } from './PieceType'
 
@@ -60,6 +59,18 @@ export class Board {
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = false;
         }
+    }
+
+    rotateRight = () => {
+        this.removeCurrentPiece()
+        this.currentPiece.rotateRight()
+        this.updateBoard()
+    }
+
+    rotateLeft = () => {
+        this.removeCurrentPiece()
+        this.currentPiece.rotateLeft()
+        this.updateBoard()
     }
 
     moveRight = () => {
