@@ -27,7 +27,7 @@ describe('Board test', () => {
     });
     test('update a current piece and board', () => {
         let board = new Board(10, 30)
-        board.updateCurrentPiece(Piece.O)
+        board.newCurrentPiece(Piece.O)
         expect(board.currentPiece.degree).toBe(0)
         expect(board.currentPiece.x).toBe(10 / 2 - 1)
         expect(board.currentPiece.y).toBe(30 - 1)

@@ -39,7 +39,7 @@ export class Board {
         }
     }
 
-    updateCurrentPiece = (piece: PieceType) => {
+    newCurrentPiece = (piece: PieceType) => {
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);
     }
 
