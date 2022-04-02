@@ -45,6 +45,18 @@ export class CurrentPiece {
         this._degree = (this._degree + 270) % 360
     }
 
+    moveRight = (): void => {
+        this._x += 1;
+    }
+
+    moveLeft = (): void => {
+        this._x -= 1;
+    }
+
+    moveDown = (): void => {
+        this._y -= 1;
+    }
+
     reset = (piece: PieceType, x: number, y: number) => {
         this._type = piece;
         this.x = x;

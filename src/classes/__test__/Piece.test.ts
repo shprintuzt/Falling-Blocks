@@ -16,4 +16,16 @@ describe('Piece test', () => {
         currentPiece.rotateLeft();
         expect(currentPiece.degree).toEqual(270);
     });
+    test('move piece', () => {
+        let currentPiece = new CurrentPiece(Piece.O, 5, 9);
+        currentPiece.moveRight()
+        expect(currentPiece.x).toEqual(6);
+        expect(currentPiece.y).toEqual(9);
+        currentPiece.moveDown()
+        expect(currentPiece.x).toEqual(6);
+        expect(currentPiece.y).toEqual(8);
+        currentPiece.moveLeft()
+        expect(currentPiece.x).toEqual(5);
+        expect(currentPiece.y).toEqual(8);
+    })
 });
