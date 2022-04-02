@@ -180,31 +180,31 @@ describe('Piece move', () => {
                 }
             }
         }
-    //     board.moveDown()
-    //     for (let x = 0; x < 10; ++x) {
-    //         for (let y = 0; y < 30; ++y) {
-    //             if (x == 5 && y == 28
-    //                 || x == 6 && y == 28
-    //                 || x == 7 && y == 28
-    //                 || x == 6 && y == 27) {
-    //                 expect(board.isEmpty(x, y)).toBe(true)
-    //             } else {
-    //                 expect(board.isEmpty(x, y)).toBe(false)
-    //             }
-    //         }
-    //     }
-    //     board.moveLeft()
-    //     for (let x = 0; x < 10; ++x) {
-    //         for (let y = 0; y < 30; ++y) {
-    //             if (x == 4 && y == 28
-    //                 || x == 5 && y == 28
-    //                 || x == 6 && y == 28
-    //                 || x == 5 && y == 27) {
-    //                 expect(board.isEmpty(x, y)).toBe(true)
-    //             } else {
-    //                 expect(board.isEmpty(x, y)).toBe(false)
-    //             }
-    //         }
-    //     }
-    // });
+        board.moveDown()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 5 && y == 28
+                    || x == 6 && y == 28
+                    || x == 7 && y == 28
+                    || x == 6 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.moveLeft()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 28
+                    || x == 5 && y == 28
+                    || x == 6 && y == 28
+                    || x == 5 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
 })
