@@ -1,11 +1,12 @@
-import { Piece } from './Piece'
+import { PieceType } from './PieceType'
 
-export class CurrentPiece extends Piece {
+export class CurrentPiece {
+    _type: PieceType;
     _degree: number;
     _y: number;
 
-    constructor(type: string) {
-        super(type);
+    constructor(type: PieceType) {
+        this._type = type;
         this._degree = 0;
         this._y = 0;
     }

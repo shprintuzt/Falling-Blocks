@@ -1,5 +1,5 @@
 import { CurrentPiece } from './CurrentPiece';
-import { Piece } from './Piece'
+import { Piece, PieceType } from './PieceType'
 
 export class Board {
     _board: boolean[][];
@@ -7,7 +7,7 @@ export class Board {
    
     constructor(width: number, height: number) {
         this._board = new Array(width);
-        this._currentPiece = new CurrentPiece('non')
+        this._currentPiece = new CurrentPiece(Piece.O)
         for (let x = 0; x < width; ++x) {
             this._board[x] = new Array(height);
             for (let y = 0; y < height; ++y) {
@@ -35,11 +35,12 @@ export class Board {
         }
     }
 
-    updateCurrentPiece = (piece: Piece) => {
-        this._board[4][29] = true
-        this._board[5][29] = true
-        this._board[4][28] = true
-        this._board[5][28] = true
+    updateCurrentPiece = (piece: PieceType) => {
+        this._currentPiece = new CurrentPiece(piece);
+        this._board[4][29] = true;
+        this._board[5][29] = true;
+        this._board[4][28] = true;
+        this._board[5][28] = true;
     }
 
 }

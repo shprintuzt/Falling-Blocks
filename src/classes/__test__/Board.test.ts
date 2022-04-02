@@ -1,5 +1,5 @@
 import { Board } from '../Board';
-import { Piece } from '../Piece';
+import { Piece } from '../PieceType';
 
 describe('Board test', () => {
     test('create 10 x 30 empty board', () => {
@@ -27,8 +27,7 @@ describe('Board test', () => {
     });
     test('add a current piece', () => {
         let board = new Board(10, 30)
-        let piece = new Piece('O')
-        board.updateCurrentPiece(piece)
+        board.updateCurrentPiece(Piece.O)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29

@@ -1,18 +1,14 @@
-import { Piece } from '../Piece';
+import { Piece } from '../PieceType';
 import { CurrentPiece } from '../CurrentPiece';
 
 describe('Piece test', () => {
-    test('create O piece', () => {
-        let oPiece = new Piece('O');
-        expect(oPiece.type).toEqual('O');
-    });
     test('create current piece', () => {
-        let currentPiece = new CurrentPiece('O')
+        let currentPiece = new CurrentPiece(Piece.O)
         expect(currentPiece.degree).toEqual(0)
         expect(currentPiece.y).toEqual(0)
     })
     test('rotate O current piece', () => {
-        let currentPiece = new CurrentPiece('O');
+        let currentPiece = new CurrentPiece(Piece.O);
         currentPiece.rotateRight();
         expect(currentPiece.degree).toEqual(90);
         currentPiece.rotateLeft();
