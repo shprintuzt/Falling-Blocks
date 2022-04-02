@@ -25,6 +25,8 @@ describe('Board test', () => {
             }
         }
     });
+})
+describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.O)
@@ -148,3 +150,61 @@ describe('Board test', () => {
         }
     });
 });
+describe('Piece move', () => {
+    test('move piece T', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.T)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 6 && y == 29
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.moveRight()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 5 && y == 29
+                    || x == 6 && y == 29
+                    || x == 7 && y == 29
+                    || x == 6 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    //     board.moveDown()
+    //     for (let x = 0; x < 10; ++x) {
+    //         for (let y = 0; y < 30; ++y) {
+    //             if (x == 5 && y == 28
+    //                 || x == 6 && y == 28
+    //                 || x == 7 && y == 28
+    //                 || x == 6 && y == 27) {
+    //                 expect(board.isEmpty(x, y)).toBe(true)
+    //             } else {
+    //                 expect(board.isEmpty(x, y)).toBe(false)
+    //             }
+    //         }
+    //     }
+    //     board.moveLeft()
+    //     for (let x = 0; x < 10; ++x) {
+    //         for (let y = 0; y < 30; ++y) {
+    //             if (x == 4 && y == 28
+    //                 || x == 5 && y == 28
+    //                 || x == 6 && y == 28
+    //                 || x == 5 && y == 27) {
+    //                 expect(board.isEmpty(x, y)).toBe(true)
+    //             } else {
+    //                 expect(board.isEmpty(x, y)).toBe(false)
+    //             }
+    //         }
+    //     }
+    // });
+})

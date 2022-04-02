@@ -55,4 +55,12 @@ export class Board {
         }
     }
 
+    moveRight = () => {
+        let pieceShape = getPieceShape(this.currentPiece)
+        for (const pos of pieceShape) {
+            this._board[pos.x][pos.y] = false;
+        }
+        this.currentPiece.moveRight()
+        this.updateBoard()
+    }
 }
