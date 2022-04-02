@@ -55,29 +55,27 @@ export class Board {
         }
     }
 
-    moveRight = () => {
+    removeCurrentPiece = () => {
         let pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = false;
         }
+    }
+
+    moveRight = () => {
+        this.removeCurrentPiece()
         this.currentPiece.moveRight()
         this.updateBoard()
     }
 
     moveDown = () => {
-        let pieceShape = getPieceShape(this.currentPiece)
-        for (const pos of pieceShape) {
-            this._board[pos.x][pos.y] = false;
-        }
+        this.removeCurrentPiece()
         this.currentPiece.moveDown()
         this.updateBoard()
     }
 
     moveLeft = () => {
-        let pieceShape = getPieceShape(this.currentPiece)
-        for (const pos of pieceShape) {
-            this._board[pos.x][pos.y] = false;
-        }
+        this.removeCurrentPiece()
         this.currentPiece.moveLeft()
         this.updateBoard()
     }
