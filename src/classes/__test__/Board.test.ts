@@ -1,4 +1,5 @@
 import { Board } from '../Board';
+import { Direction } from '../CurrentPiece';
 import { Piece } from '../PieceType';
 
 describe('Board test', () => {
@@ -167,7 +168,7 @@ describe('Piece rotation', () => {
                 }
             }
         }
-        board.rotateLeft()
+        board.rotate(Direction.Left)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29
@@ -180,7 +181,7 @@ describe('Piece rotation', () => {
                 }
             }
         }
-        board.rotateRight()
+        board.rotate(Direction.Right)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29
@@ -213,7 +214,7 @@ describe('Piece rotation', () => {
                 }
             }
         }
-        board.rotateRight()
+        board.rotate(Direction.Right)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 29
@@ -228,7 +229,7 @@ describe('Piece rotation', () => {
                 }
             }
         }
-        board.rotateLeft()
+        board.rotate(Direction.Left)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29
