@@ -87,10 +87,4 @@ export class Board {
         return canDo;
     }
 
-    move = (direction: DirectionType): void => {
-        this.removeCurrentPiece()
-        this.currentPiece.move(direction)
-        this.updateBoard()
-    }
-
 }
