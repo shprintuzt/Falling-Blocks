@@ -1,5 +1,5 @@
 import { Piece } from '../PieceType';
-import { CurrentPiece } from '../CurrentPiece';
+import { CurrentPiece, Direction } from '../CurrentPiece';
 
 describe('Piece test', () => {
     test('create current piece', () => {
@@ -10,7 +10,7 @@ describe('Piece test', () => {
     })
     test('rotate O current piece', () => {
         let currentPiece = new CurrentPiece(Piece.O, 0, 0);
-        currentPiece.rotateRight();
+        currentPiece.rotate(Direction.Right);
         expect(currentPiece.degree).toEqual(90);
         currentPiece.rotateLeft();
         currentPiece.rotateLeft();

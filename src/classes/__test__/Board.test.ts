@@ -151,7 +151,7 @@ describe('Piece shape test', () => {
     });
 });
 describe('Piece rotation', () => {
-    test('rotate piece T', () => {
+    test('rotate piece L in empty board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.L)
         board.updateBoard()
@@ -194,9 +194,59 @@ describe('Piece rotation', () => {
             }
         }
     })
+    test('rotate piece LR in non-empty board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.LR)
+        board.putBlock(5, 27)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 3 && y == 29
+                    || x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else if (x == 5 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.rotateRight()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 3 && y == 29
+                    || x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else if (x == 5 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.rotateLeft()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 4 && y == 28
+                    || x == 4 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else if (x == 5 && y == 27) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    })
 });
 describe('Piece move', () => {
-    test('move piece T', () => {
+    test('move piece T in empty board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.T)
         board.updateBoard()
