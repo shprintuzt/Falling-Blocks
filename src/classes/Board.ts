@@ -80,11 +80,11 @@ export class Board {
             this.currentPiece.degree)
         next.do(op, direction);
         let nextPieceShape = getPieceShape(next);
-        let canDo = true;
         for (const pos of nextPieceShape) {
-            if (this._board[pos.x][pos.y]) canDo = false;
+            if (pos.x < 0 || pos.x >= this.width) return false;
+            if (this._board[pos.x][pos.y]) return false;
         }
-        return canDo;
+        return true;
     }
 
 }

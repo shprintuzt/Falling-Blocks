@@ -303,4 +303,49 @@ describe('Piece move', () => {
             }
         }
     });
+    test('move piece L right out of board', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.L)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 6 && y == 29
+                    || x == 4 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.do(PieceOp.Move, Direction.Right)
+        board.do(PieceOp.Move, Direction.Right)
+        board.do(PieceOp.Move, Direction.Right)
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 7 && y == 29
+                    || x == 8 && y == 29
+                    || x == 9 && y == 29
+                    || x == 7 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        board.do(PieceOp.Move, Direction.Right)
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 7 && y == 29
+                    || x == 8 && y == 29
+                    || x == 9 && y == 29
+                    || x == 7 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
 })
