@@ -349,3 +349,42 @@ describe('Piece move', () => {
         }
     });
 })
+describe('Fix piece', () => {
+    test('fix piece Z and add new piece', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.Z)
+        board.updateBoard()
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 5 && y == 28
+                    || x == 6 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+        for (let i = 0; i < 29; ++i) {
+            board.do(PieceOp.Move, Direction.Down);
+        }
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 1
+                    || x == 5 && y == 1
+                    || x == 5 && y == 0
+                    || x == 6 && y == 0) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 4 && y == 28
+                    || x == 5 && y == 28) {
+                    expect(board.isEmpty(x, y)).toBe(true)
+                } else {
+                    expect(board.isEmpty(x, y)).toBe(false)
+                }
+            }
+        }
+    });
+});

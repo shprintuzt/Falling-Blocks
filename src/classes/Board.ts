@@ -1,4 +1,4 @@
-import { CurrentPiece, DirectionType, PieceOp, PieceOpType } from './CurrentPiece';
+import { CurrentPiece, Direction, DirectionType, PieceOp, PieceOpType } from './CurrentPiece';
 import { getPieceShape, Piece, PieceType } from './PieceType'
 
 export class Board {
@@ -66,10 +66,17 @@ export class Board {
     }
 
     do = (op: PieceOpType, direction: DirectionType): void => {
-        this.removeCurrentPiece()
-        if (this.canDo(op, direction))
+        this.removeCurrentPiece();
+        let _canDo = this.canDo(op, direction);
+        if (_canDo) {
             this.currentPiece.do(op, direction);
-        this.updateBoard()
+        }
+        this.updateBoard();
+
+        if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
+            this.newCurrentPiece(Piece.O);
+            this.updateBoard();
+        }
     }
 
     canDo = (op: PieceOpType, direction: DirectionType): boolean => {
@@ -82,6 +89,7 @@ export class Board {
         let nextPieceShape = getPieceShape(next);
         for (const pos of nextPieceShape) {
             if (pos.x < 0 || pos.x >= this.width) return false;
+            if (pos.y < 0) return false;
             if (this._board[pos.x][pos.y]) return false;
         }
         return true;
