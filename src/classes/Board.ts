@@ -1,5 +1,5 @@
 import { CurrentPiece, Direction, DirectionType, PieceOp, PieceOpType } from './CurrentPiece';
-import { getPieceShape, Piece, PieceType } from './PieceType'
+import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 
 export class Board {
     _board: boolean[][];
@@ -74,7 +74,7 @@ export class Board {
         this.updateBoard();
 
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
-            this.newCurrentPiece(Piece.O);
+            this.newCurrentPiece(getRandomPiece());
             this.updateBoard();
         }
     }

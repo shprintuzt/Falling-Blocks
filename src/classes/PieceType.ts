@@ -12,6 +12,12 @@ export const Piece = {
 
 export type PieceType = typeof Piece[keyof typeof Piece];
 
+export function getRandomPiece() {
+    const values = Object.values(Piece);
+  
+    return values[Math.floor(Math.random() * values.length)];
+}
+
 export const getPieceShape = (currentPiece: CurrentPiece) => {
     let x = currentPiece.x;
     let y = currentPiece.y;

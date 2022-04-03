@@ -1,6 +1,6 @@
 import { Board } from '../Board';
 import { Direction, PieceOp } from '../CurrentPiece';
-import { Piece } from '../PieceType';
+import { getPieceShape, Piece } from '../PieceType';
 
 describe('Board test', () => {
     test('create 10 x 30 empty board', () => {
@@ -369,6 +369,7 @@ describe('Fix piece', () => {
         for (let i = 0; i < 29; ++i) {
             board.do(PieceOp.Move, Direction.Down);
         }
+        let nextPieceShape = getPieceShape(board.currentPiece)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 1
@@ -376,10 +377,10 @@ describe('Fix piece', () => {
                     || x == 5 && y == 0
                     || x == 6 && y == 0) {
                     expect(board.isEmpty(x, y)).toBe(true)
-                } else if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 4 && y == 28
-                    || x == 5 && y == 28) {
+                } else if (x == nextPieceShape[0].x && y == nextPieceShape[0].y
+                    || x == nextPieceShape[1].x && y == nextPieceShape[1].y
+                    || x == nextPieceShape[2].x && y == nextPieceShape[2].y
+                    || x == nextPieceShape[3].x && y == nextPieceShape[3].y) {
                     expect(board.isEmpty(x, y)).toBe(true)
                 } else {
                     expect(board.isEmpty(x, y)).toBe(false)
