@@ -1,5 +1,12 @@
 import { PieceType } from './PieceType'
 
+export const PieceOp = {
+    Rotate: 0,
+    Move: 1,
+} as const;
+
+export type PieceOpType = typeof PieceOp[keyof typeof PieceOp];
+
 export const Direction = {
     Right: 0,
     Left: 1,
@@ -43,6 +50,20 @@ export class CurrentPiece {
 
     set y(y: number) {
         this._y = y;
+    }
+
+    do = (op: PieceOpType, direction: DirectionType): void => {
+        switch (op) {
+            case PieceOp.Rotate:
+                this.rotate(direction);
+                return;
+            case PieceOp.Move:
+                this.move(direction);
+                return;
+            default:
+                console.error('invalid piece operation');
+                return;
+        }
     }
 
     rotate = (direction: DirectionType): void => {
