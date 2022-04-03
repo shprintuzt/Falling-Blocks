@@ -45,10 +45,6 @@ export class CurrentPiece {
         this._y = y;
     }
 
-    rotateLeft = (): void => {
-        this.rotate(Direction.Left)
-    }
-
     rotate = (direction: DirectionType): void => {
         switch (direction) {
             case Direction.Right:

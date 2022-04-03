@@ -12,8 +12,8 @@ describe('Piece test', () => {
         let currentPiece = new CurrentPiece(Piece.O, 0, 0);
         currentPiece.rotate(Direction.Right);
         expect(currentPiece.degree).toEqual(90);
-        currentPiece.rotateLeft();
-        currentPiece.rotateLeft();
+        currentPiece.rotate(Direction.Left);
+        currentPiece.rotate(Direction.Left);
         expect(currentPiece.degree).toEqual(270);
     });
     test('move piece', () => {

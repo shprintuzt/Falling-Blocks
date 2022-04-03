@@ -89,7 +89,7 @@ export class Board {
 
     rotateLeft = () => {
         this.removeCurrentPiece()
-        this.currentPiece.rotateLeft()
+        this.currentPiece.rotate(Direction.Left)
         this.updateBoard()
     }
 
