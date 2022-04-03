@@ -263,7 +263,7 @@ describe('Piece move', () => {
                 }
             }
         }
-        board.moveRight()
+        board.move(Direction.Right)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 5 && y == 29
@@ -276,7 +276,7 @@ describe('Piece move', () => {
                 }
             }
         }
-        board.moveDown()
+        board.move(Direction.Down)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 5 && y == 28
@@ -289,7 +289,7 @@ describe('Piece move', () => {
                 }
             }
         }
-        board.moveLeft()
+        board.move(Direction.Left)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 28
