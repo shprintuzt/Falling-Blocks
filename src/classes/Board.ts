@@ -4,6 +4,7 @@ import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 export class Board {
     _board: boolean[][];
     _currentPiece: CurrentPiece;
+    _gameOverCallbacks: {(): void;}[] = []
    
     constructor(width: number, height: number) {
         this._board = new Array(width);
@@ -49,6 +50,12 @@ export class Board {
 
     newCurrentPiece = (piece: PieceType) => {
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);
+        let pieceShape = getPieceShape(this.currentPiece);
+        for (const pos of pieceShape) {
+            if (this._board[pos.x][pos.y]) {
+                this.doGameOverCallback()
+            }
+        }
     }
 
     updateBoard = () => {
@@ -65,7 +72,7 @@ export class Board {
         }
     }
 
-    do = (op: PieceOpType, direction: DirectionType): void => {
+    do = (op: PieceOpType, direction: DirectionType, random = true): void => {
         this.removeCurrentPiece();
         let _canDo = this.canDo(op, direction);
         if (_canDo) {
@@ -73,8 +80,10 @@ export class Board {
         }
         this.updateBoard();
 
+        // piece position is fixed
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
-            this.newCurrentPiece(getRandomPiece());
+            let nextPiece = random ? getRandomPiece() : Piece.O
+            this.newCurrentPiece(nextPiece);
             this.updateBoard();
         }
     }
@@ -93,6 +102,16 @@ export class Board {
             if (this._board[pos.x][pos.y]) return false;
         }
         return true;
+    }
+
+    addGameOverCallback = (callback: () => void): void => {
+        this._gameOverCallbacks.push(callback)
+    }
+
+    doGameOverCallback = (): void => {
+        for (let callback of this._gameOverCallbacks) {
+            callback()
+        }
     }
 
 }

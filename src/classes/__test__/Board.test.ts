@@ -388,4 +388,20 @@ describe('Fix piece', () => {
             }
         }
     });
+    test('game over', () => {
+        let board = new Board(10, 30)
+        let gameOverCallbackCalled = false
+        const gameOverCallback = () => {
+            gameOverCallbackCalled = true
+        }
+        board.addGameOverCallback(gameOverCallback)
+        board.newCurrentPiece(Piece.O)
+        board.updateBoard()
+        for (let i = 0; i < 28; ++i) {
+            board.do(PieceOp.Move, Direction.Down);
+        }
+        board.putBlock(4, 29);
+        board.do(PieceOp.Move, Direction.Down, false);
+        expect(gameOverCallbackCalled).toBe(true)
+    });
 });
