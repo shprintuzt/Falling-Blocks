@@ -18,13 +18,13 @@ describe('Piece test', () => {
     });
     test('move piece', () => {
         let currentPiece = new CurrentPiece(Piece.O, 5, 9);
-        currentPiece.moveRight()
+        currentPiece.move(Direction.Right)
         expect(currentPiece.x).toEqual(6);
         expect(currentPiece.y).toEqual(9);
-        currentPiece.moveDown()
+        currentPiece.move(Direction.Down)
         expect(currentPiece.x).toEqual(6);
         expect(currentPiece.y).toEqual(8);
-        currentPiece.moveLeft()
+        currentPiece.move(Direction.Left)
         expect(currentPiece.x).toEqual(5);
         expect(currentPiece.y).toEqual(8);
     })

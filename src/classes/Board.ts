@@ -89,19 +89,19 @@ export class Board {
 
     moveRight = () => {
         this.removeCurrentPiece()
-        this.currentPiece.moveRight()
+        this.currentPiece.move(Direction.Right)
         this.updateBoard()
     }
 
     moveDown = () => {
         this.removeCurrentPiece()
-        this.currentPiece.moveDown()
+        this.currentPiece.move(Direction.Down)
         this.updateBoard()
     }
 
     moveLeft = () => {
         this.removeCurrentPiece()
-        this.currentPiece.moveLeft()
+        this.currentPiece.move(Direction.Left)
         this.updateBoard()
     }
 
