@@ -69,10 +69,10 @@ export class CurrentPiece {
     rotate = (direction: DirectionType): void => {
         switch (direction) {
             case Direction.Right:
-                this._degree = (this._degree + 90) % 360
+                this.rotateRight();
                 return;
             case Direction.Left:
-                this._degree = (this._degree + 270) % 360
+                this.rotateLeft();
                 return;
             default:
                 console.error('invalid direction for rotate');
@@ -80,20 +80,40 @@ export class CurrentPiece {
         }
     }
 
+    rotateRight = (): void => {
+        this._degree = (this._degree + 90) % 360
+    }
+
+    rotateLeft = (): void => {
+        this._degree = (this._degree + 270) % 360
+    }
+
     move = (direction: DirectionType): void => {
         switch (direction) {
             case Direction.Right:
-                this._x += 1;
+                this.moveRight();
                 return;
             case Direction.Left:
-                this._x -= 1;
+                this.moveLeft();
                 return;
             case Direction.Down:
-                this._y -= 1;
+                this.moveDown();
                 return;
             default:
                 console.error('invalid direction for move');
         }
+    }
+
+    moveRight = (): void => {
+        this._x += 1;
+    }
+
+    moveLeft = (): void => {
+        this._x -= 1;
+    }
+
+    moveDown = (): void => {
+        this._y -= 1;
     }
 
     reset = (piece: PieceType, x: number, y: number) => {
