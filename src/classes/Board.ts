@@ -114,4 +114,11 @@ export class Board {
         }
     }
 
+    isRowFilled = (y: number): boolean => {
+        for (let x = 0; x < this.width; ++x) {
+            if (!this._board[x][y]) return false;
+        }
+        return true;
+    }
+
 }

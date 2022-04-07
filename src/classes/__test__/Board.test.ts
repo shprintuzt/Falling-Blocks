@@ -26,6 +26,17 @@ describe('Board test', () => {
             }
         }
     });
+    test('fill the 2nd horizontal line and check', () => {
+        let board = new Board(10, 30)
+        board.fillHorizontalLine(2)
+        for (let y = 0; y < 30; ++y) {
+            if (y == 2) {
+                expect(board.isRowFilled(y)).toBe(true)
+            } else {
+                expect(board.isRowFilled(y)).toBe(false)
+            }
+        }
+    });
 })
 describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {
