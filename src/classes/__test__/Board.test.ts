@@ -374,6 +374,17 @@ describe('Piece move', () => {
             }
         }
     });
+    test('updateBoard callback test', () => {
+        let board = new Board(10, 30)
+        let isCallbackCalled = false
+        const updateBoardCallback = () => {
+            isCallbackCalled = true
+        }
+        board.addUpdateBoardCallback(updateBoardCallback)
+        board.newCurrentPiece(Piece.O)
+        board.do(PieceOp.Rotate, Direction.Right)
+        expect(isCallbackCalled).toBe(true)
+    })
 })
 describe('Fix piece', () => {
     test('fix piece Z and add new piece', () => {

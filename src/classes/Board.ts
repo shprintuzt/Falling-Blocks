@@ -4,6 +4,7 @@ import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 export class Board {
     _board: boolean[][];
     _currentPiece: CurrentPiece;
+    _updateBoardCallbacks: {(): void;}[] = []
     _gameOverCallbacks: {(): void;}[] = []
    
     constructor(width: number, height: number) {
@@ -63,6 +64,7 @@ export class Board {
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = true;
         }
+        this.doUpdateBoardCallbacks()
     }
 
     removeCurrentPiece = () => {
@@ -103,6 +105,16 @@ export class Board {
             if (this._board[pos.x][pos.y]) return false;
         }
         return true;
+    }
+
+    addUpdateBoardCallback = (callback: () => void): void => {
+        this._updateBoardCallbacks.push(callback)
+    }
+
+    doUpdateBoardCallbacks = (): void => {
+        for (let callback of this._updateBoardCallbacks) {
+            callback()
+        }
     }
 
     addGameOverCallback = (callback: () => void): void => {
