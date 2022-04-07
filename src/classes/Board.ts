@@ -114,6 +114,23 @@ export class Board {
         }
     }
 
+    eraceFilledRow = (): void => {
+        let filledRowNum = 0;
+        let filledRowNums = new Array<number>(this.height);
+        for (let y = 0; y < this.height; ++y) {
+            filledRowNums[y] = filledRowNum;
+            if (this.isRowFilled(y)) filledRowNum += 1;
+        }
+
+        for (let y = 0; y < this.height; ++y) {
+            for (let x = 0; x < this.width; ++x) {
+                const offset = filledRowNums[y];
+                this._board[x][y - offset] = this._board[x][y];
+                this._board[x][y] = false;
+            }
+        }
+    }
+
     isRowFilled = (y: number): boolean => {
         for (let x = 0; x < this.width; ++x) {
             if (!this._board[x][y]) return false;
