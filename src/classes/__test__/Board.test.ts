@@ -430,4 +430,42 @@ describe('Fix piece', () => {
         board.do(PieceOp.Move, Direction.Down, false);
         expect(gameOverCallbackCalled).toBe(true)
     });
+    test('succeed to erace two rows', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.O)
+        board.updateBoard()
+        for (let y = 0; y < 29; ++y) {
+            board.do(PieceOp.Move, Direction.Down, false);
+        }
+        for (let x = 0; x < 4; ++x) {
+            board.do(PieceOp.Move, Direction.Left)
+        }
+        for (let y = 0; y < 29; ++y) {
+            board.do(PieceOp.Move, Direction.Down, false);
+        }
+        for (let x = 0; x < 2; ++x) {
+            board.do(PieceOp.Move, Direction.Left)
+        }
+        for (let y = 0; y < 29; ++y) {
+            board.do(PieceOp.Move, Direction.Down, false);
+        }
+        for (let x = 0; x < 2; ++x) {
+            board.do(PieceOp.Move, Direction.Right)
+        }
+        for (let y = 0; y < 29; ++y) {
+            board.do(PieceOp.Move, Direction.Down, false);
+        }
+        for (let x = 0; x < 4; ++x) {
+            board.do(PieceOp.Move, Direction.Right)
+        }
+        for (let y = 0; y < 29; ++y) {
+            board.do(PieceOp.Move, Direction.Down, false);
+        }
+
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 28; ++y) {
+                expect(board.isEmpty(x, y)).toBe(false)
+            }
+        }
+    });
 });

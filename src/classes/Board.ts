@@ -82,6 +82,7 @@ export class Board {
 
         // piece position is fixed
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
+            this.eraceFilledRow()
             let nextPiece = random ? getRandomPiece() : Piece.O
             this.newCurrentPiece(nextPiece);
             this.updateBoard();
@@ -126,7 +127,7 @@ export class Board {
             for (let x = 0; x < this.width; ++x) {
                 const offset = filledRowNums[y];
                 this._board[x][y - offset] = this._board[x][y];
-                this._board[x][y] = false;
+                if (offset > 0) this._board[x][y] = false;
             }
         }
     }
