@@ -51,7 +51,7 @@ export class Board {
 
     newCurrentPiece = (piece: PieceType) => {
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);
-        let pieceShape = getPieceShape(this.currentPiece);
+        const pieceShape = getPieceShape(this.currentPiece);
         for (const pos of pieceShape) {
             if (this._board[pos.x][pos.y]) {
                 this.doGameOverCallback()
@@ -60,7 +60,7 @@ export class Board {
     }
 
     updateBoard = () => {
-        let pieceShape = getPieceShape(this.currentPiece)
+        const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = true;
         }
@@ -68,7 +68,7 @@ export class Board {
     }
 
     removeCurrentPiece = () => {
-        let pieceShape = getPieceShape(this.currentPiece)
+        const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = false;
         }
@@ -76,7 +76,7 @@ export class Board {
 
     do = (op: PieceOpType, direction: DirectionType, random = true): void => {
         this.removeCurrentPiece();
-        let _canDo = this.canDo(op, direction);
+        const _canDo = this.canDo(op, direction);
         if (_canDo) {
             this.currentPiece.do(op, direction);
         }
@@ -85,20 +85,20 @@ export class Board {
         // piece position is fixed
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
             this.eraceFilledRow()
-            let nextPiece = random ? getRandomPiece() : Piece.O
+            const nextPiece = random ? getRandomPiece() : Piece.O
             this.newCurrentPiece(nextPiece);
             this.updateBoard();
         }
     }
 
     canDo = (op: PieceOpType, direction: DirectionType): boolean => {
-        let next = new CurrentPiece(
+        const next = new CurrentPiece(
             this.currentPiece.type,
             this.currentPiece.x,
             this.currentPiece.y,
             this.currentPiece.degree)
         next.do(op, direction);
-        let nextPieceShape = getPieceShape(next);
+        const nextPieceShape = getPieceShape(next);
         for (const pos of nextPieceShape) {
             if (pos.x < 0 || pos.x >= this.width) return false;
             if (pos.y < 0) return false;
@@ -112,7 +112,7 @@ export class Board {
     }
 
     doUpdateBoardCallbacks = (): void => {
-        for (let callback of this._updateBoardCallbacks) {
+        for (const callback of this._updateBoardCallbacks) {
             callback()
         }
     }
@@ -122,14 +122,14 @@ export class Board {
     }
 
     doGameOverCallback = (): void => {
-        for (let callback of this._gameOverCallbacks) {
+        for (const callback of this._gameOverCallbacks) {
             callback()
         }
     }
 
     eraceFilledRow = (): void => {
         let filledRowNum = 0;
-        let filledRowNums = new Array<number>(this.height);
+        const filledRowNums = new Array<number>(this.height);
         for (let y = 0; y < this.height; ++y) {
             filledRowNums[y] = filledRowNum;
             if (this.isRowFilled(y)) filledRowNum += 1;

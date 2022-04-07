@@ -40,12 +40,12 @@ export class CurrentPiece {
         return this._x;
     }
 
-    get y() {
-        return this._y;
-    }
-
     set x(x: number) {
         this._x = x;
+    }
+
+    get y() {
+        return this._y;
     }
 
     set y(y: number) {

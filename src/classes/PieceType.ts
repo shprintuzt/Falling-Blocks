@@ -19,10 +19,10 @@ export function getRandomPiece() {
 }
 
 export const getPieceShape = (currentPiece: CurrentPiece) => {
-    let x = currentPiece.x;
-    let y = currentPiece.y;
-    let piece = currentPiece.type;
-    let degree = currentPiece.degree;
+    const x = currentPiece.x;
+    const y = currentPiece.y;
+    const piece = currentPiece.type;
+    const degree = currentPiece.degree;
     switch (piece) {
         case Piece.O:
             return [
@@ -56,7 +56,7 @@ export const getPieceShape = (currentPiece: CurrentPiece) => {
                     {x: x + 1, y: y},
                     {x: x, y: y - 1},
                     {x: x + 1, y: y - 1},
-                    {x: x + 1, y: y - 2}]
+                    {x: x, y: y - 2}]
             }
         case Piece.S:
             if ([0, 180].includes(degree)) {
@@ -91,7 +91,7 @@ export const getPieceShape = (currentPiece: CurrentPiece) => {
                     {x: x - 1, y: y - 1},
                     {x: x, y: y - 1},
                     {x: x + 1, y: y - 1}]
-            } else if (270 == degree) {
+            } else {
                 return [
                     {x: x, y: y},
                     {x: x, y: y - 1},
@@ -117,7 +117,7 @@ export const getPieceShape = (currentPiece: CurrentPiece) => {
                     {x: x, y: y - 1},
                     {x: x + 1, y: y - 1},
                     {x: x + 2, y: y - 1}]
-            } else if (270 == degree) {
+            } else {
                 return [
                     {x: x, y: y},
                     {x: x + 1, y: y},
@@ -143,7 +143,7 @@ export const getPieceShape = (currentPiece: CurrentPiece) => {
                     {x: x, y: y - 1},
                     {x: x + 1, y: y - 1},
                     {x: x + 2, y: y - 1}]
-            } else if (270 == degree) {
+            } else {
                 return [
                     {x: x, y: y},
                     {x: x, y: y - 1},
