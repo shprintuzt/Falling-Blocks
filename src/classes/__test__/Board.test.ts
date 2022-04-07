@@ -15,7 +15,7 @@ describe('Board test', () => {
     });
     test('fill the 11th horizontal line', () => {
         let board = new Board(10, 30)
-        board.fillHorizontalLine(10)
+        board.fillRow(10)
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (y == 10) {
@@ -28,7 +28,7 @@ describe('Board test', () => {
     });
     test('fill the 2nd horizontal line and check', () => {
         let board = new Board(10, 30)
-        board.fillHorizontalLine(2)
+        board.fillRow(2)
         for (let y = 0; y < 30; ++y) {
             if (y == 2) {
                 expect(board.isRowFilled(y)).toBe(true)
@@ -39,7 +39,7 @@ describe('Board test', () => {
     });
     test('fill the 3rd horizontal line', () => {
         let board = new Board(10, 30)
-        board.fillHorizontalLine(2)
+        board.fillRow(2)
         board.putBlock(3, 4)
         board.eraceFilledRow()
         for (let x = 0; x < 10; ++x) {

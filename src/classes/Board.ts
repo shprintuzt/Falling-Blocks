@@ -42,7 +42,7 @@ export class Board {
         return this._board[x][y];
     }
 
-    fillHorizontalLine = (y: number): void => {
+    fillRow = (y: number): void => {
         for (let x = 0; x < this.width; ++x) {
             this._board[x][y] = true;
         }
