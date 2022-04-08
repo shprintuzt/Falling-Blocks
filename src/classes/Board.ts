@@ -54,7 +54,7 @@ export class Board {
         const pieceShape = getPieceShape(this.currentPiece);
         for (const pos of pieceShape) {
             if (this._board[pos.x][pos.y]) {
-                this.doGameOverCallback()
+                this.doGameOverCallbacks()
             }
         }
     }
@@ -121,7 +121,7 @@ export class Board {
         this._gameOverCallbacks.push(callback)
     }
 
-    doGameOverCallback = (): void => {
+    doGameOverCallbacks = (): void => {
         for (const callback of this._gameOverCallbacks) {
             callback()
         }
