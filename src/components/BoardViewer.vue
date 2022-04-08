@@ -1,5 +1,6 @@
 <template>
     <canvas ref="canvas" width="100" height="300"/>
+    <button @click="drop">drop</button>
     <button @click="moveDown">down</button>
     <button @click="moveLeft">move left</button>
     <button @click="moveRight">move right</button>
@@ -51,6 +52,10 @@ export default {
             }
         }
 
+        const drop = () => {
+            board.drop()
+        }
+
         const moveDown = () => {
             board.do(PieceOp.Move, Direction.Down)
         }
@@ -73,6 +78,7 @@ export default {
 
         return {
             canvas,
+            drop,
             moveDown,
             moveLeft,
             moveRight,

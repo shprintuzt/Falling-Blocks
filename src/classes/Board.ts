@@ -108,8 +108,8 @@ export class Board {
     }
 
     drop = (random = true): void => {
+        this.eraseCurrentPiece();
         while (this.canDo(PieceOp.Move, Direction.Down)) {
-            this.eraseCurrentPiece();
             this.currentPiece.do(PieceOp.Move, Direction.Down);
         }
         this.updateBoard()
