@@ -120,6 +120,7 @@ export class CurrentPiece {
         this._type = piece;
         this.x = x;
         this.y = y;
+        this._degree = 0;
     }
     
 }
