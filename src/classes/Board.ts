@@ -67,7 +67,7 @@ export class Board {
         this.doUpdateBoardCallbacks()
     }
 
-    removeCurrentPiece = () => {
+    eraseCurrentPiece = () => {
         const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = false;
@@ -75,7 +75,7 @@ export class Board {
     }
 
     do = (op: PieceOpType, direction: DirectionType, random = true): void => {
-        this.removeCurrentPiece();
+        this.eraseCurrentPiece();
         const _canDo = this.canDo(op, direction);
         if (_canDo) {
             this.currentPiece.do(op, direction);
