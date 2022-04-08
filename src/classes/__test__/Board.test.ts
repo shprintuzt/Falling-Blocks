@@ -374,6 +374,27 @@ describe('Piece move', () => {
             }
         }
     });
+    test('drop piece', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.O)
+        board.drop(false)
+        for (let x = 0; x < 10; ++x) {
+            for (let y = 0; y < 30; ++y) {
+                if (x == 4 && y == 29
+                    || x == 5 && y == 29
+                    || x == 4 && y == 28
+                    || x == 5 && y == 28
+                    || x == 4 && y == 1
+                    || x == 5 && y == 1
+                    || x == 4 && y == 0
+                    || x == 5 && y == 0) {
+                    expect(board.isFilled(x, y)).toBe(true)
+                } else {
+                    expect(board.isFilled(x, y)).toBe(false)
+                }
+            }
+        }
+    })
     test('updateBoard callback test', () => {
         let board = new Board(10, 30)
         let isCallbackCalled = false

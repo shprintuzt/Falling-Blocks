@@ -107,6 +107,20 @@ export class Board {
         return true;
     }
 
+    drop = (random = true): void => {
+        while (this.canDo(PieceOp.Move, Direction.Down)) {
+            this.eraseCurrentPiece();
+            this.currentPiece.do(PieceOp.Move, Direction.Down);
+        }
+        this.updateBoard()
+
+        // piece position is fixed
+        this.eraceFilledRow()
+        const nextPiece = random ? getRandomPiece() : Piece.O
+        this.newCurrentPiece(nextPiece);
+        this.updateBoard();
+    }
+
     addUpdateBoardCallback = (callback: () => void): void => {
         this._updateBoardCallbacks.push(callback)
     }
