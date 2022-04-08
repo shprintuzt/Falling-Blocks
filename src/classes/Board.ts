@@ -39,7 +39,7 @@ export class Board {
         this._board[x][y] = true
     }
 
-    isEmpty = (x: number, y: number): boolean => {
+    isFilled = (x: number, y: number): boolean => {
         return this._board[x][y];
     }
 

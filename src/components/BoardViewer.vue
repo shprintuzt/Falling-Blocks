@@ -41,10 +41,10 @@ export default {
             ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
             for (let x = 0; x < 10; x++) {
                 for (let y = 0; y < 30; y++) {
-                    if (board.isEmpty(x, y)) {
-                        ctx.fillStyle = 'lightgray';
-                    } else {
+                    if (board.isFilled(x, y)) {
                         ctx.fillStyle = 'black';
+                    } else {
+                        ctx.fillStyle = 'lightgray';
                     }
                     ctx.fillRect(10 * x, 10 * (29 - y), 9, 9);
                 }

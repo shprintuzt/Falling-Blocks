@@ -9,7 +9,7 @@ describe('Board test', () => {
         expect(board.height).toEqual(30);
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
-                expect(board.isEmpty(x, y)).toBe(false)
+                expect(board.isFilled(x, y)).toBe(false)
             }
         }
     });
@@ -19,9 +19,9 @@ describe('Board test', () => {
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (y == 10) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -45,9 +45,9 @@ describe('Board test', () => {
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -67,9 +67,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 4 && y == 28
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -84,9 +84,9 @@ describe('Piece shape test', () => {
                     || x == 4 && y == 29
                     || x == 5 && y == 29
                     || x == 6 && y == 29) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -101,9 +101,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 5 && y == 28
                     || x == 6 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -118,9 +118,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 3 && y == 28
                     || x == 4 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -135,9 +135,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 4 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -152,9 +152,9 @@ describe('Piece shape test', () => {
                     || x == 4 && y == 29
                     || x == 5 && y == 29
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -169,9 +169,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -188,9 +188,9 @@ describe('Piece rotation', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 4 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -201,9 +201,9 @@ describe('Piece rotation', () => {
                     || x == 4 && y == 28
                     || x == 4 && y == 27
                     || x == 5 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -214,9 +214,9 @@ describe('Piece rotation', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 4 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -232,11 +232,11 @@ describe('Piece rotation', () => {
                     || x == 4 && y == 29
                     || x == 5 && y == 29
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else if (x == 5 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -247,11 +247,11 @@ describe('Piece rotation', () => {
                     || x == 4 && y == 29
                     || x == 5 && y == 29
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else if (x == 5 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -262,11 +262,11 @@ describe('Piece rotation', () => {
                     || x == 5 && y == 29
                     || x == 4 && y == 28
                     || x == 4 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else if (x == 5 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -283,9 +283,9 @@ describe('Piece move', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 5 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -296,9 +296,9 @@ describe('Piece move', () => {
                     || x == 6 && y == 29
                     || x == 7 && y == 29
                     || x == 6 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -309,9 +309,9 @@ describe('Piece move', () => {
                     || x == 6 && y == 28
                     || x == 7 && y == 28
                     || x == 6 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -322,9 +322,9 @@ describe('Piece move', () => {
                     || x == 5 && y == 28
                     || x == 6 && y == 28
                     || x == 5 && y == 27) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -339,9 +339,9 @@ describe('Piece move', () => {
                     || x == 5 && y == 29
                     || x == 6 && y == 29
                     || x == 4 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -354,9 +354,9 @@ describe('Piece move', () => {
                     || x == 8 && y == 29
                     || x == 9 && y == 29
                     || x == 7 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -367,9 +367,9 @@ describe('Piece move', () => {
                     || x == 8 && y == 29
                     || x == 9 && y == 29
                     || x == 7 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -397,9 +397,9 @@ describe('Fix piece', () => {
                     || x == 5 && y == 29
                     || x == 5 && y == 28
                     || x == 6 && y == 28) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -413,14 +413,14 @@ describe('Fix piece', () => {
                     || x == 5 && y == 1
                     || x == 5 && y == 0
                     || x == 6 && y == 0) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else if (x == nextPieceShape[0].x && y == nextPieceShape[0].y
                     || x == nextPieceShape[1].x && y == nextPieceShape[1].y
                     || x == nextPieceShape[2].x && y == nextPieceShape[2].y
                     || x == nextPieceShape[3].x && y == nextPieceShape[3].y) {
-                    expect(board.isEmpty(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(true)
                 } else {
-                    expect(board.isEmpty(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(false)
                 }
             }
         }
@@ -475,7 +475,7 @@ describe('Fix piece', () => {
 
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 28; ++y) {
-                expect(board.isEmpty(x, y)).toBe(false)
+                expect(board.isFilled(x, y)).toBe(false)
             }
         }
     });
