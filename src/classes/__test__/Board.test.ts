@@ -13,6 +13,7 @@ describe('Board test', () => {
                 expect(board.isFilled(x, y)).toBe(false)
             }
         }
+        isFilled(board)
     });
     test('fill the 11th horizontal line', () => {
         let board = new Board(10, 30)
@@ -26,6 +27,7 @@ describe('Board test', () => {
                 }
             }
         }
+        isFilled(board, [], [10])
     });
     test('fill the 2nd horizontal line and check', () => {
         let board = new Board(10, 30)
@@ -58,6 +60,8 @@ describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.O)
+
+        // initial piece position test
         expect(board.currentPiece.degree).toBe(0)
         expect(board.currentPiece.x).toBe(10 / 2 - 1)
         expect(board.currentPiece.y).toBe(30 - 1)
@@ -74,6 +78,11 @@ describe('Piece shape test', () => {
                 }
             }
         }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 4, y: 28},
+            {x: 5, y: 28}])
     });
     test('update a current piece to I and board', () => {
         let board = new Board(10, 30)
@@ -503,7 +512,7 @@ describe('Fix piece', () => {
     });
 });
 
-const isFilled = (board: Board, positions: Point[], ys: number[]): void => {
+const isFilled = (board: Board, positions: Point[] = [], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
         for (let y = 0; y < board.height; ++y) {
             let result = ys.includes(y)
