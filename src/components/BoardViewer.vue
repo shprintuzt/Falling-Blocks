@@ -5,6 +5,8 @@
     </button>
     <div v-show="playing">
         <canvas ref="canvas" width="100" height="300"/>
+        <p>点数: {{ score }}</p>
+        <p>消した行数: {{ erasedRowTotalNum }}</p>
         <button @click="drop">drop</button>
         <button @click="moveDown">down</button>
         <button @click="moveLeft">move left</button>
@@ -25,11 +27,14 @@ export default {
         let board: Board = new Board(10, 30);
         const canvas = ref<HTMLCanvasElement>();
         const playing = ref(false);
+        const score = ref(0)
+        const erasedRowTotalNum = ref(0)
 
         onMounted(() => {
             board.newCurrentPiece(Piece.O);
             board.addUpdateBoardCallback(updateBoardCallback);
             board.addGameOverCallback(gameOverCallback);
+            board.addRowErasedCallback(rowErasedCallback);
             board.updateBoard()
         })
 
@@ -41,6 +46,11 @@ export default {
             board.clearBoard(10, 30);
             board.newCurrentPiece(Piece.O);
             playing.value = false
+        }
+
+        const rowErasedCallback = (rowNum: number) => {
+            score.value += rowNum * rowNum * 100
+            erasedRowTotalNum.value += rowNum
         }
 
         const draw = () => {
@@ -62,6 +72,8 @@ export default {
 
         const start = () => {
             playing.value = true
+            score.value = 0
+            erasedRowTotalNum.value = 0
         }
 
         const drop = () => {
@@ -91,6 +103,8 @@ export default {
         return {
             canvas,
             playing,
+            score,
+            erasedRowTotalNum,
             start,
             drop,
             moveDown,
