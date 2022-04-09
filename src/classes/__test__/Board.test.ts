@@ -1,5 +1,5 @@
 import { Point } from '@/interfaces/Point';
-import { Board, CellKind } from '../Board';
+import { Board, Cell } from '../Board';
 import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
 
@@ -10,47 +10,47 @@ describe('Board test', () => {
         expect(board.height).toEqual(30);
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
-                expect(board.isFilled(x, y)).toBe(false)
+                expect(board.isFilled(x, y)).toBe(Cell.Empty);
             }
         }
         isFilled(board, [])
     });
     test('fill the 11th horizontal line', () => {
-        let board = new Board(10, 30)
-        board.fillRow(10)
+        let board = new Board(10, 30);
+        board.fillRow(10);
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (y == 10) {
-                    expect(board.isFilled(x, y)).toBe(CellKind.Filled)
+                    expect(board.isFilled(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).toBe(CellKind.Empty)
+                    expect(board.isFilled(x, y)).toBe(Cell.Empty);
                 }
             }
         }
         isFilled(board, [], [10])
     });
     test('isRowFilled test', () => {
-        let board = new Board(10, 30)
-        board.fillRow(2)
+        let board = new Board(10, 30);
+        board.fillRow(2);
         for (let y = 0; y < 30; ++y) {
             if (y == 2) {
-                expect(board.isRowFilled(y)).toBe(true)
+                expect(board.isRowFilled(y)).toBe(Cell.Filled);
             } else {
-                expect(board.isRowFilled(y)).toBe(false)
+                expect(board.isRowFilled(y)).toBe(Cell.Empty);
             }
         }
     });
     test('erase the 3rd horizontal line', () => {
-        let board = new Board(10, 30)
-        board.fillRow(2)
-        board.putBlock(3, 4)
-        board.eraceFilledRow()
+        let board = new Board(10, 30);
+        board.fillRow(2);
+        board.putBlock(3, 4);
+        board.eraceFilledRow();
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {
-                    expect(board.isFilled(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(Cell.Empty);
                 }
             }
         }
@@ -72,9 +72,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 4 && y == 28
                     || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(Cell.Filled)
                 } else {
-                    expect(board.isFilled(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(Cell.Empty)
                 }
             }
         }
@@ -367,7 +367,7 @@ describe('Fix piece', () => {
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
         for (let y = 0; y < board.height; ++y) {
-            let result = ys.includes(y)
+            let result = ys.includes(y) ? Cell.Filled : Cell.Empty;
             for (const position of positions) {
                 if (x == position.x && y == position.y) {
                     result = true;
