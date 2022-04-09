@@ -501,3 +501,17 @@ describe('Fix piece', () => {
         }
     });
 });
+
+const isFilled = (board: Board, positions: Point[]): void => {
+    for (let x = 0; x < board.width; ++x) {
+        for (let y = 0; y < board.height; ++y) {
+            for (const position of positions) {
+                if (x == position.x && y == position.y) {
+                    expect(board.isFilled(x, y)).toBe(true)
+                    continue;
+                }
+            }
+            expect(board.isFilled(x, y)).toBe(false)
+        }
+    }
+}
