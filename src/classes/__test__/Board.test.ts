@@ -1,6 +1,6 @@
 import { Point } from '@/interfaces/Point';
 import { Board } from '../Board';
-import { Direction, PieceOp } from '../CurrentPiece';
+import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
 
 describe('Board test', () => {
@@ -40,7 +40,7 @@ describe('Board test', () => {
             }
         }
     });
-    test('fill the 3rd horizontal line', () => {
+    test('erase the 3rd horizontal line', () => {
         let board = new Board(10, 30)
         board.fillRow(2)
         board.putBlock(3, 4)
@@ -296,9 +296,9 @@ describe('Fix piece', () => {
             {x: 5, y: 28},
             {x: 6, y: 28},
         ])
-        for (let i = 0; i < 29; ++i) {
-            board.do(PieceOp.Move, Direction.Down);
-        }
+
+        doOp(board, PieceOp.Move, Direction.Down, 29);
+
         let nextPieceShape = getPieceShape(board.currentPiece)
         isFilled(board, [
             {x: 4, y: 1},
@@ -320,46 +320,40 @@ describe('Fix piece', () => {
         board.addGameOverCallback(gameOverCallback)
         board.newCurrentPiece(Piece.O)
         board.updateBoard()
-        for (let i = 0; i < 28; ++i) {
-            board.do(PieceOp.Move, Direction.Down);
-        }
+
+        doOp(board, PieceOp.Move, Direction.Down, 28);
+
         board.putBlock(4, 29);
         board.do(PieceOp.Move, Direction.Down, false);
+
         expect(gameOverCallbackCalled).toBe(true)
     });
     test('succeed to erace two rows', () => {
-        let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.O)
-        board.updateBoard()
-        for (let y = 0; y < 29; ++y) {
-            board.do(PieceOp.Move, Direction.Down, false);
-        }
-        for (let x = 0; x < 4; ++x) {
-            board.do(PieceOp.Move, Direction.Left)
-        }
-        for (let y = 0; y < 29; ++y) {
-            board.do(PieceOp.Move, Direction.Down, false);
-        }
-        for (let x = 0; x < 2; ++x) {
-            board.do(PieceOp.Move, Direction.Left);
-        }
-        board.drop(false);
-        for (let x = 0; x < 2; ++x) {
-            board.do(PieceOp.Move, Direction.Right);
-        }
-        board.drop(false);
-        for (let x = 0; x < 4; ++x) {
-            board.do(PieceOp.Move, Direction.Right);
-        }
+        let board = new Board(10, 30);
+        board.newCurrentPiece(Piece.O);
+        board.updateBoard();
+
+        doOp(board, PieceOp.Move, Direction.Down, 29, false);
+
+        doOp(board, PieceOp.Move, Direction.Left, 4);
+        doOp(board, PieceOp.Move, Direction.Down, 29, false);
+
+        doOp(board, PieceOp.Move, Direction.Left, 2);
         board.drop(false);
 
-        let nextPieceShape = getPieceShape(board.currentPiece)
+        doOp(board, PieceOp.Move, Direction.Right, 2);
+        board.drop(false);
+
+        doOp(board, PieceOp.Move, Direction.Right, 4);
+        board.drop(false);
+
+        let nextPieceShape = getPieceShape(board.currentPiece);
         isFilled(board, [
             {x: nextPieceShape[0].x, y: nextPieceShape[0].y},
             {x: nextPieceShape[1].x, y: nextPieceShape[1].y},
             {x: nextPieceShape[2].x, y: nextPieceShape[2].y},
             {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
-        ])
+        ]);
     });
 });
 
@@ -375,5 +369,17 @@ const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => 
             }
             expect(board.isFilled(x, y)).toBe(result)
         }
+    }
+}
+
+const doOp = (
+    board: Board,
+    op: PieceOpType,
+    direction: DirectionType,
+    cnt: number,
+    random = true
+): void => {
+    for (let i = 0; i < cnt; ++i) {
+        board.do(op, direction, random);
     }
 }
