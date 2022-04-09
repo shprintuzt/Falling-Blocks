@@ -1,5 +1,5 @@
 import { Point } from '@/interfaces/Point';
-import { Board } from '../Board';
+import { Board, CellKind } from '../Board';
 import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
 
@@ -21,9 +21,9 @@ describe('Board test', () => {
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (y == 10) {
-                    expect(board.isFilled(x, y)).toBe(true)
+                    expect(board.isFilled(x, y)).toBe(CellKind.Filled)
                 } else {
-                    expect(board.isFilled(x, y)).toBe(false)
+                    expect(board.isFilled(x, y)).toBe(CellKind.Empty)
                 }
             }
         }

@@ -1,6 +1,13 @@
 import { CurrentPiece, Direction, DirectionType, PieceOp, PieceOpType } from './CurrentPiece';
 import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 
+export const CellKind = {
+    Empty: false,
+    Filled: true,
+} as const;
+
+export type CellKindType = typeof CellKind[keyof typeof CellKind];
+
 export class Board {
     _board: boolean[][];
     _currentPiece: CurrentPiece;
