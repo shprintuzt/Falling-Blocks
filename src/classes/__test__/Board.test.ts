@@ -1,3 +1,4 @@
+import { Point } from '@/interfaces/Point';
 import { Board } from '../Board';
 import { Direction, PieceOp } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
@@ -502,16 +503,17 @@ describe('Fix piece', () => {
     });
 });
 
-const isFilled = (board: Board, positions: Point[]): void => {
+const isFilled = (board: Board, positions: Point[], ys: number[]): void => {
     for (let x = 0; x < board.width; ++x) {
         for (let y = 0; y < board.height; ++y) {
+            let result = ys.includes(y)
             for (const position of positions) {
                 if (x == position.x && y == position.y) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                    continue;
+                    result = true;
+                    break;
                 }
             }
-            expect(board.isFilled(x, y)).toBe(false)
+            expect(board.isFilled(x, y)).toBe(result)
         }
     }
 }
