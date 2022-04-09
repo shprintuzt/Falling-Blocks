@@ -13,7 +13,7 @@ describe('Board test', () => {
                 expect(board.isFilled(x, y)).toBe(false)
             }
         }
-        isFilled(board)
+        isFilled(board, [])
     });
     test('fill the 11th horizontal line', () => {
         let board = new Board(10, 30)
@@ -29,7 +29,7 @@ describe('Board test', () => {
         }
         isFilled(board, [], [10])
     });
-    test('fill the 2nd horizontal line and check', () => {
+    test('isRowFilled test', () => {
         let board = new Board(10, 30)
         board.fillRow(2)
         for (let y = 0; y < 30; ++y) {
@@ -88,103 +88,61 @@ describe('Piece shape test', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.I)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 3 && y == 29
-                    || x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 3, y: 29},
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29}])
     });
     test('update a current piece to Z and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.Z)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 5 && y == 28
-                    || x == 6 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 5, y: 28},
+            {x: 6, y: 28}])
     });
     test('update a current piece to S and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.S)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 3 && y == 28
-                    || x == 4 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 3, y: 28},
+            {x: 4, y: 28}])
     });
     test('update a current piece to L and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.L)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 4 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 4, y: 28}])
     });
     test('update a current piece to LR and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.LR)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 3 && y == 29
-                    || x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 3, y: 29},
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 5, y: 28}])
     });
     test('update a current piece to T and board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.T)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 5, y: 28}])
     });
 });
 describe('Piece rotation', () => {
@@ -192,94 +150,52 @@ describe('Piece rotation', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.L)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 4 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 4, y: 28}])
         board.do(PieceOp.Rotate, Direction.Left)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 4 && y == 28
-                    || x == 4 && y == 27
-                    || x == 5 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 4, y: 28},
+            {x: 4, y: 27},
+            {x: 5, y: 27}])
         board.do(PieceOp.Rotate, Direction.Right)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 4 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 4, y: 28}])
     })
     test('rotate piece LR in non-empty board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.LR)
         board.putBlock(5, 27)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 3 && y == 29
-                    || x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else if (x == 5 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 3, y: 29},
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 5, y: 28},
+            {x: 5, y: 27},
+        ])
         board.do(PieceOp.Rotate, Direction.Right)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 3 && y == 29
-                    || x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else if (x == 5 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 3, y: 29},
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 5, y: 28},
+            {x: 5, y: 27},
+        ])
         board.do(PieceOp.Rotate, Direction.Left)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 4 && y == 28
-                    || x == 4 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else if (x == 5 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 4, y: 28},
+            {x: 4, y: 27},
+            {x: 5, y: 27},
+        ])
     })
 });
 describe('Piece move', () => {
@@ -287,123 +203,75 @@ describe('Piece move', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.T)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 5, y: 28},
+        ])
         board.do(PieceOp.Move, Direction.Right)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 7 && y == 29
-                    || x == 6 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 7, y: 29},
+            {x: 6, y: 28},
+        ])
         board.do(PieceOp.Move, Direction.Down)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 5 && y == 28
-                    || x == 6 && y == 28
-                    || x == 7 && y == 28
-                    || x == 6 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 5, y: 28},
+            {x: 6, y: 28},
+            {x: 7, y: 28},
+            {x: 6, y: 27},
+        ])
         board.do(PieceOp.Move, Direction.Left)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 28
-                    || x == 5 && y == 28
-                    || x == 6 && y == 28
-                    || x == 5 && y == 27) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 28},
+            {x: 5, y: 28},
+            {x: 6, y: 28},
+            {x: 5, y: 27},
+        ])
     });
     test('move piece L right out of board', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.L)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 6 && y == 29
-                    || x == 4 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 6, y: 29},
+            {x: 4, y: 28},
+        ])
         board.do(PieceOp.Move, Direction.Right)
         board.do(PieceOp.Move, Direction.Right)
         board.do(PieceOp.Move, Direction.Right)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 7 && y == 29
-                    || x == 8 && y == 29
-                    || x == 9 && y == 29
-                    || x == 7 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 7, y: 29},
+            {x: 8, y: 29},
+            {x: 9, y: 29},
+            {x: 7, y: 28},
+        ])
         board.do(PieceOp.Move, Direction.Right)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 7 && y == 29
-                    || x == 8 && y == 29
-                    || x == 9 && y == 29
-                    || x == 7 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 7, y: 29},
+            {x: 8, y: 29},
+            {x: 9, y: 29},
+            {x: 7, y: 28},
+        ])
     });
     test('drop piece', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.O)
         board.drop(false)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 4 && y == 28
-                    || x == 5 && y == 28
-                    || x == 4 && y == 1
-                    || x == 5 && y == 1
-                    || x == 4 && y == 0
-                    || x == 5 && y == 0) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 4, y: 28},
+            {x: 5, y: 28},
+            {x: 4, y: 1},
+            {x: 5, y: 1},
+            {x: 4, y: 0},
+            {x: 5, y: 0},
+        ])
     })
     test('updateBoard callback test', () => {
         let board = new Board(10, 30)
@@ -422,39 +290,26 @@ describe('Fix piece', () => {
         let board = new Board(10, 30)
         board.newCurrentPiece(Piece.Z)
         board.updateBoard()
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 29
-                    || x == 5 && y == 29
-                    || x == 5 && y == 28
-                    || x == 6 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 29},
+            {x: 5, y: 29},
+            {x: 5, y: 28},
+            {x: 6, y: 28},
+        ])
         for (let i = 0; i < 29; ++i) {
             board.do(PieceOp.Move, Direction.Down);
         }
         let nextPieceShape = getPieceShape(board.currentPiece)
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 30; ++y) {
-                if (x == 4 && y == 1
-                    || x == 5 && y == 1
-                    || x == 5 && y == 0
-                    || x == 6 && y == 0) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else if (x == nextPieceShape[0].x && y == nextPieceShape[0].y
-                    || x == nextPieceShape[1].x && y == nextPieceShape[1].y
-                    || x == nextPieceShape[2].x && y == nextPieceShape[2].y
-                    || x == nextPieceShape[3].x && y == nextPieceShape[3].y) {
-                    expect(board.isFilled(x, y)).toBe(true)
-                } else {
-                    expect(board.isFilled(x, y)).toBe(false)
-                }
-            }
-        }
+        isFilled(board, [
+            {x: 4, y: 1},
+            {x: 5, y: 1},
+            {x: 5, y: 0},
+            {x: 6, y: 0},
+            {x: nextPieceShape[0].x, y: nextPieceShape[0].y},
+            {x: nextPieceShape[1].x, y: nextPieceShape[1].y},
+            {x: nextPieceShape[2].x, y: nextPieceShape[2].y},
+            {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
+        ])
     });
     test('game over', () => {
         let board = new Board(10, 30)
@@ -486,33 +341,29 @@ describe('Fix piece', () => {
             board.do(PieceOp.Move, Direction.Down, false);
         }
         for (let x = 0; x < 2; ++x) {
-            board.do(PieceOp.Move, Direction.Left)
+            board.do(PieceOp.Move, Direction.Left);
         }
-        for (let y = 0; y < 29; ++y) {
-            board.do(PieceOp.Move, Direction.Down, false);
-        }
+        board.drop(false);
         for (let x = 0; x < 2; ++x) {
-            board.do(PieceOp.Move, Direction.Right)
+            board.do(PieceOp.Move, Direction.Right);
         }
-        for (let y = 0; y < 29; ++y) {
-            board.do(PieceOp.Move, Direction.Down, false);
-        }
+        board.drop(false);
         for (let x = 0; x < 4; ++x) {
-            board.do(PieceOp.Move, Direction.Right)
+            board.do(PieceOp.Move, Direction.Right);
         }
-        for (let y = 0; y < 29; ++y) {
-            board.do(PieceOp.Move, Direction.Down, false);
-        }
+        board.drop(false);
 
-        for (let x = 0; x < 10; ++x) {
-            for (let y = 0; y < 28; ++y) {
-                expect(board.isFilled(x, y)).toBe(false)
-            }
-        }
+        let nextPieceShape = getPieceShape(board.currentPiece)
+        isFilled(board, [
+            {x: nextPieceShape[0].x, y: nextPieceShape[0].y},
+            {x: nextPieceShape[1].x, y: nextPieceShape[1].y},
+            {x: nextPieceShape[2].x, y: nextPieceShape[2].y},
+            {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
+        ])
     });
 });
 
-const isFilled = (board: Board, positions: Point[] = [], ys: number[] = []): void => {
+const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
         for (let y = 0; y < board.height; ++y) {
             let result = ys.includes(y)
