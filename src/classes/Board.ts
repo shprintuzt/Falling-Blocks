@@ -6,7 +6,7 @@ export const Cell = {
     Filled: true,
 } as const;
 
-export type CellKindType = typeof Cell[keyof typeof Cell];
+export type CellType = typeof Cell[keyof typeof Cell];
 
 export class Board {
     _board: boolean[][];
