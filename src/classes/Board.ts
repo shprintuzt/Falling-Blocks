@@ -36,24 +36,24 @@ export class Board {
 
     clearBoard = (width: number, height: number): void => {
         for (let x = 0; x < width; ++x) {
-            this._board[x] = new Array(height);
+            this._board[x] = new Array<CellType>(height);
             for (let y = 0; y < height; ++y) {
-                this._board[x][y] = false;
+                this._board[x][y] = Cell.Empty;
             }
         }
     }
 
     putBlock = (x: number, y: number): void => {
-        this._board[x][y] = true
+        this._board[x][y] = Cell.Filled;
     }
 
-    isFilled = (x: number, y: number): boolean => {
+    isFilled = (x: number, y: number): CellType => {
         return this._board[x][y];
     }
 
     fillRow = (y: number): void => {
         for (let x = 0; x < this.width; ++x) {
-            this._board[x][y] = true;
+            this._board[x][y] = Cell.Filled;
         }
     }
 
@@ -70,7 +70,7 @@ export class Board {
     updateBoard = () => {
         const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
-            this._board[pos.x][pos.y] = true;
+            this._board[pos.x][pos.y] = Cell.Filled;
         }
         this.doUpdateBoardCallbacks()
     }
@@ -78,7 +78,7 @@ export class Board {
     eraseCurrentPiece = () => {
         const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
-            this._board[pos.x][pos.y] = false;
+            this._board[pos.x][pos.y] = Cell.Empty;
         }
     }
 
@@ -171,7 +171,7 @@ export class Board {
             for (let x = 0; x < this.width; ++x) {
                 const offset = filledRowNums[y];
                 this._board[x][y - offset] = this._board[x][y];
-                if (offset > 0) this._board[x][y] = false;
+                if (offset > 0) this._board[x][y] = Cell.Empty;
             }
         }
 
