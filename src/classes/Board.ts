@@ -6,6 +6,7 @@ export class Board {
     _currentPiece: CurrentPiece;
     _updateBoardCallbacks: {(): void;}[] = []
     _gameOverCallbacks: {(): void;}[] = []
+    _rowErasedCallbacks: {(rowNum: number): void;}[] = []
    
     constructor(width: number, height: number) {
         this._board = new Array(width);
@@ -141,6 +142,16 @@ export class Board {
         }
     }
 
+    addRowErasedCallback = (callback: (rowNum: number) => void): void => {
+        this._rowErasedCallbacks.push(callback)
+    }
+
+    doRowErasedCallbacks = (rowNum: number): void => {
+        for (const callback of this._rowErasedCallbacks) {
+            callback(rowNum)
+        }
+    }
+
     eraceFilledRow = (): void => {
         let filledRowNum = 0;
         const filledRowNums = new Array<number>(this.height);
@@ -156,6 +167,8 @@ export class Board {
                 if (offset > 0) this._board[x][y] = false;
             }
         }
+
+        this.doRowErasedCallbacks(filledRowNum)
     }
 
     isRowFilled = (y: number): boolean => {

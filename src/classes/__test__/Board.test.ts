@@ -330,6 +330,11 @@ describe('Fix piece', () => {
     });
     test('succeed to erace two rows', () => {
         let board = new Board(10, 30);
+        let erasedRowNum = 0
+        const rowErasedCallback = (rowNum: number) => {
+            erasedRowNum = rowNum;
+        }
+        board.addRowErasedCallback(rowErasedCallback)
         board.newCurrentPiece(Piece.O);
         board.updateBoard();
 
@@ -354,6 +359,8 @@ describe('Fix piece', () => {
             {x: nextPieceShape[2].x, y: nextPieceShape[2].y},
             {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
         ]);
+
+        expect(erasedRowNum).toBe(2)
     });
 });
 
