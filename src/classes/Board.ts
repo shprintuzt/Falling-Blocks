@@ -2,14 +2,14 @@ import { CurrentPiece, Direction, DirectionType, PieceOp, PieceOpType } from './
 import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 
 export const Cell = {
-    Empty: false,
-    Filled: true,
+    Empty: 0,
+    Filled: 1,
 } as const;
 
 export type CellType = typeof Cell[keyof typeof Cell];
 
 export class Board {
-    _board: boolean[][];
+    _board: CellType[][];
     _currentPiece: CurrentPiece;
     _updateBoardCallbacks: {(): void;}[] = []
     _gameOverCallbacks: {(): void;}[] = []

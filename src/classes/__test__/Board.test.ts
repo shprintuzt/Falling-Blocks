@@ -34,9 +34,9 @@ describe('Board test', () => {
         board.fillRow(2);
         for (let y = 0; y < 30; ++y) {
             if (y == 2) {
-                expect(board.isRowFilled(y)).toBe(Cell.Filled);
+                expect(board.isRowFilled(y)).toBe(true);
             } else {
-                expect(board.isRowFilled(y)).toBe(Cell.Empty);
+                expect(board.isRowFilled(y)).toBe(false);
             }
         }
     });
@@ -370,7 +370,7 @@ const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => 
             let result = ys.includes(y) ? Cell.Filled : Cell.Empty;
             for (const position of positions) {
                 if (x == position.x && y == position.y) {
-                    result = true;
+                    result = Cell.Filled;
                     break;
                 }
             }
