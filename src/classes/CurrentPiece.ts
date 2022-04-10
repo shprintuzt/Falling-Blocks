@@ -28,6 +28,14 @@ export class CurrentPiece {
         this._y = y;
     }
 
+    static copy = (currentPiece: CurrentPiece): CurrentPiece => {
+        return new CurrentPiece(
+            currentPiece.type,
+            currentPiece.x,
+            currentPiece.y,
+            currentPiece.degree)
+    }
+
     get type() {
         return this._type;
     }

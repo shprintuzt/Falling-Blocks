@@ -4,6 +4,7 @@ import { getPieceShape, getRandomPiece, Piece, PieceType } from './PieceType'
 export const Cell = {
     Empty: 0,
     Filled: 1,
+    Shadow: 2,
 } as const;
 
 export type CellType = typeof Cell[keyof typeof Cell];
@@ -11,6 +12,7 @@ export type CellType = typeof Cell[keyof typeof Cell];
 export class Board {
     _board: CellType[][];
     _currentPiece: CurrentPiece;
+    _shadow: CurrentPiece;
     _updateBoardCallbacks: {(): void;}[] = []
     _gameOverCallbacks: {(): void;}[] = []
     _rowErasedCallbacks: {(rowNum: number): void;}[] = []
@@ -18,6 +20,7 @@ export class Board {
     constructor(width: number, height: number) {
         this._board = new Array(width);
         this._currentPiece = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
+        this._shadow = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
         this.clearBoard(width, height)
     }
 
@@ -59,6 +62,8 @@ export class Board {
 
     newCurrentPiece = (piece: PieceType) => {
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);
+        this.updateShadow()
+
         const pieceShape = getPieceShape(this.currentPiece);
         for (const pos of pieceShape) {
             if (this._board[pos.x][pos.y]) {
@@ -72,6 +77,12 @@ export class Board {
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = Cell.Filled;
         }
+        const shadowShape = getPieceShape(this._shadow);
+        for (const pos of shadowShape) {
+            if (this._board[pos.x][pos.y] != Cell.Filled) {
+                this._board[pos.x][pos.y] = Cell.Shadow;
+            }
+        }
         this.doUpdateBoardCallbacks()
     }
 
@@ -79,6 +90,14 @@ export class Board {
         const pieceShape = getPieceShape(this.currentPiece)
         for (const pos of pieceShape) {
             this._board[pos.x][pos.y] = Cell.Empty;
+        }
+    }
+
+    eraseShadow = () => {
+        const pieceShape = getPieceShape(this._shadow)
+        for (const pos of pieceShape) {
+            if (this._board[pos.x][pos.y] == Cell.Shadow)
+                this._board[pos.x][pos.y] = Cell.Empty;
         }
     }
 
@@ -110,7 +129,7 @@ export class Board {
         for (const pos of nextPieceShape) {
             if (pos.x < 0 || pos.x >= this.width) return false;
             if (pos.y < 0) return false;
-            if (this._board[pos.x][pos.y]) return false;
+            if (this._board[pos.x][pos.y] == Cell.Filled) return false;
         }
         return true;
     }
@@ -127,6 +146,16 @@ export class Board {
         const nextPiece = random ? getRandomPiece() : Piece.O
         this.newCurrentPiece(nextPiece);
         this.updateBoard();
+    }
+
+    updateShadow = (): void => {
+        this.eraseShadow();
+        const tmpCurrentPiece = CurrentPiece.copy(this._currentPiece)
+        while (this.canDo(PieceOp.Move, Direction.Down)) {
+            this._currentPiece.do(PieceOp.Move, Direction.Down);
+        }
+        this._shadow = CurrentPiece.copy(this._currentPiece)
+        this._currentPiece = CurrentPiece.copy(tmpCurrentPiece)
     }
 
     addUpdateBoardCallback = (callback: () => void): void => {

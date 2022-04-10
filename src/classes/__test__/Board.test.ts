@@ -1,5 +1,5 @@
 import { Point } from '@/interfaces/Point';
-import { Board, Cell } from '../Board';
+import { Board, Cell, CellType } from '../Board';
 import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
 
@@ -23,7 +23,7 @@ describe('Board test', () => {
                 if (y == 10) {
                     expect(board.isFilled(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).toBe(Cell.Empty);
+                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled);
                 }
             }
         }
@@ -50,7 +50,7 @@ describe('Board test', () => {
                 if (x == 3 && y == 3) {
                     expect(board.isFilled(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).toBe(Cell.Empty);
+                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled);
                 }
             }
         }
@@ -74,7 +74,7 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 28) {
                     expect(board.isFilled(x, y)).toBe(Cell.Filled)
                 } else {
-                    expect(board.isFilled(x, y)).toBe(Cell.Empty)
+                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled)
                 }
             }
         }
@@ -363,18 +363,54 @@ describe('Fix piece', () => {
         expect(erasedRowNum).toBe(2)
     });
 });
+describe('Shadow test', () => {
+    test('piece Z\'s shadow', () => {
+        let board = new Board(10, 30)
+        board.newCurrentPiece(Piece.Z)
+        board.updateBoard()
+        isShadow(board, [
+            {x: 4, y: 1},
+            {x: 5, y: 1},
+            {x: 5, y: 0},
+            {x: 6, y: 0},
+        ])
+    });
+});
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
         for (let y = 0; y < board.height; ++y) {
-            let result = ys.includes(y) ? Cell.Filled : Cell.Empty;
+            let result = ys.includes(y);
             for (const position of positions) {
                 if (x == position.x && y == position.y) {
-                    result = Cell.Filled;
+                    result = true;
                     break;
                 }
             }
-            expect(board.isFilled(x, y)).toBe(result)
+            if (result) {
+                expect(board.isFilled(x, y)).toBe(Cell.Filled)
+            } else {
+                expect(board.isFilled(x, y)).not.toBe(Cell.Filled)
+            }
+        }
+    }
+}
+
+const isShadow = (board: Board, positions: Point[]): void => {
+    for (let x = 0; x < board.width; ++x) {
+        for (let y = 0; y < board.height; ++y) {
+            let result = false;
+            for (const position of positions) {
+                if (x == position.x && y == position.y) {
+                    result = true;
+                    break;
+                }
+            }
+            if (result) {
+                expect(board.isFilled(x, y)).toBe(Cell.Shadow)
+            } else {
+                expect(board.isFilled(x, y)).not.toBe(Cell.Shadow)
+            }
         }
     }
 }
