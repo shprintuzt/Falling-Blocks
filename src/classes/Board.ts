@@ -5,6 +5,7 @@ export const Cell = {
     Empty: 0,
     Filled: 1,
     Shadow: 2,
+    Red: 3,
 } as const;
 
 export type CellType = typeof Cell[keyof typeof Cell];
@@ -48,6 +49,12 @@ export class Board {
 
     putBlock = (x: number, y: number): void => {
         this._board[x][y] = Cell.Filled;
+    }
+
+    putBlocksRandomly = (height: number): void => {
+        for (let y = 0; y < height; ++y) {
+            this._board[0][y] = Cell.Red;
+        }
     }
 
     getCell = (x: number, y: number): CellType => {

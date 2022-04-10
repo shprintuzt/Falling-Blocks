@@ -1,7 +1,11 @@
 <template>
     <button @click="start"
         v-show="!playing">
-        start
+        通常モード
+    </button>
+    <button @click="start"
+        v-show="!playing">
+        通常モード
     </button>
     <div v-show="playing">
         <canvas ref="canvas" width="100" height="300"/>

@@ -411,6 +411,15 @@ describe('Shadow test', () => {
         ])
     });
 });
+describe('Initialize randomly', () => {
+    test('put blocks randomly 3 rows', () => {
+        let board = new Board(10, 30)
+        board.putBlocksRandomly(3)
+        board.newCurrentPiece(Piece.Z)
+        board.updateBoard()
+        isRandomBlock(board, 3)
+    });
+});
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
@@ -447,6 +456,19 @@ const isShadow = (board: Board, positions: Point[]): void => {
                 expect(board.getCell(x, y)).not.toBe(Cell.Shadow)
             }
         }
+    }
+}
+
+const isRandomBlock = (board: Board, height: number): void => {
+    for (let y = 0; y < height; ++y) {
+        let result = false;
+        for (let x = 0; x < board.width; ++x) {
+            if (board.getCell(x, y) == Cell.Red) {
+                result = true;
+                break;
+            }
+        }
+        expect(result).toBe(true);
     }
 }
 
