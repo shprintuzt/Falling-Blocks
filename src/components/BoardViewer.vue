@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { onMounted } from '@vue/runtime-core'
-import { Board } from '@/classes/Board'
+import { Board, Cell } from '@/classes/Board'
 import { Piece } from '@/classes/PieceType'
 import { ref } from 'vue'
 import { Direction, PieceOp } from '@/classes/CurrentPiece'
@@ -60,8 +60,11 @@ export default {
             ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
             for (let x = 0; x < 10; x++) {
                 for (let y = 0; y < 30; y++) {
-                    if (board.isFilled(x, y)) {
+                    const cellKind = board.isFilled(x, y);
+                    if (cellKind == Cell.Filled) {
                         ctx.fillStyle = 'black';
+                    } else if (cellKind == Cell.Shadow) {
+                        ctx.fillStyle = 'gray';
                     } else {
                         ctx.fillStyle = 'lightgray';
                     }
