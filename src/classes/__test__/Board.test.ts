@@ -10,7 +10,7 @@ describe('Board test', () => {
         expect(board.height).toEqual(30);
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
-                expect(board.isFilled(x, y)).toBe(Cell.Empty);
+                expect(board.getCell(x, y)).toBe(Cell.Empty);
             }
         }
         isFilled(board, [])
@@ -21,9 +21,9 @@ describe('Board test', () => {
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (y == 10) {
-                    expect(board.isFilled(x, y)).toBe(Cell.Filled);
+                    expect(board.getCell(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled);
+                    expect(board.getCell(x, y)).not.toBe(Cell.Filled);
                 }
             }
         }
@@ -48,9 +48,9 @@ describe('Board test', () => {
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {
-                    expect(board.isFilled(x, y)).toBe(Cell.Filled);
+                    expect(board.getCell(x, y)).toBe(Cell.Filled);
                 } else {
-                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled);
+                    expect(board.getCell(x, y)).not.toBe(Cell.Filled);
                 }
             }
         }
@@ -72,9 +72,9 @@ describe('Piece shape test', () => {
                     || x == 5 && y == 29
                     || x == 4 && y == 28
                     || x == 5 && y == 28) {
-                    expect(board.isFilled(x, y)).toBe(Cell.Filled)
+                    expect(board.getCell(x, y)).toBe(Cell.Filled)
                 } else {
-                    expect(board.isFilled(x, y)).not.toBe(Cell.Filled)
+                    expect(board.getCell(x, y)).not.toBe(Cell.Filled)
                 }
             }
         }
@@ -423,9 +423,9 @@ const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => 
                 }
             }
             if (result) {
-                expect(board.isFilled(x, y)).toBe(Cell.Filled)
+                expect(board.getCell(x, y)).toBe(Cell.Filled)
             } else {
-                expect(board.isFilled(x, y)).not.toBe(Cell.Filled)
+                expect(board.getCell(x, y)).not.toBe(Cell.Filled)
             }
         }
     }
@@ -442,9 +442,9 @@ const isShadow = (board: Board, positions: Point[]): void => {
                 }
             }
             if (result) {
-                expect(board.isFilled(x, y)).toBe(Cell.Shadow)
+                expect(board.getCell(x, y)).toBe(Cell.Shadow)
             } else {
-                expect(board.isFilled(x, y)).not.toBe(Cell.Shadow)
+                expect(board.getCell(x, y)).not.toBe(Cell.Shadow)
             }
         }
     }

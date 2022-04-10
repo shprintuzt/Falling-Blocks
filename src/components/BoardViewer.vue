@@ -7,12 +7,12 @@
         <canvas ref="canvas" width="100" height="300"/>
         <p>点数: {{ score }}</p>
         <p>消した行数: {{ erasedRowTotalNum }}</p>
-        <button @click="drop">drop</button>
-        <button @click="moveDown">down</button>
-        <button @click="moveLeft">move left</button>
-        <button @click="moveRight">move right</button>
-        <button @click="rotateLeft">rotate left</button>
-        <button @click="rotateRight">rotate right</button>
+        <img @click="drop" src="@/assets/drop.svg"/>
+        <img @click="moveDown" src="@/assets/arrow_down.svg"/>
+        <img @click="moveLeft" src="@/assets/arrow_left.svg"/>
+        <img @click="moveRight" src="@/assets/arrow_right.svg"/>
+        <img @click="rotateLeft" src="@/assets/rotate_left.svg"/>
+        <img @click="rotateRight" src="@/assets/rotate_right.svg"/>
     </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
             ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
             for (let x = 0; x < 10; x++) {
                 for (let y = 0; y < 30; y++) {
-                    const cellKind = board.isFilled(x, y);
+                    const cellKind = board.getCell(x, y);
                     if (cellKind == Cell.Filled) {
                         ctx.fillStyle = 'black';
                     } else if (cellKind == Cell.Shadow) {

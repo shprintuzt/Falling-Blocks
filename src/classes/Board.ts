@@ -50,7 +50,7 @@ export class Board {
         this._board[x][y] = Cell.Filled;
     }
 
-    isFilled = (x: number, y: number): CellType => {
+    getCell = (x: number, y: number): CellType => {
         return this._board[x][y];
     }
 
