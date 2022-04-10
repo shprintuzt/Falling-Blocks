@@ -53,8 +53,25 @@ export class Board {
 
     putBlocksRandomly = (height: number): void => {
         for (let y = 0; y < height; ++y) {
-            this._board[0][y] = Cell.Red;
+            const randomNums = this.pickRandomly([...Array(10).keys()], 6)
+            for (const x of randomNums) {
+                this._board[x][y] = Cell.Red;
+            }
         }
+    }
+
+    pickRandomly = (array: number[], num: number): number[] => {
+        let result = [];
+        for (let i = 0; i < num; ++i) {
+            let picked = this.getRandomInt(array.length);
+            result.push(array[picked]);
+            array = array.slice(0, picked).concat(array.slice(picked + 1, array.length));
+        }
+        return result;
+    }
+
+    getRandomInt = (max: number): number => {
+        return Math.floor(Math.random() * max);
     }
 
     getCell = (x: number, y: number): CellType => {
