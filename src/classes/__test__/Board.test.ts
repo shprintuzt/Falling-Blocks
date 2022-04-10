@@ -374,6 +374,14 @@ describe('Shadow test', () => {
             {x: 5, y: 0},
             {x: 6, y: 0},
         ])
+        // rotatetion
+        doOp(board, PieceOp.Rotate, Direction.Left, 1);
+        isShadow(board, [
+            {x: 5, y: 2},
+            {x: 4, y: 1},
+            {x: 5, y: 1},
+            {x: 4, y: 0},
+        ])
     });
 });
 

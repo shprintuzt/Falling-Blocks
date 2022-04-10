@@ -106,6 +106,7 @@ export class Board {
         const _canDo = this.canDo(op, direction);
         if (_canDo) {
             this.currentPiece.do(op, direction);
+            this.updateShadow()
         }
         this.updateBoard();
 
