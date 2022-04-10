@@ -3,9 +3,9 @@
         v-show="!playing">
         通常モード
     </button>
-    <button @click="start"
+    <button @click="startRandom"
         v-show="!playing">
-        通常モード
+        ブロック消しモード
     </button>
     <div v-show="playing">
         <canvas ref="canvas" width="100" height="300"/>
@@ -35,11 +35,9 @@ export default {
         const erasedRowTotalNum = ref(0)
 
         onMounted(() => {
-            board.newCurrentPiece(Piece.O);
             board.addUpdateBoardCallback(updateBoardCallback);
             board.addGameOverCallback(gameOverCallback);
             board.addRowErasedCallback(rowErasedCallback);
-            board.updateBoard()
         })
 
         const updateBoardCallback = () => {
@@ -48,7 +46,6 @@ export default {
 
         const gameOverCallback = () => {
             board.clearBoard(10, 30);
-            board.newCurrentPiece(Piece.O);
             playing.value = false
         }
 
@@ -69,6 +66,8 @@ export default {
                         ctx.fillStyle = 'black';
                     } else if (cellKind == Cell.Shadow) {
                         ctx.fillStyle = 'gray';
+                    } else if (cellKind == Cell.Red) {
+                        ctx.fillStyle = 'red';
                     } else {
                         ctx.fillStyle = 'lightgray';
                     }
@@ -78,9 +77,16 @@ export default {
         }
 
         const start = () => {
+            board.newCurrentPiece(Piece.O);
+            board.updateBoard()
             playing.value = true
             score.value = 0
             erasedRowTotalNum.value = 0
+        }
+
+        const startRandom = () => {
+            board.putBlocksRandomly(20)
+            start()
         }
 
         const drop = () => {
@@ -113,6 +119,7 @@ export default {
             score,
             erasedRowTotalNum,
             start,
+            startRandom,
             drop,
             moveDown,
             moveLeft,

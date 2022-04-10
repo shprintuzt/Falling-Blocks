@@ -61,9 +61,9 @@ export class Board {
     }
 
     pickRandomly = (array: number[], num: number): number[] => {
-        let result = [];
+        const result = [];
         for (let i = 0; i < num; ++i) {
-            let picked = this.getRandomInt(array.length);
+            const picked = this.getRandomInt(array.length);
             result.push(array[picked]);
             array = array.slice(0, picked).concat(array.slice(picked + 1, array.length));
         }
@@ -155,6 +155,7 @@ export class Board {
             if (pos.x < 0 || pos.x >= this.width) return false;
             if (pos.y < 0) return false;
             if (this._board[pos.x][pos.y] == Cell.Filled) return false;
+            if (this._board[pos.x][pos.y] == Cell.Red) return false;
         }
         return true;
     }
