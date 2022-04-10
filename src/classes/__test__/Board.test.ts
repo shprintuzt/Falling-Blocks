@@ -374,13 +374,40 @@ describe('Shadow test', () => {
             {x: 5, y: 0},
             {x: 6, y: 0},
         ])
-        // rotatetion
+        // rotation
         doOp(board, PieceOp.Rotate, Direction.Left, 1);
         isShadow(board, [
             {x: 5, y: 2},
             {x: 4, y: 1},
             {x: 5, y: 1},
             {x: 4, y: 0},
+        ])
+        doOp(board, PieceOp.Move, Direction.Left, 3);
+        isShadow(board, [
+            {x: 2, y: 2},
+            {x: 1, y: 1},
+            {x: 2, y: 1},
+            {x: 1, y: 0},
+        ])
+    });
+    test('piece Z\'s shadow', () => {
+        let board = new Board(10, 30)
+        board.putBlock(5, 26)
+        board.newCurrentPiece(Piece.L)
+        board.updateBoard()
+        isShadow(board, [
+            {x: 4, y: 27},
+            {x: 5, y: 27},
+            {x: 6, y: 27},
+            {x: 4, y: 26},
+        ])
+        doOp(board, PieceOp.Rotate, Direction.Right, 1)
+        isShadow(board, [])
+        doOp(board, PieceOp.Move, Direction.Right, 1)
+        isShadow(board, [
+            {x: 5, y: 27},
+            {x: 6, y: 26},
+            {x: 6, y: 25},
         ])
     });
 });
