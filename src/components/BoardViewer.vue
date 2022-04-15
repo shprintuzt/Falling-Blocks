@@ -38,6 +38,19 @@ export default {
             board.addUpdateBoardCallback(updateBoardCallback);
             board.addGameOverCallback(gameOverCallback);
             board.addRowErasedCallback(rowErasedCallback);
+            window.addEventListener('keyup', (e) => {
+                if (e.key == 'ArrowRight') {
+                    moveRight()
+                } else if (e.key == 'ArrowLeft') {
+                    moveLeft()
+                } else if (e.key == 'z') {
+                    rotateLeft()
+                } else if (e.key == 'c') {
+                    rotateRight()
+                } else if (e.key == 'ArrowUp') {
+                    drop()
+                }
+            })
         })
 
         const updateBoardCallback = () => {
