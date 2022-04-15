@@ -427,6 +427,21 @@ describe('Initialize randomly', () => {
         board.updateBoard()
         isRandomBlock(board, 3)
     });
+    test('put blocks randomly 3 rows after clear', () => {
+        let board = new Board(10, 30);
+        let callbackCalled = false;
+        const gameOverCallback = (): void => {
+            callbackCalled = true;
+            board.clearBoard(10, 30);
+            board.putBlocksRandomly(3);
+        }
+        board.addGameOverCallback(gameOverCallback);
+        board.newCurrentPiece(Piece.O);
+        board.updateBoard();
+        drops(board, 15, false);
+        isRandomBlock(board, 3);
+        expect(callbackCalled).toBe(true)
+    });
 });
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
@@ -489,5 +504,15 @@ const doOp = (
 ): void => {
     for (let i = 0; i < cnt; ++i) {
         board.do(op, direction, random);
+    }
+}
+
+const drops = (
+    board: Board,
+    cnt: number,
+    random = true
+): void => {
+    for (let i = 0; i < cnt; ++i) {
+        board.drop(random);
     }
 }
