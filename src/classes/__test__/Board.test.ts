@@ -419,6 +419,14 @@ describe('Initialize randomly', () => {
         board.updateBoard()
         isRandomBlock(board, 3)
     });
+    test('put blocks randomly 3 rows after clear', () => {
+        let board = new Board(10, 30)
+        board.clearBoard(10, 30)
+        board.putBlocksRandomly(3)
+        board.newCurrentPiece(Piece.Z)
+        board.updateBoard()
+        isRandomBlock(board, 3)
+    });
 });
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {

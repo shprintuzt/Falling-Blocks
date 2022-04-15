@@ -43,12 +43,14 @@ export default {
                     moveRight()
                 } else if (e.key == 'ArrowLeft') {
                     moveLeft()
-                } else if (e.key == 'z') {
-                    rotateLeft()
-                } else if (e.key == 'c') {
-                    rotateRight()
+                } else if (e.key == 'ArrowDown') {
+                    moveDown()
                 } else if (e.key == 'ArrowUp') {
                     drop()
+                } else if (e.key == 'z') {
+                    rotateLeft()
+                } else if (e.key == 'x') {
+                    rotateRight()
                 }
             })
         })
