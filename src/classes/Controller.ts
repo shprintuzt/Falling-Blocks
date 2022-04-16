@@ -1,4 +1,5 @@
 import { Board } from "./Board";
+import { Direction, PieceOp } from "./CurrentPiece";
 
 export const Mode = {
     None: 0,
@@ -53,6 +54,30 @@ export class Controller {
 
     addGameOverCallback = (callback: () => void) => {
         this._board.addGameOverCallback(callback)
+    }
+
+    drop = () => {
+        this._board.drop()
+    }
+
+    moveDown = () => {
+        this._board.do(PieceOp.Move, Direction.Down)
+    }
+
+    moveLeft = () => {
+        this._board.do(PieceOp.Move, Direction.Left)
+    }
+
+    moveRight = () => {
+        this._board.do(PieceOp.Move, Direction.Right)
+    }
+
+    rotateLeft = () => {
+        this._board.do(PieceOp.Rotate, Direction.Left)
+    }
+
+    rotateRight = () => {
+        this._board.do(PieceOp.Rotate, Direction.Right)
     }
 
 }

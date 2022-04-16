@@ -111,27 +111,27 @@ export default {
         }
 
         const drop = () => {
-            controller.board.drop()
+            controller.drop()
         }
 
         const moveDown = () => {
-            controller.board.do(PieceOp.Move, Direction.Down)
+            controller.moveDown()
         }
 
         const moveLeft = () => {
-            controller.board.do(PieceOp.Move, Direction.Left)
+            controller.moveLeft()
         }
 
         const moveRight = () => {
-            controller.board.do(PieceOp.Move, Direction.Right)
+            controller.moveRight()
         }
 
         const rotateLeft = () => {
-            controller.board.do(PieceOp.Rotate, Direction.Left)
+            controller.rotateLeft()
         }
 
         const rotateRight = () => {
-            controller.board.do(PieceOp.Rotate, Direction.Right)
+            controller.rotateRight()
         }
 
         return {
