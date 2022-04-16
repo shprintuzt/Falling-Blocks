@@ -156,12 +156,14 @@ describe('Piece rotation', () => {
             {x: 6, y: 29},
             {x: 4, y: 28}])
         board.do(PieceOp.Rotate, Direction.Left)
+        board.updateBoard();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 4, y: 28},
             {x: 4, y: 27},
             {x: 5, y: 27}])
         board.do(PieceOp.Rotate, Direction.Right)
+        board.updateBoard();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -181,6 +183,7 @@ describe('Piece rotation', () => {
             {x: 5, y: 27},
         ])
         board.do(PieceOp.Rotate, Direction.Right)
+        board.updateBoard();
         isFilled(board, [
             {x: 3, y: 29},
             {x: 4, y: 29},
@@ -189,6 +192,7 @@ describe('Piece rotation', () => {
             {x: 5, y: 27},
         ])
         board.do(PieceOp.Rotate, Direction.Left)
+        board.updateBoard();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -210,6 +214,7 @@ describe('Piece move', () => {
             {x: 5, y: 28},
         ])
         board.do(PieceOp.Move, Direction.Right)
+        board.updateBoard();
         isFilled(board, [
             {x: 5, y: 29},
             {x: 6, y: 29},
@@ -217,6 +222,7 @@ describe('Piece move', () => {
             {x: 6, y: 28},
         ])
         board.do(PieceOp.Move, Direction.Down)
+        board.updateBoard();
         isFilled(board, [
             {x: 5, y: 28},
             {x: 6, y: 28},
@@ -224,6 +230,7 @@ describe('Piece move', () => {
             {x: 6, y: 27},
         ])
         board.do(PieceOp.Move, Direction.Left)
+        board.updateBoard();
         isFilled(board, [
             {x: 4, y: 28},
             {x: 5, y: 28},
@@ -242,8 +249,11 @@ describe('Piece move', () => {
             {x: 4, y: 28},
         ])
         board.do(PieceOp.Move, Direction.Right)
+        board.updateBoard();
         board.do(PieceOp.Move, Direction.Right)
+        board.updateBoard();
         board.do(PieceOp.Move, Direction.Right)
+        board.updateBoard();
         isFilled(board, [
             {x: 7, y: 29},
             {x: 8, y: 29},
@@ -251,6 +261,7 @@ describe('Piece move', () => {
             {x: 7, y: 28},
         ])
         board.do(PieceOp.Move, Direction.Right)
+        board.updateBoard();
         isFilled(board, [
             {x: 7, y: 29},
             {x: 8, y: 29},
@@ -282,6 +293,7 @@ describe('Piece move', () => {
         board.addUpdateBoardCallback(updateBoardCallback)
         board.newCurrentPiece(Piece.O)
         board.do(PieceOp.Rotate, Direction.Right)
+        board.updateBoard();
         expect(isCallbackCalled).toBe(true)
     })
 })
@@ -320,6 +332,7 @@ describe('Fix piece', () => {
 
         board.putBlock(4, 29);
         const doResult = board.do(PieceOp.Move, Direction.Down, false);
+        board.updateBoard();
 
         expect(doResult).toBe(false)
     });
@@ -486,6 +499,7 @@ const doOp = (
 ): void => {
     for (let i = 0; i < cnt; ++i) {
         const doRes = board.do(op, direction, random);
+        board.updateBoard();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             board.newCurrentPiece(nextPiece);

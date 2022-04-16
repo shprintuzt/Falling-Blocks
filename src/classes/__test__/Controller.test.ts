@@ -55,6 +55,7 @@ const doOp = (
 ): void => {
     for (let i = 0; i < cnt; ++i) {
         const doRes = board.do(op, direction, random);
+        board.updateBoard();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             board.newCurrentPiece(nextPiece);

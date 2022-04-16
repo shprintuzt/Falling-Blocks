@@ -142,7 +142,6 @@ export class Board {
             this.currentPiece.do(op, direction);
             this.updateShadow()
         }
-        this.updateBoard();
 
         // piece position is fixed
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
