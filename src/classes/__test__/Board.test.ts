@@ -336,6 +336,7 @@ describe('Fix piece', () => {
         }
         board.addRowErasedCallback(rowErasedCallback)
         board.newCurrentPiece(Piece.O);
+        expect(board.pieceNum).toBe(1);
         board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Down, 29, false);
@@ -351,6 +352,7 @@ describe('Fix piece', () => {
 
         doOp(board, PieceOp.Move, Direction.Right, 4);
         board.drop(false);
+        expect(board.pieceNum).toBe(6)
 
         let nextPieceShape = getPieceShape(board.currentPiece);
         isFilled(board, [
