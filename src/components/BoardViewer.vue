@@ -1,5 +1,5 @@
 <template>
-    <button @click="start"
+    <button @click="startNormal"
         v-show="!playing">
         通常モード
     </button>
@@ -90,7 +90,7 @@ export default {
             }
         }
 
-        const start = (clear = true) => {
+        const startNormal = (clear = true) => {
             if (clear) board.clearBoard(10, 30);
             board.newCurrentPiece(Piece.O);
             board.updateBoard()
@@ -102,8 +102,10 @@ export default {
         const startRandom = () => {
             board.clearBoard(10, 30)
             board.putBlocksRandomly(20)
-            start(false)
+            startNormal(false)
         }
+
+        // const start
 
         const drop = () => {
             board.drop()
@@ -134,7 +136,7 @@ export default {
             playing,
             score,
             erasedRowTotalNum,
-            start,
+            startNormal,
             startRandom,
             drop,
             moveDown,
