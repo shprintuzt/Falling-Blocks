@@ -22,22 +22,23 @@
 
 <script lang="ts">
 import { onMounted } from '@vue/runtime-core'
-import { Board, Cell } from '@/classes/Board'
+import { Cell } from '@/classes/Board'
 import { Piece } from '@/classes/PieceType'
 import { ref } from 'vue'
 import { Direction, PieceOp } from '@/classes/CurrentPiece'
+import { Controller } from '@/classes/Controller'
 export default {
     setup() {
-        let board: Board = new Board(10, 30);
+        let controller: Controller = new Controller();
         const canvas = ref<HTMLCanvasElement>();
         const playing = ref(false);
         const score = ref(0)
         const erasedRowTotalNum = ref(0)
 
         onMounted(() => {
-            board.addUpdateBoardCallback(updateBoardCallback);
-            board.addGameOverCallback(gameOverCallback);
-            board.addRowErasedCallback(rowErasedCallback);
+            controller.board.addUpdateBoardCallback(updateBoardCallback);
+            controller.addGameOverCallback(gameOverCallback);
+            controller.board.addRowErasedCallback(rowErasedCallback);
             window.addEventListener('keyup', (e) => {
                 if (e.key == 'ArrowRight') {
                     moveRight()
@@ -75,7 +76,7 @@ export default {
             ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
             for (let x = 0; x < 10; x++) {
                 for (let y = 0; y < 30; y++) {
-                    const cellKind = board.getCell(x, y);
+                    const cellKind = controller.board.getCell(x, y);
                     if (cellKind == Cell.Filled) {
                         ctx.fillStyle = 'black';
                     } else if (cellKind == Cell.Shadow) {
@@ -91,46 +92,46 @@ export default {
         }
 
         const startNormal = () => {
-            board.clearBoard(10, 30);
+            controller.board.clearBoard(10, 30);
             start()
         }
 
         const startRandom = () => {
-            board.clearBoard(10, 30)
-            board.putBlocksRandomly(20)
+            controller.board.clearBoard(10, 30)
+            controller.board.putBlocksRandomly(20)
             start()
         }
 
         const start = () => {
-            board.newCurrentPiece(Piece.O);
-            board.updateBoard()
+            controller.board.newCurrentPiece(Piece.O);
+            controller.board.updateBoard()
             playing.value = true
             score.value = 0
             erasedRowTotalNum.value = 0
         }
 
         const drop = () => {
-            board.drop()
+            controller.board.drop()
         }
 
         const moveDown = () => {
-            board.do(PieceOp.Move, Direction.Down)
+            controller.board.do(PieceOp.Move, Direction.Down)
         }
 
         const moveLeft = () => {
-            board.do(PieceOp.Move, Direction.Left)
+            controller.board.do(PieceOp.Move, Direction.Left)
         }
 
         const moveRight = () => {
-            board.do(PieceOp.Move, Direction.Right)
+            controller.board.do(PieceOp.Move, Direction.Right)
         }
 
         const rotateLeft = () => {
-            board.do(PieceOp.Rotate, Direction.Left)
+            controller.board.do(PieceOp.Rotate, Direction.Left)
         }
 
         const rotateRight = () => {
-            board.do(PieceOp.Rotate, Direction.Right)
+            controller.board.do(PieceOp.Rotate, Direction.Right)
         }
 
         return {

@@ -1,5 +1,4 @@
 import { Board } from "./Board";
-import { Piece } from "./PieceType";
 
 export const Mode = {
     None: 0,
