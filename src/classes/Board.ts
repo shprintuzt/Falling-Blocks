@@ -146,10 +146,6 @@ export class Board {
 
         // piece position is fixed
         if (!_canDo && op == PieceOp.Move && direction == Direction.Down) {
-            this.eraceFilledRow()
-            const nextPiece = random ? getRandomPiece() : Piece.O
-            this.newCurrentPiece(nextPiece);
-            this.updateBoard();
             return false;
         }
 

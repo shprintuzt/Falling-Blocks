@@ -61,23 +61,48 @@ export class Controller {
     }
 
     moveDown = () => {
-        this._board.do(PieceOp.Move, Direction.Down)
+        const doRes = this._board.do(PieceOp.Move, Direction.Down);
+        if (!doRes) {
+            this._board.eraceFilledRow()
+            this._board.newCurrentPiece(null);
+            this._board.updateBoard();
+        }
     }
 
     moveLeft = () => {
-        this._board.do(PieceOp.Move, Direction.Left)
+        const doRes = this._board.do(PieceOp.Move, Direction.Left);
+        if (!doRes) {
+            this._board.eraceFilledRow()
+            this._board.newCurrentPiece(null);
+            this._board.updateBoard();
+        }
     }
 
     moveRight = () => {
-        this._board.do(PieceOp.Move, Direction.Right)
+        const doRes = this._board.do(PieceOp.Move, Direction.Right);
+        if (!doRes) {
+            this._board.eraceFilledRow()
+            this._board.newCurrentPiece(null);
+            this._board.updateBoard();
+        }
     }
 
     rotateLeft = () => {
-        this._board.do(PieceOp.Rotate, Direction.Left)
+        const doRes = this._board.do(PieceOp.Rotate, Direction.Left);
+        if (!doRes) {
+            this._board.eraceFilledRow()
+            this._board.newCurrentPiece(null);
+            this._board.updateBoard();
+        }
     }
 
     rotateRight = () => {
-        this._board.do(PieceOp.Rotate, Direction.Right)
+        const doRes = this._board.do(PieceOp.Rotate, Direction.Right);
+        if (!doRes) {
+            this._board.eraceFilledRow()
+            this._board.newCurrentPiece(null);
+            this._board.updateBoard();
+        }
     }
 
 }

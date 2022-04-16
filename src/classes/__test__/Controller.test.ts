@@ -1,7 +1,7 @@
 import { Board } from "../Board";
 import { Controller, Mode } from "../Controller";
 import { Direction, DirectionType, PieceOp, PieceOpType } from "../CurrentPiece";
-import { Piece } from "../PieceType";
+import { getRandomPiece, Piece } from "../PieceType";
 
 describe('Controller test', () => {
     test('create controller', () => {
@@ -40,7 +40,7 @@ describe('Controller test', () => {
         doOp(controller.board, PieceOp.Move, Direction.Down, 28);
 
         controller.board.putBlock(4, 29);
-        controller.board.do(PieceOp.Move, Direction.Down, false);
+        controller.moveDown()
 
         expect(gameOverCallbackCalled).toBe(true)
     });
@@ -54,7 +54,12 @@ const doOp = (
     random = true
 ): void => {
     for (let i = 0; i < cnt; ++i) {
-        board.do(op, direction, random);
+        const doRes = board.do(op, direction, random);
+        if (!doRes) {
+            const nextPiece = random ? getRandomPiece() : Piece.O
+            board.newCurrentPiece(nextPiece);
+            board.updateBoard();
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 import { Point } from '@/interfaces/Point';
 import { Board, Cell } from '../Board';
 import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
-import { getPieceShape, Piece } from '../PieceType';
+import { getPieceShape, getRandomPiece, Piece } from '../PieceType';
 
 describe('Board test', () => {
     test('create 10 x 30 empty board', () => {
@@ -485,7 +485,12 @@ const doOp = (
     random = true
 ): void => {
     for (let i = 0; i < cnt; ++i) {
-        board.do(op, direction, random);
+        const doRes = board.do(op, direction, random);
+        if (!doRes) {
+            const nextPiece = random ? getRandomPiece() : Piece.O
+            board.newCurrentPiece(nextPiece);
+            board.updateBoard();
+        }
     }
 }
 
