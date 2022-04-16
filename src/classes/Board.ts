@@ -84,7 +84,9 @@ export class Board {
         }
     }
 
-    newCurrentPiece = (piece: PieceType) => {
+    newCurrentPiece = (piece: PieceType | null) => {
+        if (piece == null)
+            piece = getRandomPiece();
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);
         this.updateShadow()
 

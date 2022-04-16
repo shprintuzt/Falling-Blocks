@@ -18,11 +18,11 @@ export class Controller {
     _mode: ModeType;
 
     constructor() {
-        this._board = new Board(10, 30);
         this._playing = false;
         this._score = 0;
         this._totalErasedRowNum = 0;
         this._mode = Mode.None;
+        this._board = new Board(10, 30);
     }
 
     get board() {return this._board;}
@@ -38,7 +38,6 @@ export class Controller {
     }
 
     startErasing = () => {
-        this._playing = true;
         this._mode = Mode.Erasing;
         this._board.clearBoard(10, 30)
         this._board.putBlocksRandomly(20)
@@ -46,7 +45,7 @@ export class Controller {
     }
 
     start = () => {
-        this.board.newCurrentPiece(Piece.O);
+        this.board.newCurrentPiece(null);
         this._board.updateBoard()
         this._playing = true
         this._score = 0
