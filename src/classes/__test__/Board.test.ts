@@ -1,5 +1,5 @@
 import { Point } from '@/interfaces/Point';
-import { Board, Cell, CellType } from '../Board';
+import { Board, Cell } from '../Board';
 import { Direction, DirectionType, PieceOp, PieceOpType } from '../CurrentPiece';
 import { getPieceShape, Piece } from '../PieceType';
 
