@@ -45,11 +45,15 @@ export class Controller {
     }
 
     start = () => {
-        this._board.newCurrentPiece(null);
-        this._board.updateBoard()
-        this._playing = true
-        this._score = 0
-        this._totalErasedRowNum = 0
+        const res = this._board.newCurrentPiece(null);
+        if (!res) {
+            this._board.doGameOverCallbacks()
+        } else {
+            this._board.updateBoard()
+            this._playing = true
+            this._score = 0
+            this._totalErasedRowNum = 0
+        }
     }
 
     addGameOverCallback = (callback: () => void) => {
@@ -65,8 +69,12 @@ export class Controller {
         this._board.updateBoard();
         if (!doRes) {
             this._board.eraceFilledRow()
-            this._board.newCurrentPiece(null);
-            this._board.updateBoard();
+            const res = this._board.newCurrentPiece(null);
+            if (!res) {
+                this._board.doGameOverCallbacks();
+            } else {
+                this._board.updateBoard();
+            }
         }
     }
 
@@ -75,8 +83,12 @@ export class Controller {
         this._board.updateBoard();
         if (!doRes) {
             this._board.eraceFilledRow()
-            this._board.newCurrentPiece(null);
-            this._board.updateBoard();
+            const res = this._board.newCurrentPiece(null);
+            if (!res) {
+                this._board.doGameOverCallbacks()
+            } else {
+                this._board.updateBoard();
+            }
         }
     }
 
@@ -85,8 +97,12 @@ export class Controller {
         this._board.updateBoard();
         if (!doRes) {
             this._board.eraceFilledRow()
-            this._board.newCurrentPiece(null);
-            this._board.updateBoard();
+            const res = this._board.newCurrentPiece(null);
+            if (!res) {
+                this._board.doGameOverCallbacks()
+            } else {
+                this._board.updateBoard();
+            }
         }
     }
 
@@ -95,8 +111,12 @@ export class Controller {
         this._board.updateBoard();
         if (!doRes) {
             this._board.eraceFilledRow()
-            this._board.newCurrentPiece(null);
-            this._board.updateBoard();
+            const res = this._board.newCurrentPiece(null);
+            if (!res) {
+                this._board.doGameOverCallbacks()
+            } else {
+                this._board.updateBoard();
+            }
         }
     }
 
@@ -105,8 +125,12 @@ export class Controller {
         this._board.updateBoard();
         if (!doRes) {
             this._board.eraceFilledRow()
-            this._board.newCurrentPiece(null);
-            this._board.updateBoard();
+            const res = this._board.newCurrentPiece(null);
+            if (!res) {
+                this._board.doGameOverCallbacks()
+            } else {
+                this._board.updateBoard();
+            }
         }
     }
 

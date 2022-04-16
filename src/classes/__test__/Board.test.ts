@@ -59,7 +59,10 @@ describe('Board test', () => {
 describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.O)
+        const res = board.newCurrentPiece(Piece.O);
+        if (!res) {
+            board.doGameOverCallbacks();
+        }
 
         // initial piece position test
         expect(board.currentPiece.degree).toBe(0)
@@ -86,8 +89,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to I and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.I)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.I);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 3, y: 29},
             {x: 4, y: 29},
@@ -96,8 +104,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to Z and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.Z)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.Z);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -106,8 +119,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to S and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.S)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.S);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -116,8 +134,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to L and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.L)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.L);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -126,8 +149,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to LR and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.LR)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.LR);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 3, y: 29},
             {x: 4, y: 29},
@@ -136,8 +164,13 @@ describe('Piece shape test', () => {
     });
     test('update a current piece to T and board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.T)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.T);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -148,8 +181,13 @@ describe('Piece shape test', () => {
 describe('Piece rotation', () => {
     test('rotate piece L in empty board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.L)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.L);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -172,7 +210,11 @@ describe('Piece rotation', () => {
     })
     test('rotate piece LR in non-empty board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.LR)
+        const res = board.newCurrentPiece(Piece.LR);
+        if (!res) {
+            board.doGameOverCallbacks();
+        }
+
         board.putBlock(5, 27)
         board.updateBoard()
         isFilled(board, [
@@ -205,8 +247,13 @@ describe('Piece rotation', () => {
 describe('Piece move', () => {
     test('move piece T in empty board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.T)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.T);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -240,8 +287,13 @@ describe('Piece move', () => {
     });
     test('move piece L right out of board', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.L)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.L);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -271,7 +323,11 @@ describe('Piece move', () => {
     });
     test('drop piece', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.O)
+        const res = board.newCurrentPiece(Piece.O);
+        if (!res) {
+            board.doGameOverCallbacks();
+        }
+
         board.drop(false)
         isFilled(board, [
             {x: 4, y: 29},
@@ -291,7 +347,11 @@ describe('Piece move', () => {
             isCallbackCalled = true
         }
         board.addUpdateBoardCallback(updateBoardCallback)
-        board.newCurrentPiece(Piece.O)
+        const res = board.newCurrentPiece(Piece.O);
+        if (!res) {
+            board.doGameOverCallbacks();
+        }
+
         board.do(PieceOp.Rotate, Direction.Right)
         board.updateBoard();
         expect(isCallbackCalled).toBe(true)
@@ -300,8 +360,13 @@ describe('Piece move', () => {
 describe('Fix piece', () => {
     test('fix piece Z and add new piece', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.Z)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.Z);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -325,8 +390,12 @@ describe('Fix piece', () => {
     });
     test('do failed', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.O)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.O);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
 
         doOp(board, PieceOp.Move, Direction.Down, 28);
 
@@ -343,7 +412,11 @@ describe('Fix piece', () => {
             erasedRowNum = rowNum;
         }
         board.addRowErasedCallback(rowErasedCallback)
-        board.newCurrentPiece(Piece.O);
+        const res = board.newCurrentPiece(Piece.O);
+        if (!res) {
+            board.doGameOverCallbacks();
+        }
+
         expect(board.pieceNum).toBe(1);
         board.updateBoard();
 
@@ -376,8 +449,13 @@ describe('Fix piece', () => {
 describe('Shadow test', () => {
     test('piece Z\'s shadow', () => {
         let board = new Board(10, 30)
-        board.newCurrentPiece(Piece.Z)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.Z);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isShadow(board, [
             {x: 4, y: 1},
             {x: 5, y: 1},
@@ -403,8 +481,13 @@ describe('Shadow test', () => {
     test('piece Z\'s shadow', () => {
         let board = new Board(10, 30)
         board.putBlock(5, 26)
-        board.newCurrentPiece(Piece.L)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.L);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isShadow(board, [
             {x: 4, y: 27},
             {x: 5, y: 27},
@@ -425,16 +508,26 @@ describe('Initialize randomly', () => {
     test('put blocks randomly 3 rows', () => {
         let board = new Board(10, 30)
         board.putBlocksRandomly(3)
-        board.newCurrentPiece(Piece.Z)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.Z);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isRandomBlock(board, 3)
     });
     test('put blocks randomly 3 rows after clear', () => {
         let board = new Board(10, 30)
         board.clearBoard(10, 30)
         board.putBlocksRandomly(3)
-        board.newCurrentPiece(Piece.Z)
-        board.updateBoard()
+        const res = board.newCurrentPiece(Piece.Z);
+        if (!res) {
+            board.doGameOverCallbacks();
+        } else {
+            board.updateBoard();
+        }
+
         isRandomBlock(board, 3)
     });
 });
@@ -502,8 +595,12 @@ const doOp = (
         board.updateBoard();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
-            board.newCurrentPiece(nextPiece);
-            board.updateBoard();
+            const res = board.newCurrentPiece(nextPiece);
+            if (!res) {
+                board.doGameOverCallbacks();
+            } else {
+                board.updateBoard();
+            }
         }
     }
 }

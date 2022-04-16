@@ -91,7 +91,7 @@ export class Board {
         }
     }
 
-    newCurrentPiece = (piece: PieceType | null) => {
+    newCurrentPiece = (piece: PieceType | null): boolean => {
         this._pieceNum += 1;
         if (piece == null)
             piece = getRandomPiece();
@@ -101,9 +101,11 @@ export class Board {
         const pieceShape = getPieceShape(this.currentPiece);
         for (const pos of pieceShape) {
             if (this._board[pos.x][pos.y] != Cell.Empty) {
-                this.doGameOverCallbacks()
+                return false;
             }
         }
+
+        return true;
     }
 
     updateBoard = () => {
@@ -178,7 +180,10 @@ export class Board {
         // piece position is fixed
         this.eraceFilledRow()
         const nextPiece = random ? getRandomPiece() : Piece.O
-        this.newCurrentPiece(nextPiece);
+        const res = this.newCurrentPiece(nextPiece);
+        if (!res) {
+            this.doGameOverCallbacks()
+        }
         this.updateBoard();
     }
 
