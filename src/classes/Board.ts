@@ -135,7 +135,7 @@ export class Board {
         }
     }
 
-    do = (op: PieceOpType, direction: DirectionType, random = true): void => {
+    do = (op: PieceOpType, direction: DirectionType, random = true): boolean => {
         this.eraseCurrentPiece();
         const _canDo = this.canDo(op, direction);
         if (_canDo) {
@@ -150,7 +150,10 @@ export class Board {
             const nextPiece = random ? getRandomPiece() : Piece.O
             this.newCurrentPiece(nextPiece);
             this.updateBoard();
+            return false;
         }
+
+        return true;
     }
 
     canDo = (op: PieceOpType, direction: DirectionType): boolean => {
