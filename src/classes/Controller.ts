@@ -4,6 +4,7 @@ import { Piece } from "./PieceType";
 export const Mode = {
     None: 0,
     Normal: 1,
+    Erasing: 2,
 } as const;
 
 export type ModeType = typeof Mode[keyof typeof Mode];
@@ -36,6 +37,14 @@ export class Controller {
         this.start()
     }
 
+    startErasing = () => {
+        this._playing = true;
+        this._mode = Mode.Erasing;
+        this._board.clearBoard(10, 30)
+        this._board.putBlocksRandomly(20)
+        this.start()
+    }
+
     start = () => {
         this.board.newCurrentPiece(Piece.O);
         this._board.updateBoard()
@@ -43,10 +52,5 @@ export class Controller {
         this._score = 0
         this._totalErasedRowNum = 0
     }
-
-// startErasing = () => {
-    //     this._playing = true;
-    //     this._mode = 'erasing';
-    // }
 
 }

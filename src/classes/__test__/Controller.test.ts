@@ -16,4 +16,12 @@ describe('Controller test', () => {
         expect(controller.totalErasedRowNum).toBe(0);
         expect(controller.mode).toBe(Mode.Normal);
     });
+    test('start erasing game', () => {
+        let controller = new Controller();
+        controller.startErasing()
+        expect(controller.playing).toBe(true);
+        expect(controller.score).toBe(0);
+        expect(controller.totalErasedRowNum).toBe(0);
+        expect(controller.mode).toBe(Mode.Erasing);
+    });
 });
