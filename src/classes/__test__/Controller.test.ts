@@ -1,4 +1,7 @@
+import { Board } from "../Board";
 import { Controller, Mode } from "../Controller";
+import { Direction, DirectionType, PieceOp, PieceOpType } from "../CurrentPiece";
+import { Piece } from "../PieceType";
 
 describe('Controller test', () => {
     test('create controller', () => {
@@ -24,4 +27,34 @@ describe('Controller test', () => {
         expect(controller.totalErasedRowNum).toBe(0);
         expect(controller.mode).toBe(Mode.Erasing);
     });
+    test('game over callback', () => {
+        let controller = new Controller();
+        let gameOverCallbackCalled = false
+        const gameOverCallback = () => {
+            gameOverCallbackCalled = true
+        }
+        controller.addGameOverCallback(gameOverCallback)
+        controller.board.newCurrentPiece(Piece.O)
+        controller.board.updateBoard()
+
+        doOp(controller.board, PieceOp.Move, Direction.Down, 28);
+
+        controller.board.putBlock(4, 29);
+        controller.board.do(PieceOp.Move, Direction.Down, false);
+
+        expect(gameOverCallbackCalled).toBe(true)
+    });
 });
+
+const doOp = (
+    board: Board,
+    op: PieceOpType,
+    direction: DirectionType,
+    cnt: number,
+    random = true
+): void => {
+    for (let i = 0; i < cnt; ++i) {
+        board.do(op, direction, random);
+    }
+}
+

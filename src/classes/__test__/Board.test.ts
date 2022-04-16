@@ -311,22 +311,17 @@ describe('Fix piece', () => {
             {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
         ])
     });
-    test('game over', () => {
+    test('do failed', () => {
         let board = new Board(10, 30)
-        let gameOverCallbackCalled = false
-        const gameOverCallback = () => {
-            gameOverCallbackCalled = true
-        }
-        board.addGameOverCallback(gameOverCallback)
         board.newCurrentPiece(Piece.O)
         board.updateBoard()
 
         doOp(board, PieceOp.Move, Direction.Down, 28);
 
         board.putBlock(4, 29);
-        board.do(PieceOp.Move, Direction.Down, false);
+        const doResult = board.do(PieceOp.Move, Direction.Down, false);
 
-        expect(gameOverCallbackCalled).toBe(true)
+        expect(doResult).toBe(false)
     });
     test('succeed to erace two rows', () => {
         let board = new Board(10, 30);
@@ -428,21 +423,6 @@ describe('Initialize randomly', () => {
         board.newCurrentPiece(Piece.Z)
         board.updateBoard()
         isRandomBlock(board, 3)
-    });
-    test('put blocks randomly 3 rows after clear', () => {
-        let board = new Board(10, 30);
-        let callbackCalled = false;
-        const gameOverCallback = (): void => {
-            callbackCalled = true;
-            board.clearBoard(10, 30);
-            board.putBlocksRandomly(3);
-        }
-        board.addGameOverCallback(gameOverCallback);
-        board.newCurrentPiece(Piece.O);
-        board.updateBoard();
-        drops(board, 15, false);
-        isRandomBlock(board, 3);
-        expect(callbackCalled).toBe(true)
     });
 });
 

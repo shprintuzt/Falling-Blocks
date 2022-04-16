@@ -45,11 +45,15 @@ export class Controller {
     }
 
     start = () => {
-        this.board.newCurrentPiece(null);
+        this._board.newCurrentPiece(null);
         this._board.updateBoard()
         this._playing = true
         this._score = 0
         this._totalErasedRowNum = 0
+    }
+
+    addGameOverCallback = (callback: () => void) => {
+        this._board.addGameOverCallback(callback)
     }
 
 }
