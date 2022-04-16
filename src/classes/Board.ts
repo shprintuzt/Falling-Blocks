@@ -90,7 +90,7 @@ export class Board {
 
         const pieceShape = getPieceShape(this.currentPiece);
         for (const pos of pieceShape) {
-            if (this._board[pos.x][pos.y]) {
+            if (this._board[pos.x][pos.y] != Cell.Empty) {
                 this.doGameOverCallbacks()
             }
         }

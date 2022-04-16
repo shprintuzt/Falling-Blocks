@@ -60,7 +60,6 @@ export default {
         }
 
         const gameOverCallback = () => {
-            board.clearBoard(10, 30);
             playing.value = false
         }
 
@@ -91,7 +90,8 @@ export default {
             }
         }
 
-        const start = () => {
+        const start = (clear = true) => {
+            if (clear) board.clearBoard(10, 30);
             board.newCurrentPiece(Piece.O);
             board.updateBoard()
             playing.value = true
@@ -100,8 +100,9 @@ export default {
         }
 
         const startRandom = () => {
+            board.clearBoard(10, 30)
             board.putBlocksRandomly(20)
-            start()
+            start(false)
         }
 
         const drop = () => {
