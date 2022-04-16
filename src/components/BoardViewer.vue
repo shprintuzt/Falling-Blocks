@@ -90,22 +90,24 @@ export default {
             }
         }
 
-        const startNormal = (clear = true) => {
-            if (clear) board.clearBoard(10, 30);
+        const startNormal = () => {
+            board.clearBoard(10, 30);
+            start()
+        }
+
+        const startRandom = () => {
+            board.clearBoard(10, 30)
+            board.putBlocksRandomly(20)
+            start()
+        }
+
+        const start = () => {
             board.newCurrentPiece(Piece.O);
             board.updateBoard()
             playing.value = true
             score.value = 0
             erasedRowTotalNum.value = 0
         }
-
-        const startRandom = () => {
-            board.clearBoard(10, 30)
-            board.putBlocksRandomly(20)
-            startNormal(false)
-        }
-
-        // const start
 
         const drop = () => {
             board.drop()
