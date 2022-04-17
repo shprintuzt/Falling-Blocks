@@ -16,6 +16,7 @@ export class Controller {
     _score: number;
     _totalErasedRowNum: number;
     _mode: ModeType;
+    _gameOverCallbacks: {(): void;}[] = []
 
     constructor() {
         this._playing = false;
@@ -57,11 +58,13 @@ export class Controller {
     }
 
     addGameOverCallback = (callback: () => void) => {
-        this._board.addGameOverCallback(callback)
+        this._gameOverCallbacks.push(callback)
     }
 
     doGameOverCallbacks = () => {
-        this._board.doGameOverCallbacks()
+        for (const callback of this._gameOverCallbacks) {
+            callback()
+        }
     }
 
     drop = () => {

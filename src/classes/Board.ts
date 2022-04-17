@@ -203,16 +203,6 @@ export class Board {
         }
     }
 
-    addGameOverCallback = (callback: () => void): void => {
-        this._gameOverCallbacks.push(callback)
-    }
-
-    doGameOverCallbacks = (): void => {
-        for (const callback of this._gameOverCallbacks) {
-            callback()
-        }
-    }
-
     addRowErasedCallback = (callback: (rowNum: number) => void): void => {
         this._rowErasedCallbacks.push(callback)
     }
