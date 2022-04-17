@@ -60,9 +60,7 @@ describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.O);
-        if (!res) {
-            board.doGameOverCallbacks();
-        }
+        expect(res).toBe(true)
 
         // initial piece position test
         expect(board.currentPiece.degree).toBe(0)
@@ -90,11 +88,8 @@ describe('Piece shape test', () => {
     test('update a current piece to I and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.I);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 3, y: 29},
@@ -105,11 +100,8 @@ describe('Piece shape test', () => {
     test('update a current piece to Z and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.Z);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -120,11 +112,8 @@ describe('Piece shape test', () => {
     test('update a current piece to S and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.S);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -135,11 +124,8 @@ describe('Piece shape test', () => {
     test('update a current piece to L and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.L);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -150,11 +136,8 @@ describe('Piece shape test', () => {
     test('update a current piece to LR and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.LR);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 3, y: 29},
@@ -165,11 +148,8 @@ describe('Piece shape test', () => {
     test('update a current piece to T and board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.T);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -182,11 +162,8 @@ describe('Piece rotation', () => {
     test('rotate piece L in empty board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.L);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -211,9 +188,7 @@ describe('Piece rotation', () => {
     test('rotate piece LR in non-empty board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.LR);
-        if (!res) {
-            board.doGameOverCallbacks();
-        }
+        expect(res).toBe(true)
 
         board.putBlock(5, 27)
         board.updateBoard()
@@ -248,11 +223,8 @@ describe('Piece move', () => {
     test('move piece T in empty board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.T);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -288,11 +260,8 @@ describe('Piece move', () => {
     test('move piece L right out of board', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.L);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -324,9 +293,7 @@ describe('Piece move', () => {
     test('drop piece', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.O);
-        if (!res) {
-            board.doGameOverCallbacks();
-        }
+        expect(res).toBe(true)
 
         board.drop(false)
         isFilled(board, [
@@ -348,9 +315,7 @@ describe('Piece move', () => {
         }
         board.addUpdateBoardCallback(updateBoardCallback)
         const res = board.newCurrentPiece(Piece.O);
-        if (!res) {
-            board.doGameOverCallbacks();
-        }
+        expect(res).toBe(true)
 
         board.do(PieceOp.Rotate, Direction.Right)
         board.updateBoard();
@@ -361,11 +326,8 @@ describe('Fix piece', () => {
     test('fix piece Z and add new piece', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.Z);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -391,11 +353,8 @@ describe('Fix piece', () => {
     test('do failed', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.O);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Down, 28);
 
@@ -413,9 +372,7 @@ describe('Fix piece', () => {
         }
         board.addRowErasedCallback(rowErasedCallback)
         const res = board.newCurrentPiece(Piece.O);
-        if (!res) {
-            board.doGameOverCallbacks();
-        }
+        expect(res).toBe(true)
 
         expect(board.pieceNum).toBe(1);
         board.updateBoard();
@@ -450,11 +407,8 @@ describe('Shadow test', () => {
     test('piece Z\'s shadow', () => {
         let board = new Board(10, 30)
         const res = board.newCurrentPiece(Piece.Z);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isShadow(board, [
             {x: 4, y: 1},
@@ -482,11 +436,8 @@ describe('Shadow test', () => {
         let board = new Board(10, 30)
         board.putBlock(5, 26)
         const res = board.newCurrentPiece(Piece.L);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isShadow(board, [
             {x: 4, y: 27},
@@ -509,11 +460,8 @@ describe('Initialize randomly', () => {
         let board = new Board(10, 30)
         board.putBlocksRandomly(3)
         const res = board.newCurrentPiece(Piece.Z);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isRandomBlock(board, 3)
     });
@@ -522,11 +470,8 @@ describe('Initialize randomly', () => {
         board.clearBoard(10, 30)
         board.putBlocksRandomly(3)
         const res = board.newCurrentPiece(Piece.Z);
-        if (!res) {
-            board.doGameOverCallbacks();
-        } else {
-            board.updateBoard();
-        }
+        expect(res).toBe(true)
+        board.updateBoard();
 
         isRandomBlock(board, 3)
     });
@@ -596,11 +541,8 @@ const doOp = (
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             const res = board.newCurrentPiece(nextPiece);
-            if (!res) {
-                board.doGameOverCallbacks();
-            } else {
-                board.updateBoard();
-            }
+            expect(res).toBe(true)
+            board.updateBoard();
         }
     }
 }
