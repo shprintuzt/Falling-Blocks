@@ -83,7 +83,7 @@ describe('Controller test', () => {
         const rowErasedCallback = (rowNum: number) => {
             erasedRowNum = rowNum;
         }
-        controller.board.addRowErasedCallback(rowErasedCallback)
+        controller.addRowErasedCallback(rowErasedCallback)
         const res = controller.board.newCurrentPiece(Piece.O);
         expect(res).toBe(true)
 

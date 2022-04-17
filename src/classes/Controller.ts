@@ -19,6 +19,7 @@ export class Controller {
     _mode: ModeType;
     _gameOverCallbacks: {(): void;}[] = []
     _updateBoardCallbacks: {(): void;}[] = []
+    _rowErasedCallbacks: {(rowNum: number): void;}[] = []
 
     constructor() {
         this._playing = false;
@@ -81,12 +82,20 @@ export class Controller {
         }
     }
 
+    addRowErasedCallback = (callback: (rowNum: number) => void): void => {
+        this._board.addRowErasedCallback(callback);
+    }
+
+    doRowErasedCallbacks = (rowNum: number): void => {
+        this._board.doRowErasedCallbacks(rowNum);
+    }
+
     drop = (random = true) => {
         this._board.drop();
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         const rowNum = this._board.eraseFilledRow();
-        this._board.doRowErasedCallbacks(rowNum);
+        this.doRowErasedCallbacks(rowNum);
         const nextPiece = random ? null : Piece.O;
         const res = this._board.newCurrentPiece(nextPiece);
 
@@ -104,7 +113,7 @@ export class Controller {
         this.doUpdateBoardCallbacks();
         if (!doRes) {
             const rowNum = this._board.eraseFilledRow();
-            this._board.doRowErasedCallbacks(rowNum);
+            this.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks();
@@ -121,7 +130,7 @@ export class Controller {
         this.doUpdateBoardCallbacks();
         if (!doRes) {
             const rowNum = this._board.eraseFilledRow();
-            this._board.doRowErasedCallbacks(rowNum);
+            this.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -138,7 +147,7 @@ export class Controller {
         this.doUpdateBoardCallbacks();
         if (!doRes) {
             const rowNum = this._board.eraseFilledRow();
-            this._board.doRowErasedCallbacks(rowNum);
+            this.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -155,7 +164,7 @@ export class Controller {
         this.doUpdateBoardCallbacks();
         if (!doRes) {
             const rowNum = this._board.eraseFilledRow();
-            this._board.doRowErasedCallbacks(rowNum);
+            this.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -172,7 +181,7 @@ export class Controller {
         this.doUpdateBoardCallbacks();
         if (!doRes) {
             const rowNum = this._board.eraseFilledRow();
-            this._board.doRowErasedCallbacks(rowNum);
+            this.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
