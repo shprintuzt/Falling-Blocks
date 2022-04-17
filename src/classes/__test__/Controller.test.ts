@@ -49,6 +49,25 @@ describe('Controller test', () => {
 
         expect(gameOverCallbackCalled).toBe(true)
     });
+    test('update board callback', () => {
+        let controller = new Controller();
+        const res = controller.board.newCurrentPiece(Piece.O)
+        controller.board.updateBoard();
+        controller.board.doUpdateBoardCallbacks();
+
+        let callbackCalled = false
+        const callback = () => {
+            callbackCalled = true
+        }
+        controller.addUpdateBoardCallback(callback)
+
+        expect(callbackCalled).toBe(false);
+        doOp(controller, controller.board, PieceOp.Move, Direction.Down, 28);
+        expect(callbackCalled).toBe(true);
+
+        controller.board.putBlock(4, 29);
+        controller.moveDown()
+    });
 });
 
 const doOp = (
