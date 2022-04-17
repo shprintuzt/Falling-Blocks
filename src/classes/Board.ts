@@ -14,7 +14,6 @@ export class Board {
     _board: CellType[][];
     _currentPiece: CurrentPiece;
     _shadow: CurrentPiece;
-    _updateBoardCallbacks: {(): void;}[] = []
     _gameOverCallbacks: {(): void;}[] = []
     _rowErasedCallbacks: {(rowNum: number): void;}[] = []
     _pieceNum: number;
@@ -184,16 +183,6 @@ export class Board {
         }
         this._shadow = CurrentPiece.copy(this._currentPiece)
         this._currentPiece = CurrentPiece.copy(tmpCurrentPiece)
-    }
-
-    addUpdateBoardCallback = (callback: () => void): void => {
-        this._updateBoardCallbacks.push(callback)
-    }
-
-    doUpdateBoardCallbacks = (): void => {
-        for (const callback of this._updateBoardCallbacks) {
-            callback()
-        }
     }
 
     addRowErasedCallback = (callback: (rowNum: number) => void): void => {

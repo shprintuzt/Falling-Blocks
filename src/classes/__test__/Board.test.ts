@@ -67,7 +67,6 @@ describe('Piece shape test', () => {
         expect(board.currentPiece.x).toBe(10 / 2 - 1)
         expect(board.currentPiece.y).toBe(30 - 1)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 4 && y == 29
@@ -91,7 +90,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.I);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 3, y: 29},
@@ -104,7 +102,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.Z);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -117,7 +114,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.S);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -130,7 +126,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.L);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -143,7 +138,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.LR);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 3, y: 29},
@@ -156,7 +150,6 @@ describe('Piece shape test', () => {
         const res = board.newCurrentPiece(Piece.T);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -171,7 +164,6 @@ describe('Piece rotation', () => {
         const res = board.newCurrentPiece(Piece.L);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -180,7 +172,6 @@ describe('Piece rotation', () => {
             {x: 4, y: 28}])
         board.do(PieceOp.Rotate, Direction.Left)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 4, y: 28},
@@ -188,7 +179,6 @@ describe('Piece rotation', () => {
             {x: 5, y: 27}])
         board.do(PieceOp.Rotate, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -202,7 +192,6 @@ describe('Piece rotation', () => {
 
         board.putBlock(5, 27)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 3, y: 29},
             {x: 4, y: 29},
@@ -212,7 +201,6 @@ describe('Piece rotation', () => {
         ])
         board.do(PieceOp.Rotate, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 3, y: 29},
             {x: 4, y: 29},
@@ -222,7 +210,6 @@ describe('Piece rotation', () => {
         ])
         board.do(PieceOp.Rotate, Direction.Left)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -238,7 +225,6 @@ describe('Piece move', () => {
         const res = board.newCurrentPiece(Piece.T);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -248,7 +234,6 @@ describe('Piece move', () => {
         ])
         board.do(PieceOp.Move, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 5, y: 29},
             {x: 6, y: 29},
@@ -257,7 +242,6 @@ describe('Piece move', () => {
         ])
         board.do(PieceOp.Move, Direction.Down)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 5, y: 28},
             {x: 6, y: 28},
@@ -266,7 +250,6 @@ describe('Piece move', () => {
         ])
         board.do(PieceOp.Move, Direction.Left)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 4, y: 28},
             {x: 5, y: 28},
@@ -279,7 +262,6 @@ describe('Piece move', () => {
         const res = board.newCurrentPiece(Piece.L);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -289,13 +271,10 @@ describe('Piece move', () => {
         ])
         board.do(PieceOp.Move, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.do(PieceOp.Move, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.do(PieceOp.Move, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 7, y: 29},
             {x: 8, y: 29},
@@ -304,7 +283,6 @@ describe('Piece move', () => {
         ])
         board.do(PieceOp.Move, Direction.Right)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         isFilled(board, [
             {x: 7, y: 29},
             {x: 8, y: 29},
@@ -319,12 +297,10 @@ describe('Piece move', () => {
 
         board.drop();
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.eraseFilledRow()
         const res2 = board.newCurrentPiece(Piece.O);
         expect(res2).toBe(true);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -337,21 +313,6 @@ describe('Piece move', () => {
             {x: 5, y: 0},
         ])
     })
-    test('updateBoard callback test', () => {
-        let board = new Board(10, 30)
-        let isCallbackCalled = false
-        const updateBoardCallback = () => {
-            isCallbackCalled = true
-        }
-        board.addUpdateBoardCallback(updateBoardCallback)
-        const res = board.newCurrentPiece(Piece.O);
-        expect(res).toBe(true)
-
-        board.do(PieceOp.Rotate, Direction.Right)
-        board.updateBoard();
-        board.doUpdateBoardCallbacks();
-        expect(isCallbackCalled).toBe(true)
-    })
 })
 describe('Fix piece', () => {
     test('fix piece Z and add new piece', () => {
@@ -359,7 +320,6 @@ describe('Fix piece', () => {
         const res = board.newCurrentPiece(Piece.Z);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isFilled(board, [
             {x: 4, y: 29},
@@ -387,14 +347,12 @@ describe('Fix piece', () => {
         const res = board.newCurrentPiece(Piece.O);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         doOp(board, PieceOp.Move, Direction.Down, 28);
 
         board.putBlock(4, 29);
         const doResult = board.do(PieceOp.Move, Direction.Down, false);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         expect(doResult).toBe(false)
     });
@@ -410,7 +368,6 @@ describe('Fix piece', () => {
 
         expect(board.pieceNum).toBe(1);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         doOp(board, PieceOp.Move, Direction.Down, 29, false);
 
@@ -420,32 +377,26 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Left, 2);
         board.drop();
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.eraseFilledRow()
         const res2 = board.newCurrentPiece(Piece.O);
         expect(res2).toBe(true);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         doOp(board, PieceOp.Move, Direction.Right, 2);
         board.drop();
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.eraseFilledRow()
         const res3 = board.newCurrentPiece(Piece.O);
         expect(res3).toBe(true);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         doOp(board, PieceOp.Move, Direction.Right, 4);
         board.drop();
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         board.eraseFilledRow()
         const res4 = board.newCurrentPiece(Piece.O);
         expect(res4).toBe(true);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         expect(board.pieceNum).toBe(6)
 
         let nextPieceShape = getPieceShape(board.currentPiece);
@@ -465,7 +416,6 @@ describe('Shadow test', () => {
         const res = board.newCurrentPiece(Piece.Z);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isShadow(board, [
             {x: 4, y: 1},
@@ -495,7 +445,6 @@ describe('Shadow test', () => {
         const res = board.newCurrentPiece(Piece.L);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isShadow(board, [
             {x: 4, y: 27},
@@ -520,7 +469,6 @@ describe('Initialize randomly', () => {
         const res = board.newCurrentPiece(Piece.Z);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isRandomBlock(board, 3)
     });
@@ -531,7 +479,6 @@ describe('Initialize randomly', () => {
         const res = board.newCurrentPiece(Piece.Z);
         expect(res).toBe(true)
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
 
         isRandomBlock(board, 3)
     });
@@ -598,13 +545,11 @@ const doOp = (
     for (let i = 0; i < cnt; ++i) {
         const doRes = board.do(op, direction, random);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             const res = board.newCurrentPiece(nextPiece);
             expect(res).toBe(true)
             board.updateBoard();
-            board.doUpdateBoardCallbacks();
         }
     }
 }
