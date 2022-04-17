@@ -61,7 +61,12 @@ export class Controller {
     }
 
     drop = () => {
-        this._board.drop()
+        const res = this._board.drop()
+        if (!res) {
+            this._board.doGameOverCallbacks()
+        } else {
+            this._board.updateBoard();
+        }
     }
 
     moveDown = () => {

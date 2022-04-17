@@ -295,7 +295,10 @@ describe('Piece move', () => {
         const res = board.newCurrentPiece(Piece.O);
         expect(res).toBe(true)
 
-        board.drop(false)
+        const dropRes = board.drop(false);
+        expect(dropRes).toBe(true);
+        board.updateBoard();
+
         isFilled(board, [
             {x: 4, y: 29},
             {x: 5, y: 29},
@@ -383,13 +386,19 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Down, 29, false);
 
         doOp(board, PieceOp.Move, Direction.Left, 2);
-        board.drop(false);
+        const dropRes1 = board.drop(false);
+        expect(dropRes1).toBe(true);
+        board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Right, 2);
-        board.drop(false);
+        const dropRes2 = board.drop(false);
+        expect(dropRes2).toBe(true);
+        board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Right, 4);
-        board.drop(false);
+        const dropRes3 = board.drop(false);
+        expect(dropRes3).toBe(true);
+        board.updateBoard();
         expect(board.pieceNum).toBe(6)
 
         let nextPieceShape = getPieceShape(board.currentPiece);
@@ -544,15 +553,5 @@ const doOp = (
             expect(res).toBe(true)
             board.updateBoard();
         }
-    }
-}
-
-const drops = (
-    board: Board,
-    cnt: number,
-    random = true
-): void => {
-    for (let i = 0; i < cnt; ++i) {
-        board.drop(random);
     }
 }
