@@ -1,5 +1,5 @@
 import { Board } from "./Board";
-import { Direction, PieceOp } from "./CurrentPiece";
+import { Direction, DirectionType, PieceOp, PieceOpType } from "./CurrentPiece";
 import { Piece } from "./PieceType";
 
 export const Mode = {
@@ -109,8 +109,8 @@ export class Controller {
         }
     }
 
-    moveDown = () => {
-        const doRes = this._board.do(PieceOp.Move, Direction.Down);
+    do = (op: PieceOpType, direction: DirectionType) => {
+        const doRes = this._board.do(op, direction);
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
@@ -126,72 +126,24 @@ export class Controller {
         }
     }
 
+    moveDown = () => {
+        this.do(PieceOp.Move, Direction.Down);
+    }
+
     moveLeft = () => {
-        const doRes = this._board.do(PieceOp.Move, Direction.Left);
-        this._board.updateBoard();
-        this.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const rowNum = this._board.eraseFilledRow();
-            this.doRowErasedCallbacks(rowNum);
-            const res = this._board.newCurrentPiece(null);
-            if (!res) {
-                this.doGameOverCallbacks()
-            } else {
-                this._board.updateBoard();
-                this.doUpdateBoardCallbacks();
-            }
-        }
+        this.do(PieceOp.Move, Direction.Left);
     }
 
     moveRight = () => {
-        const doRes = this._board.do(PieceOp.Move, Direction.Right);
-        this._board.updateBoard();
-        this.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const rowNum = this._board.eraseFilledRow();
-            this.doRowErasedCallbacks(rowNum);
-            const res = this._board.newCurrentPiece(null);
-            if (!res) {
-                this.doGameOverCallbacks()
-            } else {
-                this._board.updateBoard();
-                this.doUpdateBoardCallbacks();
-            }
-        }
+        this.do(PieceOp.Move, Direction.Right);
     }
 
     rotateLeft = () => {
-        const doRes = this._board.do(PieceOp.Rotate, Direction.Left);
-        this._board.updateBoard();
-        this.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const rowNum = this._board.eraseFilledRow();
-            this.doRowErasedCallbacks(rowNum);
-            const res = this._board.newCurrentPiece(null);
-            if (!res) {
-                this.doGameOverCallbacks()
-            } else {
-                this._board.updateBoard();
-                this.doUpdateBoardCallbacks();
-            }
-        }
+        this.do(PieceOp.Rotate, Direction.Left);
     }
 
     rotateRight = () => {
-        const doRes = this._board.do(PieceOp.Rotate, Direction.Right);
-        this._board.updateBoard();
-        this.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const rowNum = this._board.eraseFilledRow();
-            this.doRowErasedCallbacks(rowNum);
-            const res = this._board.newCurrentPiece(null);
-            if (!res) {
-                this.doGameOverCallbacks()
-            } else {
-                this._board.updateBoard();
-                this.doUpdateBoardCallbacks();
-            }
-        }
+        this.do(PieceOp.Rotate, Direction.Right);
     }
 
 }
