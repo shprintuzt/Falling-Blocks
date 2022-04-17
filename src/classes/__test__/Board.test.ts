@@ -295,8 +295,11 @@ describe('Piece move', () => {
         const res = board.newCurrentPiece(Piece.O);
         expect(res).toBe(true)
 
-        const dropRes = board.drop(false);
-        expect(dropRes).toBe(true);
+        board.drop();
+        board.updateBoard()
+        board.eraseFilledRow()
+        const res2 = board.newCurrentPiece(Piece.O);
+        expect(res2).toBe(true);
         board.updateBoard();
 
         isFilled(board, [
@@ -386,18 +389,27 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Down, 29, false);
 
         doOp(board, PieceOp.Move, Direction.Left, 2);
-        const dropRes1 = board.drop(false);
-        expect(dropRes1).toBe(true);
+        board.drop();
+        board.updateBoard()
+        board.eraseFilledRow()
+        const res2 = board.newCurrentPiece(Piece.O);
+        expect(res2).toBe(true);
         board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Right, 2);
-        const dropRes2 = board.drop(false);
-        expect(dropRes2).toBe(true);
+        board.drop();
+        board.updateBoard()
+        board.eraseFilledRow()
+        const res3 = board.newCurrentPiece(Piece.O);
+        expect(res3).toBe(true);
         board.updateBoard();
 
         doOp(board, PieceOp.Move, Direction.Right, 4);
-        const dropRes3 = board.drop(false);
-        expect(dropRes3).toBe(true);
+        board.drop();
+        board.updateBoard()
+        board.eraseFilledRow()
+        const res4 = board.newCurrentPiece(Piece.O);
+        expect(res4).toBe(true);
         board.updateBoard();
         expect(board.pieceNum).toBe(6)
 

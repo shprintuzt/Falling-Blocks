@@ -170,17 +170,11 @@ export class Board {
         return true;
     }
 
-    drop = (random = true): boolean => {
+    drop = (): void => {
         this.eraseCurrentPiece();
         while (this.canDo(PieceOp.Move, Direction.Down)) {
             this.currentPiece.do(PieceOp.Move, Direction.Down);
         }
-        this.updateBoard()
-
-        // piece position is fixed
-        this.eraseFilledRow()
-        const nextPiece = random ? getRandomPiece() : Piece.O
-        return this.newCurrentPiece(nextPiece);
     }
 
     updateShadow = (): void => {

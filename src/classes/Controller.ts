@@ -68,7 +68,11 @@ export class Controller {
     }
 
     drop = () => {
-        const res = this._board.drop()
+        this._board.drop();
+        this._board.updateBoard()
+        this._board.eraseFilledRow()
+        const res = this._board.newCurrentPiece(null);
+
         if (!res) {
             this.doGameOverCallbacks()
         } else {
