@@ -14,7 +14,6 @@ export class Board {
     _board: CellType[][];
     _currentPiece: CurrentPiece;
     _shadow: CurrentPiece;
-    _gameOverCallbacks: {(): void;}[] = []
     _rowErasedCallbacks: {(rowNum: number): void;}[] = []
     _pieceNum: number;
    
