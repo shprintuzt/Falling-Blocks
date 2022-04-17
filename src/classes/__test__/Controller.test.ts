@@ -1,7 +1,7 @@
 import { Board } from "../Board";
 import { Controller, Mode } from "../Controller";
 import { Direction, DirectionType, PieceOp, PieceOpType } from "../CurrentPiece";
-import { getRandomPiece, Piece } from "../PieceType";
+import { getPieceShape, getRandomPiece, Piece } from "../PieceType";
 
 describe('Controller test', () => {
     test('create controller', () => {
@@ -76,6 +76,36 @@ describe('Controller test', () => {
 
         controller.board.putBlock(4, 29);
         controller.moveDown()
+    });
+    test('succeed to erase two rows', () => {
+        let controller = new Controller()
+        let erasedRowNum = 0
+        const rowErasedCallback = (rowNum: number) => {
+            erasedRowNum = rowNum;
+        }
+        controller.board.addRowErasedCallback(rowErasedCallback)
+        const res = controller.board.newCurrentPiece(Piece.O);
+        expect(res).toBe(true)
+
+        expect(controller.board.pieceNum).toBe(1);
+        controller.board.updateBoard();
+
+        doOp(controller, controller.board, PieceOp.Move, Direction.Down, 29, false);
+
+        doOp(controller, controller.board, PieceOp.Move, Direction.Left, 4);
+        doOp(controller, controller.board, PieceOp.Move, Direction.Down, 29, false);
+
+        doOp(controller, controller.board, PieceOp.Move, Direction.Left, 2);
+        controller.drop(false);
+
+        doOp(controller, controller.board, PieceOp.Move, Direction.Right, 2);
+        controller.drop(false);
+
+        doOp(controller, controller.board, PieceOp.Move, Direction.Right, 4);
+        controller.drop(false);
+
+        expect(controller.board.pieceNum).toBe(6)
+        expect(erasedRowNum).toBe(2)
     });
 });
 
