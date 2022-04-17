@@ -55,7 +55,7 @@ describe('Board test', () => {
             }
         }
     });
-    test('red block exists', () => {
+    test('has red block', () => {
         let board = new Board(10, 30)
         board.clearBoard(10, 30);
         board.newCurrentPiece(null)
