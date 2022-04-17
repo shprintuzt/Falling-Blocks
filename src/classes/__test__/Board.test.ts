@@ -44,7 +44,8 @@ describe('Board test', () => {
         let board = new Board(10, 30);
         board.fillRow(2);
         board.putBlock(3, 4);
-        board.eraseFilledRow();
+        const rowNum = board.eraseFilledRow();
+        board.doRowErasedCallbacks(rowNum);
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {
@@ -297,7 +298,8 @@ describe('Piece move', () => {
 
         board.drop();
         board.updateBoard();
-        board.eraseFilledRow()
+        const rowNum = board.eraseFilledRow();
+        board.doRowErasedCallbacks(rowNum);
         const res2 = board.newCurrentPiece(Piece.O);
         expect(res2).toBe(true);
         board.updateBoard();
@@ -377,7 +379,8 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Left, 2);
         board.drop();
         board.updateBoard();
-        board.eraseFilledRow()
+        const rowNum = board.eraseFilledRow();
+        board.doRowErasedCallbacks(rowNum);
         const res2 = board.newCurrentPiece(Piece.O);
         expect(res2).toBe(true);
         board.updateBoard();
@@ -385,7 +388,8 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Right, 2);
         board.drop();
         board.updateBoard();
-        board.eraseFilledRow()
+        const rowNum2 = board.eraseFilledRow();
+        board.doRowErasedCallbacks(rowNum2);
         const res3 = board.newCurrentPiece(Piece.O);
         expect(res3).toBe(true);
         board.updateBoard();
@@ -393,7 +397,8 @@ describe('Fix piece', () => {
         doOp(board, PieceOp.Move, Direction.Right, 4);
         board.drop();
         board.updateBoard();
-        board.eraseFilledRow()
+        const rowNum3 = board.eraseFilledRow();
+        board.doRowErasedCallbacks(rowNum3);
         const res4 = board.newCurrentPiece(Piece.O);
         expect(res4).toBe(true);
         board.updateBoard();

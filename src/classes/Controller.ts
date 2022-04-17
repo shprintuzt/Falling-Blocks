@@ -84,7 +84,8 @@ export class Controller {
         this._board.drop();
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
-        this._board.eraseFilledRow()
+        const rowNum = this._board.eraseFilledRow();
+        this._board.doRowErasedCallbacks(rowNum);
         const res = this._board.newCurrentPiece(null);
 
         if (!res) {
@@ -100,7 +101,8 @@ export class Controller {
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
-            this._board.eraseFilledRow()
+            const rowNum = this._board.eraseFilledRow();
+            this._board.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks();
@@ -116,7 +118,8 @@ export class Controller {
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
-            this._board.eraseFilledRow()
+            const rowNum = this._board.eraseFilledRow();
+            this._board.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -132,7 +135,8 @@ export class Controller {
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
-            this._board.eraseFilledRow()
+            const rowNum = this._board.eraseFilledRow();
+            this._board.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -148,7 +152,8 @@ export class Controller {
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
-            this._board.eraseFilledRow()
+            const rowNum = this._board.eraseFilledRow();
+            this._board.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -164,7 +169,8 @@ export class Controller {
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         if (!doRes) {
-            this._board.eraseFilledRow()
+            const rowNum = this._board.eraseFilledRow();
+            this._board.doRowErasedCallbacks(rowNum);
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()

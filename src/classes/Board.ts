@@ -194,7 +194,7 @@ export class Board {
         }
     }
 
-    eraseFilledRow = (): void => {
+    eraseFilledRow = (): number => {
         let filledRowNum = 0;
         const filledRowNums = new Array<number>(this.height);
         for (let y = 0; y < this.height; ++y) {
@@ -210,7 +210,7 @@ export class Board {
             }
         }
 
-        this.doRowErasedCallbacks(filledRowNum)
+        return filledRowNum;
     }
 
     isRowFilled = (y: number): boolean => {
