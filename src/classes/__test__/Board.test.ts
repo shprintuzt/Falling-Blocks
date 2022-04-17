@@ -44,8 +44,7 @@ describe('Board test', () => {
         let board = new Board(10, 30);
         board.fillRow(2);
         board.putBlock(3, 4);
-        const rowNum = board.eraseFilledRow();
-        board.doRowErasedCallbacks(rowNum);
+        board.eraseFilledRow();
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {
@@ -298,8 +297,7 @@ describe('Piece move', () => {
 
         board.drop();
         board.updateBoard();
-        const rowNum = board.eraseFilledRow();
-        board.doRowErasedCallbacks(rowNum);
+        board.eraseFilledRow();
         const res2 = board.newCurrentPiece(Piece.O);
         expect(res2).toBe(true);
         board.updateBoard();
@@ -357,62 +355,6 @@ describe('Fix piece', () => {
         board.updateBoard();
 
         expect(doResult).toBe(false)
-    });
-    test('succeed to erase two rows', () => {
-        let board = new Board(10, 30);
-        let erasedRowNum = 0
-        const rowErasedCallback = (rowNum: number) => {
-            erasedRowNum = rowNum;
-        }
-        board.addRowErasedCallback(rowErasedCallback)
-        const res = board.newCurrentPiece(Piece.O);
-        expect(res).toBe(true)
-
-        expect(board.pieceNum).toBe(1);
-        board.updateBoard();
-
-        doOp(board, PieceOp.Move, Direction.Down, 29, false);
-
-        doOp(board, PieceOp.Move, Direction.Left, 4);
-        doOp(board, PieceOp.Move, Direction.Down, 29, false);
-
-        doOp(board, PieceOp.Move, Direction.Left, 2);
-        board.drop();
-        board.updateBoard();
-        const rowNum = board.eraseFilledRow();
-        board.doRowErasedCallbacks(rowNum);
-        const res2 = board.newCurrentPiece(Piece.O);
-        expect(res2).toBe(true);
-        board.updateBoard();
-
-        doOp(board, PieceOp.Move, Direction.Right, 2);
-        board.drop();
-        board.updateBoard();
-        const rowNum2 = board.eraseFilledRow();
-        board.doRowErasedCallbacks(rowNum2);
-        const res3 = board.newCurrentPiece(Piece.O);
-        expect(res3).toBe(true);
-        board.updateBoard();
-
-        doOp(board, PieceOp.Move, Direction.Right, 4);
-        board.drop();
-        board.updateBoard();
-        const rowNum3 = board.eraseFilledRow();
-        board.doRowErasedCallbacks(rowNum3);
-        const res4 = board.newCurrentPiece(Piece.O);
-        expect(res4).toBe(true);
-        board.updateBoard();
-        expect(board.pieceNum).toBe(6)
-
-        let nextPieceShape = getPieceShape(board.currentPiece);
-        isFilled(board, [
-            {x: nextPieceShape[0].x, y: nextPieceShape[0].y},
-            {x: nextPieceShape[1].x, y: nextPieceShape[1].y},
-            {x: nextPieceShape[2].x, y: nextPieceShape[2].y},
-            {x: nextPieceShape[3].x, y: nextPieceShape[3].y},
-        ]);
-
-        expect(erasedRowNum).toBe(2)
     });
 });
 describe('Shadow test', () => {

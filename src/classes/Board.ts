@@ -184,16 +184,6 @@ export class Board {
         this._currentPiece = CurrentPiece.copy(tmpCurrentPiece)
     }
 
-    addRowErasedCallback = (callback: (rowNum: number) => void): void => {
-        this._rowErasedCallbacks.push(callback)
-    }
-
-    doRowErasedCallbacks = (rowNum: number): void => {
-        for (const callback of this._rowErasedCallbacks) {
-            callback(rowNum)
-        }
-    }
-
     eraseFilledRow = (): number => {
         let filledRowNum = 0;
         const filledRowNums = new Array<number>(this.height);

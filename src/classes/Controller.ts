@@ -83,11 +83,13 @@ export class Controller {
     }
 
     addRowErasedCallback = (callback: (rowNum: number) => void): void => {
-        this._board.addRowErasedCallback(callback);
+        this._rowErasedCallbacks.push(callback);
     }
 
     doRowErasedCallbacks = (rowNum: number): void => {
-        this._board.doRowErasedCallbacks(rowNum);
+        for (const callback of this._rowErasedCallbacks) {
+            callback(rowNum);
+        }
     }
 
     drop = (random = true) => {
