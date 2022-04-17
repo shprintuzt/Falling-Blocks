@@ -358,7 +358,7 @@ describe('Fix piece', () => {
 
         expect(doResult).toBe(false)
     });
-    test('succeed to erace two rows', () => {
+    test('succeed to erase two rows', () => {
         let board = new Board(10, 30);
         let erasedRowNum = 0
         const rowErasedCallback = (rowNum: number) => {
