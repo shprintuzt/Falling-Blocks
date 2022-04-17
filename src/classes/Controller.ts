@@ -1,5 +1,6 @@
 import { Board } from "./Board";
 import { Direction, PieceOp } from "./CurrentPiece";
+import { Piece } from "./PieceType";
 
 export const Mode = {
     None: 0,
@@ -80,13 +81,14 @@ export class Controller {
         }
     }
 
-    drop = () => {
+    drop = (random = true) => {
         this._board.drop();
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
         const rowNum = this._board.eraseFilledRow();
         this._board.doRowErasedCallbacks(rowNum);
-        const res = this._board.newCurrentPiece(null);
+        const nextPiece = random ? null : Piece.O;
+        const res = this._board.newCurrentPiece(nextPiece);
 
         if (!res) {
             this.doGameOverCallbacks()
