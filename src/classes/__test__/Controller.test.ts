@@ -39,7 +39,7 @@ describe('Controller test', () => {
             controller.doGameOverCallbacks();
         } else {
             controller.board.updateBoard();
-            controller.board.doUpdateBoardCallbacks();
+            controller.doUpdateBoardCallbacks();
         }
 
         doOp(controller, controller.board, PieceOp.Move, Direction.Down, 28);
@@ -53,7 +53,7 @@ describe('Controller test', () => {
         let controller = new Controller();
         const res = controller.board.newCurrentPiece(Piece.O)
         controller.board.updateBoard();
-        controller.board.doUpdateBoardCallbacks();
+        controller.doUpdateBoardCallbacks();
 
         let callbackCalled = false
         const callback = () => {
@@ -81,7 +81,7 @@ const doOp = (
     for (let i = 0; i < cnt; ++i) {
         const doRes = board.do(op, direction, random);
         board.updateBoard();
-        board.doUpdateBoardCallbacks();
+        controller.doUpdateBoardCallbacks();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             const res = board.newCurrentPiece(nextPiece);
@@ -89,7 +89,7 @@ const doOp = (
                 controller.doGameOverCallbacks();
             } else {
                 board.updateBoard();
-                board.doUpdateBoardCallbacks();
+                controller.doUpdateBoardCallbacks();
             }
         }
     }
