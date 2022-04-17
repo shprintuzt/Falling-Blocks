@@ -80,7 +80,7 @@ export class Controller {
         const doRes = this._board.do(PieceOp.Move, Direction.Down);
         this._board.updateBoard();
         if (!doRes) {
-            this._board.eraceFilledRow()
+            this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks();
@@ -94,7 +94,7 @@ export class Controller {
         const doRes = this._board.do(PieceOp.Move, Direction.Left);
         this._board.updateBoard();
         if (!doRes) {
-            this._board.eraceFilledRow()
+            this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -108,7 +108,7 @@ export class Controller {
         const doRes = this._board.do(PieceOp.Move, Direction.Right);
         this._board.updateBoard();
         if (!doRes) {
-            this._board.eraceFilledRow()
+            this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -122,7 +122,7 @@ export class Controller {
         const doRes = this._board.do(PieceOp.Rotate, Direction.Left);
         this._board.updateBoard();
         if (!doRes) {
-            this._board.eraceFilledRow()
+            this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()
@@ -136,7 +136,7 @@ export class Controller {
         const doRes = this._board.do(PieceOp.Rotate, Direction.Right);
         this._board.updateBoard();
         if (!doRes) {
-            this._board.eraceFilledRow()
+            this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
             if (!res) {
                 this.doGameOverCallbacks()

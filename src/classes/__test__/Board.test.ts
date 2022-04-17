@@ -44,7 +44,7 @@ describe('Board test', () => {
         let board = new Board(10, 30);
         board.fillRow(2);
         board.putBlock(3, 4);
-        board.eraceFilledRow();
+        board.eraseFilledRow();
         for (let x = 0; x < 10; ++x) {
             for (let y = 0; y < 30; ++y) {
                 if (x == 3 && y == 3) {

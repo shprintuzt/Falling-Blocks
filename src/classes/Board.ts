@@ -178,7 +178,7 @@ export class Board {
         this.updateBoard()
 
         // piece position is fixed
-        this.eraceFilledRow()
+        this.eraseFilledRow()
         const nextPiece = random ? getRandomPiece() : Piece.O
         return this.newCurrentPiece(nextPiece);
     }
@@ -213,7 +213,7 @@ export class Board {
         }
     }
 
-    eraceFilledRow = (): void => {
+    eraseFilledRow = (): void => {
         let filledRowNum = 0;
         const filledRowNums = new Array<number>(this.height);
         for (let y = 0; y < this.height; ++y) {
