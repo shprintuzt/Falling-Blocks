@@ -92,22 +92,13 @@ export default {
         }
 
         const startNormal = () => {
-            controller.board.clearBoard(10, 30);
-            start()
+            controller.startNormal()
+            playing.value = controller.playing
         }
 
         const startRandom = () => {
-            controller.board.clearBoard(10, 30)
-            controller.board.putBlocksRandomly(20)
-            start()
-        }
-
-        const start = () => {
-            controller.board.newCurrentPiece(Piece.O);
-            controller.board.updateBoard()
-            playing.value = true
-            score.value = 0
-            erasedRowTotalNum.value = 0
+            controller.startErasing()
+            playing.value = controller.playing
         }
 
         const drop = () => {

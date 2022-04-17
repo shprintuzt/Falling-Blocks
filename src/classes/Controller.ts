@@ -49,14 +49,15 @@ export class Controller {
     start = () => {
         const res = this._board.newCurrentPiece(null);
         if (!res) {
-            this.doGameOverCallbacks()
-        } else {
-            this._board.updateBoard();
-            this.doUpdateBoardCallbacks();
-            this._playing = true
-            this._score = 0
-            this._totalErasedRowNum = 0
+            console.log('error');
+            return;
         }
+
+        this._board.updateBoard();
+        this.doUpdateBoardCallbacks();
+        this._playing = true
+        this._score = 0
+        this._totalErasedRowNum = 0
     }
 
     addGameOverCallback = (callback: () => void) => {

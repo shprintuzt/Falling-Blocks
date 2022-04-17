@@ -21,7 +21,16 @@ describe('Controller test', () => {
     });
     test('start erasing game', () => {
         let controller = new Controller();
+        let callbackCalled = false
+        const callback = () => {
+            callbackCalled = true
+        }
+        controller.addUpdateBoardCallback(callback)
+
+        expect(callbackCalled).toBe(false);
         controller.startErasing()
+        expect(callbackCalled).toBe(true);
+
         expect(controller.playing).toBe(true);
         expect(controller.score).toBe(0);
         expect(controller.totalErasedRowNum).toBe(0);
