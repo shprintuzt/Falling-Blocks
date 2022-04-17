@@ -119,7 +119,6 @@ export class Board {
                 this._board[pos.x][pos.y] = Cell.Shadow;
             }
         }
-        this.doUpdateBoardCallbacks()
     }
 
     eraseCurrentPiece = () => {

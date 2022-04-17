@@ -38,7 +38,8 @@ describe('Controller test', () => {
         if (!res) {
             controller.doGameOverCallbacks();
         } else {
-            controller.board.updateBoard()
+            controller.board.updateBoard();
+            controller.board.doUpdateBoardCallbacks();
         }
 
         doOp(controller, controller.board, PieceOp.Move, Direction.Down, 28);
@@ -61,6 +62,7 @@ const doOp = (
     for (let i = 0; i < cnt; ++i) {
         const doRes = board.do(op, direction, random);
         board.updateBoard();
+        board.doUpdateBoardCallbacks();
         if (!doRes) {
             const nextPiece = random ? getRandomPiece() : Piece.O
             const res = board.newCurrentPiece(nextPiece);
@@ -68,6 +70,7 @@ const doOp = (
                 controller.doGameOverCallbacks();
             } else {
                 board.updateBoard();
+                board.doUpdateBoardCallbacks();
             }
         }
     }

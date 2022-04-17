@@ -17,6 +17,7 @@ export class Controller {
     _totalErasedRowNum: number;
     _mode: ModeType;
     _gameOverCallbacks: {(): void;}[] = []
+    _updateBoardCallbacks: {(): void;}[] = []
 
     constructor() {
         this._playing = false;
@@ -50,7 +51,8 @@ export class Controller {
         if (!res) {
             this.doGameOverCallbacks()
         } else {
-            this._board.updateBoard()
+            this._board.updateBoard();
+            this._board.doUpdateBoardCallbacks();
             this._playing = true
             this._score = 0
             this._totalErasedRowNum = 0
@@ -67,9 +69,20 @@ export class Controller {
         }
     }
 
+    addUpdateBoardCallback = (callback: () => void): void => {
+        this._updateBoardCallbacks.push(callback)
+    }
+
+    doUpdateBoardCallbacks = (): void => {
+        for (const callback of this._updateBoardCallbacks) {
+            callback()
+        }
+    }
+
     drop = () => {
         this._board.drop();
-        this._board.updateBoard()
+        this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         this._board.eraseFilledRow()
         const res = this._board.newCurrentPiece(null);
 
@@ -77,12 +90,14 @@ export class Controller {
             this.doGameOverCallbacks()
         } else {
             this._board.updateBoard();
+            this._board.doUpdateBoardCallbacks();
         }
     }
 
     moveDown = () => {
         const doRes = this._board.do(PieceOp.Move, Direction.Down);
         this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         if (!doRes) {
             this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
@@ -90,6 +105,7 @@ export class Controller {
                 this.doGameOverCallbacks();
             } else {
                 this._board.updateBoard();
+                this._board.doUpdateBoardCallbacks();
             }
         }
     }
@@ -97,6 +113,7 @@ export class Controller {
     moveLeft = () => {
         const doRes = this._board.do(PieceOp.Move, Direction.Left);
         this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         if (!doRes) {
             this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
@@ -104,6 +121,7 @@ export class Controller {
                 this.doGameOverCallbacks()
             } else {
                 this._board.updateBoard();
+                this._board.doUpdateBoardCallbacks();
             }
         }
     }
@@ -111,6 +129,7 @@ export class Controller {
     moveRight = () => {
         const doRes = this._board.do(PieceOp.Move, Direction.Right);
         this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         if (!doRes) {
             this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
@@ -118,6 +137,7 @@ export class Controller {
                 this.doGameOverCallbacks()
             } else {
                 this._board.updateBoard();
+                this._board.doUpdateBoardCallbacks();
             }
         }
     }
@@ -125,6 +145,7 @@ export class Controller {
     rotateLeft = () => {
         const doRes = this._board.do(PieceOp.Rotate, Direction.Left);
         this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         if (!doRes) {
             this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
@@ -132,6 +153,7 @@ export class Controller {
                 this.doGameOverCallbacks()
             } else {
                 this._board.updateBoard();
+                this._board.doUpdateBoardCallbacks();
             }
         }
     }
@@ -139,6 +161,7 @@ export class Controller {
     rotateRight = () => {
         const doRes = this._board.do(PieceOp.Rotate, Direction.Right);
         this._board.updateBoard();
+        this._board.doUpdateBoardCallbacks();
         if (!doRes) {
             this._board.eraseFilledRow()
             const res = this._board.newCurrentPiece(null);
@@ -146,6 +169,7 @@ export class Controller {
                 this.doGameOverCallbacks()
             } else {
                 this._board.updateBoard();
+                this._board.doUpdateBoardCallbacks();
             }
         }
     }
