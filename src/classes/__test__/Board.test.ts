@@ -55,6 +55,12 @@ describe('Board test', () => {
             }
         }
     });
+    test('red block exists', () => {
+        let board = new Board(10, 30)
+        board.clearBoard(10, 30);
+        board.newCurrentPiece(null)
+        expect(board.hasRedBlock()).toBe(false);
+    });
 })
 describe('Piece shape test', () => {
     test('update a current piece to O and board', () => {

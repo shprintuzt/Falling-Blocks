@@ -209,4 +209,13 @@ export class Board {
         return true;
     }
 
+    hasRedBlock = (): boolean => {
+        for (let x = 0; x < this.width; ++x) {
+            for (let y = 0; y < this.height; ++y) {
+                if (this._board[x][y] == Cell.Red) return true;
+            }
+        }
+        return false;
+    }
+
 }
