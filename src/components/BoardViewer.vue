@@ -38,7 +38,7 @@ export default {
         onMounted(() => {
             controller.addUpdateBoardCallback(updateBoardCallback);
             controller.addGameOverCallback(gameOverCallback);
-            controller.board.addRowErasedCallback(rowErasedCallback);
+            controller.addRowErasedCallback(rowErasedCallback);
             window.addEventListener('keyup', (e) => {
                 if (e.key == 'ArrowRight') {
                     moveRight()
