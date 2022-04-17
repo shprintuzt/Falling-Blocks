@@ -70,7 +70,7 @@ export class Controller {
     }
 
     addUpdateBoardCallback = (callback: () => void): void => {
-        this._updateBoardCallbacks.push(callback)
+        this._board.addUpdateBoardCallback(callback);
     }
 
     doUpdateBoardCallbacks = (): void => {

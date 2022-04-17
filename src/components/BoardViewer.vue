@@ -36,7 +36,7 @@ export default {
         const erasedRowTotalNum = ref(0)
 
         onMounted(() => {
-            controller.board.addUpdateBoardCallback(updateBoardCallback);
+            controller.addUpdateBoardCallback(updateBoardCallback);
             controller.addGameOverCallback(gameOverCallback);
             controller.board.addRowErasedCallback(rowErasedCallback);
             window.addEventListener('keyup', (e) => {
