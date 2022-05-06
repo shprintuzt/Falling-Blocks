@@ -77,7 +77,7 @@ describe('Controller test', () => {
         controller.board.putBlock(4, 29);
         controller.moveDown()
     });
-    test('succeed to erase two rows', () => {
+    test('add six pieces and succeed to erase two rows', () => {
         let controller = new Controller()
         let erasedRowNum = 0
         const rowErasedCallback = (rowNum: number) => {
