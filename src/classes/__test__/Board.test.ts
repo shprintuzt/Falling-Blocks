@@ -456,6 +456,23 @@ describe('raise up red blocks', () => {
         const raiseUpRes = board.raiseUpRedLine();
         expect(raiseUpRes).toBe(false)
     });
+    test('put a block, raise up 27 lines, and put another block', () => {
+        let board = new Board(10, 30)
+        const res1 = board.newCurrentPiece(Piece.O);
+        expect(res1).toBe(true);
+        board.updateBoard();
+        board.drop();
+        board.updateBoard();
+
+        for (let i = 0; i < 27; ++i) {
+            const raiseUpRes = board.raiseUpRedLine(false);
+            board.updateBoard();
+            expect(raiseUpRes).toBe(true)
+        }
+
+        const res2 = board.newCurrentPiece(Piece.O);
+        expect(res2).toBe(false)
+    });
 });
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
