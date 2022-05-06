@@ -16,6 +16,7 @@ export class Controller {
     _playing: boolean;
     _score: number;
     _totalErasedRowNum: number;
+    _pieceNum: number;
     _mode: ModeType;
     _gameOverCallbacks: {(): void;}[] = []
     _updateBoardCallbacks: {(): void;}[] = []
@@ -25,6 +26,7 @@ export class Controller {
         this._playing = false;
         this._score = 0;
         this._totalErasedRowNum = 0;
+        this._pieceNum = 0;
         this._mode = Mode.None;
         this._board = new Board(10, 30);
     }
@@ -33,6 +35,7 @@ export class Controller {
     get playing() {return this._playing;}
     get score() {return this._score;}
     get totalErasedRowNum() {return this._totalErasedRowNum;}
+    get pieceNum() {return this._pieceNum;}
     get mode() {return this._mode}
 
     startNormal = () => {
@@ -60,6 +63,7 @@ export class Controller {
         this._playing = true
         this._score = 0
         this._totalErasedRowNum = 0
+        this._pieceNum = 0;
     }
 
     addGameOverCallback = (callback: () => void) => {
@@ -114,10 +118,11 @@ export class Controller {
     }
 
     postFixProcess = (random = true) => {
+        this._pieceNum += 1;
         const rowNum = this._board.eraseFilledRow();
         this.doRowErasedCallbacks(rowNum);
 
-        if (this.mode == Mode.Erasing && this._board.pieceNum % 10 == 0) {
+        if (this.mode == Mode.Erasing && this._pieceNum % 10 == 0) {
             const raiseUpRes = this._board.raiseUpRedLine();
             if (!raiseUpRes) {
                 this.doGameOverCallbacks();

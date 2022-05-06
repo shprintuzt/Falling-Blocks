@@ -14,13 +14,11 @@ export class Board {
     _board: CellType[][];
     _currentPiece: CurrentPiece;
     _shadow: CurrentPiece;
-    _pieceNum: number;
    
     constructor(width: number, height: number) {
         this._board = new Array(width);
         this._currentPiece = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
         this._shadow = new CurrentPiece(Piece.O, width / 2 - 1, height - 1)
-        this._pieceNum = 0;
         this.clearBoard(width, height)
     }
 
@@ -37,12 +35,7 @@ export class Board {
         return this._currentPiece
     }
 
-    get pieceNum() {
-        return this._pieceNum;
-    }
-
     clearBoard = (width: number, height: number): void => {
-        this._pieceNum = 0;
         for (let x = 0; x < width; ++x) {
             this._board[x] = new Array<CellType>(height);
             for (let y = 0; y < height; ++y) {
@@ -95,7 +88,6 @@ export class Board {
     }
 
     newCurrentPiece = (piece: PieceType | null): boolean => {
-        this._pieceNum += 1;
         if (piece == null)
             piece = getRandomPiece();
         this._currentPiece.reset(piece, this.width / 2 - 1, this.height - 1);

@@ -77,7 +77,7 @@ describe('Controller test', () => {
         controller.board.putBlock(4, 29);
         controller.moveDown()
     });
-    test('add six pieces and succeed to erase two rows', () => {
+    test('drop six pieces and succeed to erase two rows', () => {
         let controller = new Controller()
         let erasedRowNum = 0
         const rowErasedCallback = (rowNum: number) => {
@@ -87,10 +87,10 @@ describe('Controller test', () => {
         const res = controller.board.newCurrentPiece(Piece.O);
         expect(res).toBe(true)
 
-        expect(controller.board.pieceNum).toBe(1);
         controller.board.updateBoard();
 
         doOp(controller, controller.board, PieceOp.Move, Direction.Down, 29, false);
+        expect(controller.pieceNum).toBe(1);
 
         doOp(controller, controller.board, PieceOp.Move, Direction.Left, 4);
         doOp(controller, controller.board, PieceOp.Move, Direction.Down, 29, false);
@@ -104,7 +104,7 @@ describe('Controller test', () => {
         doOp(controller, controller.board, PieceOp.Move, Direction.Right, 4);
         controller.drop(false);
 
-        expect(controller.board.pieceNum).toBe(6)
+        expect(controller.pieceNum).toBe(5)
         expect(erasedRowNum).toBe(2)
     });
 });
@@ -118,19 +118,7 @@ const doOp = (
     random = true
 ): void => {
     for (let i = 0; i < cnt; ++i) {
-        const doRes = board.do(op, direction, random);
-        board.updateBoard();
-        controller.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const nextPiece = random ? getRandomPiece() : Piece.O
-            const res = board.newCurrentPiece(nextPiece);
-            if (!res) {
-                controller.doGameOverCallbacks();
-            } else {
-                board.updateBoard();
-                controller.doUpdateBoardCallbacks();
-            }
-        }
+        controller.do(op, direction, random);
     }
 }
 
