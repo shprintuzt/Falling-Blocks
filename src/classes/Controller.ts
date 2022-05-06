@@ -109,20 +109,24 @@ export class Controller {
         }
     }
 
-    do = (op: PieceOpType, direction: DirectionType) => {
+    do = (op: PieceOpType, direction: DirectionType, random = true) => {
         const doRes = this._board.do(op, direction);
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
-        if (!doRes) {
-            const rowNum = this._board.eraseFilledRow();
-            this.doRowErasedCallbacks(rowNum);
-            const res = this._board.newCurrentPiece(null);
-            if (!res) {
-                this.doGameOverCallbacks();
-            } else {
-                this._board.updateBoard();
-                this.doUpdateBoardCallbacks();
-            }
+
+        if (doRes) return;
+
+        // if do return false, piece position is fixed
+
+        const rowNum = this._board.eraseFilledRow();
+        this.doRowErasedCallbacks(rowNum);
+        const nextPiece = random ? null : Piece.O;
+        const res = this._board.newCurrentPiece(nextPiece);
+        if (!res) {
+            this.doGameOverCallbacks();
+        } else {
+            this._board.updateBoard();
+            this.doUpdateBoardCallbacks();
         }
     }
 
