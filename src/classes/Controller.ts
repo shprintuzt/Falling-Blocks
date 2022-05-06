@@ -122,7 +122,7 @@ export class Controller {
         const rowNum = this._board.eraseFilledRow();
         this.doRowErasedCallbacks(rowNum);
 
-        if (this.mode == Mode.Erasing && this._pieceNum % 10 == 0) {
+        if (this.mode == Mode.Erasing && this._pieceNum % 20 == 0) {
             const raiseUpRes = this._board.raiseUpRedLine();
             if (!raiseUpRes) {
                 this.doGameOverCallbacks();
