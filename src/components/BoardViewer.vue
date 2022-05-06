@@ -101,12 +101,16 @@ export default {
             controller.startNormal()
             playing.value = controller.playing
             cleared.value = false;
+            score.value = controller.score
+            erasedRowTotalNum.value = controller.totalErasedRowNum
         }
 
         const startRandom = () => {
             controller.startErasing()
             playing.value = controller.playing
             cleared.value = false;
+            score.value = controller.score
+            erasedRowTotalNum.value = controller.totalErasedRowNum
         }
 
         const drop = () => {
