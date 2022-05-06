@@ -94,19 +94,11 @@ export class Controller {
 
     drop = (random = true) => {
         this._board.drop();
+
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
-        const rowNum = this._board.eraseFilledRow();
-        this.doRowErasedCallbacks(rowNum);
-        const nextPiece = random ? null : Piece.O;
-        const res = this._board.newCurrentPiece(nextPiece);
 
-        if (!res) {
-            this.doGameOverCallbacks()
-        } else {
-            this._board.updateBoard();
-            this.doUpdateBoardCallbacks();
-        }
+        this.postFixProcess(random)
     }
 
     do = (op: PieceOpType, direction: DirectionType, random = true) => {
@@ -118,6 +110,10 @@ export class Controller {
 
         // if do return false, piece position is fixed
 
+        this.postFixProcess(random)
+    }
+
+    postFixProcess = (random = true) => {
         const rowNum = this._board.eraseFilledRow();
         this.doRowErasedCallbacks(rowNum);
         const nextPiece = random ? null : Piece.O;
