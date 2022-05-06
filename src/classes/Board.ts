@@ -88,6 +88,12 @@ export class Board {
         }
     }
 
+    fillRowRed = (y: number): void => {
+        for (let x = 0; x < this.width; ++x) {
+            this._board[x][y] = Cell.Red;
+        }
+    }
+
     newCurrentPiece = (piece: PieceType | null): boolean => {
         this._pieceNum += 1;
         if (piece == null)
@@ -216,6 +222,26 @@ export class Board {
             }
         }
         return false;
+    }
+
+    raiseUpRedLine = (random = true) => {
+        for (let x = 0; x < this.width; ++x) {
+            const cell = this.getCell(x, this.height - 1);
+            if (cell == Cell.Filled || cell == Cell.Red) {
+                return false;
+            }
+        }
+        for (let y = this.height - 1; y > 0; --y) {
+            for (let x = 0; x < this.width; ++x) {
+                this._board[x][y] = this._board[x][y - 1];
+            }
+        }
+        if (random) {
+            this.putBlocksRandomly(1);
+        } else {
+            this.fillRowRed(0);
+        }
+        return true
     }
 
 }

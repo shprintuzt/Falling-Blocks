@@ -436,6 +436,27 @@ describe('Initialize randomly', () => {
         isRandomBlock(board, 3)
     });
 });
+describe('raise up red blocks', () => {
+    test('put a block and then raise up 29 lines', () => {
+        let board = new Board(10, 30)
+        const res = board.newCurrentPiece(Piece.O);
+        expect(res).toBe(true);
+        board.updateBoard();
+        board.drop();
+        board.updateBoard();
+
+        for (let i = 0; i < 28; ++i) {
+            const raiseUpRes = board.raiseUpRedLine(false);
+            board.updateBoard();
+            expect(raiseUpRes).toBe(true)
+        }
+
+        isRandomBlock(board, 28);
+
+        const raiseUpRes = board.raiseUpRedLine();
+        expect(raiseUpRes).toBe(false)
+    });
+});
 
 const isFilled = (board: Board, positions: Point[], ys: number[] = []): void => {
     for (let x = 0; x < board.width; ++x) {
