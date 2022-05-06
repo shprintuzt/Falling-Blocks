@@ -7,6 +7,7 @@
         v-show="!playing">
         ブロック消しモード
     </button>
+    <p v-show="cleared">クリア！！！</p>
     <div v-show="playing">
         <canvas ref="canvas" width="100" height="300"/>
         <p>点数: {{ score }}</p>
@@ -26,12 +27,13 @@ import { Cell } from '@/classes/Board'
 import { Piece } from '@/classes/PieceType'
 import { ref } from 'vue'
 import { Direction, PieceOp } from '@/classes/CurrentPiece'
-import { Controller } from '@/classes/Controller'
+import { Controller, Mode } from '@/classes/Controller'
 export default {
     setup() {
         let controller: Controller = new Controller();
         const canvas = ref<HTMLCanvasElement>();
         const playing = ref(false);
+        const cleared = ref(false);
         const score = ref(0)
         const erasedRowTotalNum = ref(0)
 
@@ -67,6 +69,10 @@ export default {
         const rowErasedCallback = (rowNum: number) => {
             score.value += rowNum * rowNum * 100
             erasedRowTotalNum.value += rowNum
+            if (Mode.Erasing && !controller.board.hasRedBlock()) {
+                playing.value = false;
+                cleared.value = true;
+            }
         }
 
         const draw = () => {
@@ -94,11 +100,13 @@ export default {
         const startNormal = () => {
             controller.startNormal()
             playing.value = controller.playing
+            cleared.value = false;
         }
 
         const startRandom = () => {
             controller.startErasing()
             playing.value = controller.playing
+            cleared.value = false;
         }
 
         const drop = () => {
@@ -128,6 +136,7 @@ export default {
         return {
             canvas,
             playing,
+            cleared,
             score,
             erasedRowTotalNum,
             startNormal,
