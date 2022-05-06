@@ -116,6 +116,15 @@ export class Controller {
     postFixProcess = (random = true) => {
         const rowNum = this._board.eraseFilledRow();
         this.doRowErasedCallbacks(rowNum);
+
+        if (this.mode == Mode.Erasing && this._board.pieceNum % 10 == 0) {
+            const raiseUpRes = this._board.raiseUpRedLine();
+            if (!raiseUpRes) {
+                this.doGameOverCallbacks();
+                return;
+            }
+        }
+
         const nextPiece = random ? null : Piece.O;
         const res = this._board.newCurrentPiece(nextPiece);
         if (!res) {

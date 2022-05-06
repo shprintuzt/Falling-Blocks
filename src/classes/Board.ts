@@ -236,6 +236,11 @@ export class Board {
                 this._board[x][y] = this._board[x][y - 1];
             }
         }
+
+        for (let x = 0; x < this.width; ++x) {
+            this._board[x][0] = Cell.Empty;
+        }
+
         if (random) {
             this.putBlocksRandomly(1);
         } else {
