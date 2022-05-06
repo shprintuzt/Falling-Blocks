@@ -12,6 +12,7 @@
         <canvas ref="canvas" width="100" height="300"/>
         <p>点数: {{ score }}</p>
         <p>消した行数: {{ erasedRowTotalNum }}</p>
+        <p>落としたピース数: {{ pieceNum }}</p>
         <img @click="drop" src="@/assets/drop.svg"/>
         <img @click="moveDown" src="@/assets/arrow_down.svg"/>
         <img @click="moveLeft" src="@/assets/arrow_left.svg"/>
@@ -36,6 +37,7 @@ export default {
         const cleared = ref(false);
         const score = ref(0)
         const erasedRowTotalNum = ref(0)
+        const pieceNum = ref(0)
 
         onMounted(() => {
             controller.addUpdateBoardCallback(updateBoardCallback);
@@ -103,6 +105,7 @@ export default {
             cleared.value = false;
             score.value = controller.score
             erasedRowTotalNum.value = controller.totalErasedRowNum
+            pieceNum.value = controller.pieceNum
         }
 
         const startRandom = () => {
@@ -111,14 +114,17 @@ export default {
             cleared.value = false;
             score.value = controller.score
             erasedRowTotalNum.value = controller.totalErasedRowNum
+            pieceNum.value = controller.pieceNum
         }
 
         const drop = () => {
             controller.drop()
+            pieceNum.value = controller.pieceNum
         }
 
         const moveDown = () => {
             controller.moveDown()
+            pieceNum.value = controller.pieceNum
         }
 
         const moveLeft = () => {
@@ -143,6 +149,7 @@ export default {
             cleared,
             score,
             erasedRowTotalNum,
+            pieceNum,
             startNormal,
             startRandom,
             drop,
