@@ -54,7 +54,12 @@ export class Controller {
     }
 
     start = () => {
-        const res = this._board.newCurrentPiece(null);
+        for (let i = 0; i < 4; ++i) {
+            this.addNextPiece()
+        }
+
+        const nextPiece = this.popNextPiece()
+        const res = this._board.newCurrentPiece(nextPiece);
         if (!res) {
             console.log('error');
             return;
