@@ -148,6 +148,11 @@ describe('Controller test', () => {
         expect(controller.holdedPiece).toBe(currentPieceType)
         expect(controller.board.currentPiece._type).toBe(nextPieceType)
 
+        controller.hold();
+
+        expect(controller.holdedPiece).toBe(nextPieceType);
+        expect(controller.board.currentPiece._type).toBe(currentPieceType);
+
         expect
 
     });

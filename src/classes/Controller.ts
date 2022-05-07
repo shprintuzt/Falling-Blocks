@@ -1,6 +1,6 @@
-import { Board } from "./Board";
+import { Board, Cell } from "./Board";
 import { Direction, DirectionType, PieceOp, PieceOpType } from "./CurrentPiece";
-import { getRandomPiece, Piece, PieceType } from "./PieceType";
+import { getPieceShape, getRandomPiece, Piece, PieceType } from "./PieceType";
 
 export const Mode = {
     None: 0,
@@ -129,18 +129,34 @@ export class Controller {
 
     hold = (random = true): void => {
         this.board.eraseCurrentPiece();
-        this._holdedPiece = this.board.currentPiece._type;
 
-        const addedPiece = random ? null : Piece.O;
-        this.addNextPiece(addedPiece);
-        const nextPiece = this.popNextPiece();
-        const res = this._board.newCurrentPiece(nextPiece);
-        if (!res) {
-            this.doGameOverCallbacks();
-        } else {
-            this._board.updateBoard();
-            this.doUpdateBoardCallbacks();
+        if (this._holdedPiece == null) {
+            this._holdedPiece = this.board.currentPiece._type;
+
+            const addedPiece = random ? null : Piece.O;
+            this.addNextPiece(addedPiece);
+            const nextPiece = this.popNextPiece();
+            const res = this._board.newCurrentPiece(nextPiece);
+            if (!res) {
+                this.doGameOverCallbacks();
+            } else {
+                this._board.updateBoard();
+                this.doUpdateBoardCallbacks();
+            }
+            return;
         }
+
+        const tmpPiece = this.board.currentPiece._type;
+        this.board.currentPiece._type = this.holdedPiece as PieceType;
+        const pieceShape = getPieceShape(this.board.currentPiece);
+        for (const pos of pieceShape) {
+            const cellType = this.board.getCell(pos.x, pos.y);
+            if (cellType == Cell.Filled || cellType == Cell.Red) {
+                this.board.currentPiece._type = tmpPiece;
+                return;
+            }
+        }
+        this._holdedPiece = tmpPiece;
     }
 
     drop = (random = true) => {
