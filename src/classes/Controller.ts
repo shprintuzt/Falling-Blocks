@@ -54,6 +54,7 @@ export class Controller {
     }
 
     start = () => {
+        this.clearNextPieces()
         for (let i = 0; i < 4; ++i) {
             this.addNextPiece()
         }
@@ -101,6 +102,10 @@ export class Controller {
         for (const callback of this._rowErasedCallbacks) {
             callback(rowNum);
         }
+    }
+
+    clearNextPieces = () => {
+        this._nextPieces = []
     }
 
     addNextPiece = (piece: PieceType | null = null) => {
