@@ -157,6 +157,8 @@ export class Controller {
             }
         }
         this._holdedPiece = tmpPiece;
+        this._board.updateBoard();
+        this.doUpdateBoardCallbacks();
     }
 
     drop = (random = true) => {
