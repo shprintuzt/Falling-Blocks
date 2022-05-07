@@ -44,6 +44,7 @@ export class Board {
         }
     }
 
+    // for test
     putBlock = (x: number, y: number): void => {
         this._board[x][y] = Cell.Filled;
     }
@@ -57,6 +58,7 @@ export class Board {
         }
     }
 
+    // random util
     pickRandomly = (array: number[], num: number): number[] => {
         const result = [];
         for (let i = 0; i < num; ++i) {
@@ -67,6 +69,7 @@ export class Board {
         return result;
     }
 
+    // random util
     getRandomInt = (max: number): number => {
         return Math.floor(Math.random() * max);
     }
@@ -75,12 +78,14 @@ export class Board {
         return this._board[x][y];
     }
 
+    // for test
     fillRow = (y: number): void => {
         for (let x = 0; x < this.width; ++x) {
             this._board[x][y] = Cell.Filled;
         }
     }
 
+    // for test
     fillRowRed = (y: number): void => {
         for (let x = 0; x < this.width; ++x) {
             this._board[x][y] = Cell.Red;
