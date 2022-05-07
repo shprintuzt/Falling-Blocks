@@ -146,13 +146,18 @@ export class Controller {
             return;
         }
 
-        const tmpPiece = this.board.currentPiece._type;
-        this.board.currentPiece._type = this.holdedPiece as PieceType;
-        const pieceShape = getPieceShape(this.board.currentPiece);
+        const tmpPiece = this._board.currentPiece._type;
+        this._board._currentPiece._type = this.holdedPiece as PieceType;
+        const pieceShape = getPieceShape(this._board._currentPiece);
         for (const pos of pieceShape) {
-            const cellType = this.board.getCell(pos.x, pos.y);
+            if (pos.x < 0 || pos.x >= this._board.width
+                || pos.y < 0 || pos.y >= this._board.height) {
+                this._board._currentPiece._type = tmpPiece;
+                return;
+            }
+            const cellType = this._board.getCell(pos.x, pos.y);
             if (cellType == Cell.Filled || cellType == Cell.Red) {
-                this.board.currentPiece._type = tmpPiece;
+                this._board._currentPiece._type = tmpPiece;
                 return;
             }
         }
