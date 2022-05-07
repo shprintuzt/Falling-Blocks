@@ -1,6 +1,6 @@
 import { Board } from "./Board";
 import { Direction, DirectionType, PieceOp, PieceOpType } from "./CurrentPiece";
-import { Piece } from "./PieceType";
+import { getRandomPiece, Piece, PieceType } from "./PieceType";
 
 export const Mode = {
     None: 0,
@@ -18,6 +18,7 @@ export class Controller {
     _totalErasedRowNum: number;
     _pieceNum: number;
     _mode: ModeType;
+    _nextPieces: PieceType[];
     _gameOverCallbacks: {(): void;}[] = []
     _updateBoardCallbacks: {(): void;}[] = []
     _rowErasedCallbacks: {(rowNum: number): void;}[] = []
@@ -28,6 +29,7 @@ export class Controller {
         this._totalErasedRowNum = 0;
         this._pieceNum = 0;
         this._mode = Mode.None;
+        this._nextPieces = [];
         this._board = new Board(10, 30);
     }
 
@@ -96,6 +98,22 @@ export class Controller {
         }
     }
 
+    addNextPiece = (piece: PieceType | null = null) => {
+        if (piece == null)
+            piece = getRandomPiece();
+            
+        this._nextPieces.push(piece)
+    }
+
+    popNextPiece = (): PieceType => {
+        if (this._nextPieces.length < 1) {
+            console.log('error')
+        }
+
+        const nextPiece = this._nextPieces.shift() as PieceType;
+        return nextPiece;
+    }
+
     drop = (random = true) => {
         this._board.drop();
 
@@ -122,13 +140,13 @@ export class Controller {
         const rowNum = this._board.eraseFilledRow();
         this.doRowErasedCallbacks(rowNum);
 
-        if (this.mode == Mode.Erasing && this._pieceNum % 20 == 0) {
-            const raiseUpRes = this._board.raiseUpRedLine();
-            if (!raiseUpRes) {
-                this.doGameOverCallbacks();
-                return;
-            }
-        }
+        // if (this.mode == Mode.Erasing && this._pieceNum % 30 == 0) {
+        //     const raiseUpRes = this._board.raiseUpRedLine();
+        //     if (!raiseUpRes) {
+        //         this.doGameOverCallbacks();
+        //         return;
+        //     }
+        // }
 
         const nextPiece = random ? null : Piece.O;
         const res = this._board.newCurrentPiece(nextPiece);

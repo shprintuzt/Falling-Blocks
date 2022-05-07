@@ -107,6 +107,16 @@ describe('Controller test', () => {
         expect(controller.pieceNum).toBe(5)
         expect(erasedRowNum).toBe(2)
     });
+    test('show three pieces to be used', () => {
+        let controller = new Controller()
+
+        controller.addNextPiece(Piece.L)
+        controller.addNextPiece(Piece.LR)
+        controller.addNextPiece(Piece.Z)
+
+        controller.board.newCurrentPiece(controller.popNextPiece())
+        expect(controller.board.currentPiece._type).toBe(Piece.L)
+    });
 });
 
 const doOp = (
