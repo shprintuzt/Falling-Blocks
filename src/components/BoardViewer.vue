@@ -9,7 +9,7 @@
     </button>
     <p v-show="cleared">クリア！！！</p>
     <div v-show="playing">
-        <canvas ref="canvas" width="150" height="300"/>
+        <canvas ref="canvas" width="200" height="300"/>
         <p>点数: {{ score }}</p>
         <p>消した行数: {{ erasedRowTotalNum }}</p>
         <p>落としたピース数: {{ pieceNum }}</p>
@@ -25,7 +25,7 @@
 <script lang="ts">
 import { onMounted } from '@vue/runtime-core'
 import { Cell } from '@/classes/Board'
-import { getPieceShapeDegree0, Piece } from '@/classes/PieceType'
+import { getPieceShape, getPieceShapeDegree0, Piece, PieceType } from '@/classes/PieceType'
 import { ref } from 'vue'
 import { Direction, PieceOp } from '@/classes/CurrentPiece'
 import { Controller, Mode } from '@/classes/Controller'
@@ -54,8 +54,10 @@ export default {
                     drop()
                 } else if (e.key == 'z') {
                     rotateLeft()
-                } else if (e.key == 'x') {
+                } else if (e.key == 'c') {
                     rotateRight()
+                } else if (e.key == 'x') {
+                    hold()
                 }
             })
         })
@@ -94,7 +96,7 @@ export default {
                     } else {
                         ctx.fillStyle = 'lightgray';
                     }
-                    ctx.fillRect(10 * x, 10 * (29 - y), 9, 9);
+                    ctx.fillRect(10 * x + 50, 10 * (29 - y), 9, 9);
                 }
             }
 
@@ -104,10 +106,19 @@ export default {
                 ctx.fillStyle = 'black';
                 pieceShape.forEach((pos) => {
                     if (ctx == null) return;
-                    ctx.fillRect(10 * pos.x + 110, 10 * (1 - pos.y) + 10 + index * 30, 9, 9);
+                    ctx.fillRect(10 * pos.x + 160, 10 * (1 - pos.y) + 10 + index * 30, 9, 9);
                 })
             })
 
+            if (controller._holdedPiece != null) {
+                const holdedPieceShape = getPieceShapeDegree0(controller._holdedPiece as PieceType)
+                if (ctx == null) return;
+                ctx.fillStyle = 'black';
+                holdedPieceShape.forEach((pos) => {
+                    if (ctx == null) return;
+                    ctx.fillRect(10 * pos.x, 10 * (1 - pos.y) + 10, 9, 9);
+                })
+            }
         }
 
         const startNormal = () => {
@@ -154,6 +165,10 @@ export default {
             controller.rotateRight()
         }
 
+        const hold = () => {
+            controller.hold()
+        }
+
         return {
             canvas,
             playing,
@@ -169,6 +184,7 @@ export default {
             moveRight,
             rotateLeft,
             rotateRight,
+            hold,
         }
     }
 }
