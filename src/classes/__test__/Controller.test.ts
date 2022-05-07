@@ -115,7 +115,23 @@ describe('Controller test', () => {
         controller.addNextPiece(Piece.Z)
 
         controller.board.newCurrentPiece(controller.popNextPiece())
+        controller.addNextPiece(Piece.S)
         expect(controller.board.currentPiece._type).toBe(Piece.L)
+
+        controller.drop();
+        expect(controller.board.currentPiece._type).toBe(Piece.LR)
+
+        const thirdPiece = controller._nextPieces[2];
+
+        controller.drop();
+        expect(controller.board.currentPiece._type).toBe(Piece.Z);
+
+        controller.drop();
+        expect(controller.board.currentPiece._type).toBe(Piece.S);
+
+        controller.drop();
+        expect(controller.board.currentPiece._type).toBe(thirdPiece);
+        
     });
 });
 

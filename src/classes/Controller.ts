@@ -148,7 +148,9 @@ export class Controller {
         //     }
         // }
 
-        const nextPiece = random ? null : Piece.O;
+        const addedPiece = random ? null : Piece.O;
+        this.addNextPiece(addedPiece);
+        const nextPiece = this.popNextPiece();
         const res = this._board.newCurrentPiece(nextPiece);
         if (!res) {
             this.doGameOverCallbacks();
