@@ -133,6 +133,24 @@ describe('Controller test', () => {
         expect(controller.board.currentPiece._type).toBe(thirdPiece);
         
     });
+    test('hold', () => {
+        let controller = new Controller()
+
+        controller.startNormal()
+
+        const currentPieceType = controller.board.currentPiece._type
+        const nextPieceType = controller._nextPieces[0]
+
+        expect(controller.holdedPiece).toBe(null)
+
+        controller.hold()
+
+        expect(controller.holdedPiece).toBe(currentPieceType)
+        expect(controller.board.currentPiece._type).toBe(nextPieceType)
+
+        expect
+
+    });
 });
 
 const doOp = (

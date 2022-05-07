@@ -19,6 +19,7 @@ export class Controller {
     _pieceNum: number;
     _mode: ModeType;
     _nextPieces: PieceType[];
+    _holdedPiece: PieceType | null
     _gameOverCallbacks: {(): void;}[] = []
     _updateBoardCallbacks: {(): void;}[] = []
     _rowErasedCallbacks: {(rowNum: number): void;}[] = []
@@ -30,6 +31,7 @@ export class Controller {
         this._pieceNum = 0;
         this._mode = Mode.None;
         this._nextPieces = [];
+        this._holdedPiece = null;
         this._board = new Board(10, 30);
     }
 
@@ -39,6 +41,7 @@ export class Controller {
     get totalErasedRowNum() {return this._totalErasedRowNum;}
     get pieceNum() {return this._pieceNum;}
     get mode() {return this._mode}
+    get holdedPiece() {return this._holdedPiece;}
 
     startNormal = () => {
         this._mode = Mode.Normal;
@@ -122,6 +125,22 @@ export class Controller {
 
         const nextPiece = this._nextPieces.shift() as PieceType;
         return nextPiece;
+    }
+
+    hold = (random = true): void => {
+        this.board.eraseCurrentPiece();
+        this._holdedPiece = this.board.currentPiece._type;
+
+        const addedPiece = random ? null : Piece.O;
+        this.addNextPiece(addedPiece);
+        const nextPiece = this.popNextPiece();
+        const res = this._board.newCurrentPiece(nextPiece);
+        if (!res) {
+            this.doGameOverCallbacks();
+        } else {
+            this._board.updateBoard();
+            this.doUpdateBoardCallbacks();
+        }
     }
 
     drop = (random = true) => {
