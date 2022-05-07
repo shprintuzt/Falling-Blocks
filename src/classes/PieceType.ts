@@ -18,7 +18,12 @@ export function getRandomPiece() {
     return values[Math.floor(Math.random() * values.length)];
 }
 
-export const getPieceShape = (currentPiece: CurrentPiece) => {
+export const getPieceShapeDegree0 = (piece: PieceType) => {
+    const currentPiece = new CurrentPiece(piece, 1, 1, 0);
+    return getPieceShape(currentPiece)
+}
+
+export const getPieceShape = (currentPiece: CurrentPiece): any[] => {
     const x = currentPiece.x;
     const y = currentPiece.y;
     const piece = currentPiece.type;

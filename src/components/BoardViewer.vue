@@ -9,7 +9,7 @@
     </button>
     <p v-show="cleared">クリア！！！</p>
     <div v-show="playing">
-        <canvas ref="canvas" width="100" height="300"/>
+        <canvas ref="canvas" width="150" height="300"/>
         <p>点数: {{ score }}</p>
         <p>消した行数: {{ erasedRowTotalNum }}</p>
         <p>落としたピース数: {{ pieceNum }}</p>
@@ -25,7 +25,7 @@
 <script lang="ts">
 import { onMounted } from '@vue/runtime-core'
 import { Cell } from '@/classes/Board'
-import { Piece } from '@/classes/PieceType'
+import { getPieceShapeDegree0, Piece } from '@/classes/PieceType'
 import { ref } from 'vue'
 import { Direction, PieceOp } from '@/classes/CurrentPiece'
 import { Controller, Mode } from '@/classes/Controller'
@@ -97,6 +97,17 @@ export default {
                     ctx.fillRect(10 * x, 10 * (29 - y), 9, 9);
                 }
             }
+
+            controller._nextPieces.forEach((piece, index) => {
+                const pieceShape = getPieceShapeDegree0(piece)
+                if (ctx == null) return;
+                ctx.fillStyle = 'black';
+                pieceShape.forEach((pos) => {
+                    if (ctx == null) return;
+                    ctx.fillRect(10 * pos.x + 110, 10 * (1 - pos.y) + 10 + index * 30, 9, 9);
+                })
+            })
+
         }
 
         const startNormal = () => {
