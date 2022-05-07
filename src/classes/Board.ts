@@ -49,9 +49,9 @@ export class Board {
         this._board[x][y] = Cell.Filled;
     }
 
-    putBlocksRandomly = (height: number): void => {
+    putBlocksRandomly = (height: number, blockPerRow = 6): void => {
         for (let y = 0; y < height; ++y) {
-            const randomNums = this.pickRandomly([...Array(10).keys()], 6)
+            const randomNums = this.pickRandomly([...Array(10).keys()], blockPerRow)
             for (const x of randomNums) {
                 this._board[x][y] = Cell.Red;
             }
@@ -82,13 +82,6 @@ export class Board {
     fillRow = (y: number): void => {
         for (let x = 0; x < this.width; ++x) {
             this._board[x][y] = Cell.Filled;
-        }
-    }
-
-    // for test
-    fillRowRed = (y: number): void => {
-        for (let x = 0; x < this.width; ++x) {
-            this._board[x][y] = Cell.Red;
         }
     }
 
@@ -241,7 +234,7 @@ export class Board {
         if (random) {
             this.putBlocksRandomly(1);
         } else {
-            this.fillRowRed(0);
+            this.putBlocksRandomly(1, 10);
         }
         return true
     }
