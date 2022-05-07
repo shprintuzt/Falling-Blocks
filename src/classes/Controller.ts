@@ -157,6 +157,7 @@ export class Controller {
             }
         }
         this._holdedPiece = tmpPiece;
+        this._board.updateShadow();
         this._board.updateBoard();
         this.doUpdateBoardCallbacks();
     }
