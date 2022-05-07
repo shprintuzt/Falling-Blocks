@@ -71,7 +71,7 @@ export default {
         const rowErasedCallback = (rowNum: number) => {
             score.value += rowNum * rowNum * 100
             erasedRowTotalNum.value += rowNum
-            if (Mode.Erasing && !controller.board.hasRedBlock()) {
+            if (controller.mode == Mode.Erasing && !controller.board.hasRedBlock()) {
                 playing.value = false;
                 cleared.value = true;
             }
