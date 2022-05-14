@@ -23,14 +23,10 @@ export const getPieceShapeDegree0 = (piece: PieceType) => {
     return getPieceShape(currentPiece)
 }
 
-export const getPieceShape = (currentPiece: CurrentPiece): any[] => {
-    const x = currentPiece.x;
-    const y = currentPiece.y;
-    const piece = currentPiece.type;
-    const degree = currentPiece.degree;
-    const pieceOffset = PieceOffsets[piece][degree].slice()
+export const getPieceShape = (piece: CurrentPiece): any[] => {
+    const pieceOffset = PieceOffsets[piece.type][piece.degree].slice()
     const pieceShape = pieceOffset.map((value: {x: number, y: number}) => {
-        return {x: x + value.x, y: y + value.y}
+        return {x: piece.x + value.x, y: piece.y + value.y}
     })
     return pieceShape
 }
