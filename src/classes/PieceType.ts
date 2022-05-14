@@ -28,134 +28,198 @@ export const getPieceShape = (currentPiece: CurrentPiece): any[] => {
     const y = currentPiece.y;
     const piece = currentPiece.type;
     const degree = currentPiece.degree;
-    switch (piece) {
-        case Piece.O:
-            return [
-                {x: x, y: y},
-                {x: x + 1, y: y},
-                {x: x, y: y - 1},
-                {x: x + 1, y: y - 1}]
-        case Piece.I:
-            if ([0, 180].includes(degree)) {
-                return [
-                    {x: x - 1, y: y},
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 2, y: y}]
-            } else {
-                return [
-                    {x: x, y: y},
-                    {x: x, y: y - 1},
-                    {x: x, y: y - 2},
-                    {x: x, y: y - 3}]
-            }
-        case Piece.Z:
-            if ([0, 180].includes(degree)) {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 2, y: y - 1}]
-            } else {
-                return [
-                    {x: x + 1, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x, y: y - 2}]
-            }
-        case Piece.S:
-            if ([0, 180].includes(degree)) {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x - 1, y: y - 1},
-                    {x: x, y: y - 1}]
-            } else {
-                return [
-                    {x: x, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 1, y: y - 2}]
-            }
-        case Piece.L:
-            if (0 == degree) {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 2, y: y},
-                    {x: x, y: y - 1}]
-            } else if (90 == degree) {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 1, y: y - 2}]
-            } else if (180 == degree) {
-                return [
-                    {x: x + 1, y: y},
-                    {x: x - 1, y: y - 1},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1}]
-            } else {
-                return [
-                    {x: x, y: y},
-                    {x: x, y: y - 1},
-                    {x: x, y: y - 2},
-                    {x: x + 1, y: y - 2}]
-            }
-        case Piece.LR:
-            if (0 == degree) {
-                return [
-                    {x: x - 1, y: y},
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 1, y: y - 1}]
-            } else if (90 == degree) {
-                return [
-                    {x: x + 1, y: y},
-                    {x: x + 1, y: y - 1},
-                    {x: x, y: y - 2},
-                    {x: x + 1, y: y - 2}]
-            } else if (180 == degree) {
-                return [
-                    {x: x, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 2, y: y - 1}]
-            } else {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x, y: y - 1},
-                    {x: x, y: y - 2}]
-            }
-        case Piece.T:
-            if (0 == degree) {
-                return [
-                    {x: x, y: y},
-                    {x: x + 1, y: y},
-                    {x: x + 2, y: y},
-                    {x: x + 1, y: y - 1}]
-            } else if (90 == degree) {
-                return [
-                    {x: x + 1, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 1, y: y - 2}]
-            } else if (180 == degree) {
-                return [
-                    {x: x + 1, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x + 2, y: y - 1}]
-            } else {
-                return [
-                    {x: x, y: y},
-                    {x: x, y: y - 1},
-                    {x: x + 1, y: y - 1},
-                    {x: x, y: y - 2}]
-            }
-        default:
-            return []
+    const pieceOffset = PieceOffsets[piece][degree].slice()
+    const pieceShape = pieceOffset.map((value: {x: number, y: number}) => {
+        return {x: x + value.x, y: y + value.y}
+    })
+    return pieceShape
+}
+
+const PieceOffsets: {
+    [key in PieceType]: {
+        [key: number]:  {x: number, y: number}[]
     }
+} = {
+    [Piece.O]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+        ],
+        [90]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+        ],
+        [180]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+        ],
+    },
+    [Piece.I]: {
+        [0]: [
+            {x: -1, y: 0},
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 2, y: 0},
+        ],
+        [90]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 0, y: -2},
+            {x: 0, y: -3},
+        ],
+        [180]: [
+            {x: -1, y: 0},
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 2, y: 0},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 0, y: -2},
+            {x: 0, y: -3},
+        ],
+    },
+    [Piece.Z]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+            {x: 2, y: -1},
+        ],
+        [90]: [
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 0, y: -2},
+        ],
+        [180]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+            {x: 2, y: -1},
+        ],
+        [270]: [
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 0, y: -2},
+        ],
+    },
+    [Piece.S]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: -1, y: -1},
+            {x: 0, y: -1},
+        ],
+        [90]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 1, y: -2},
+        ],
+        [180]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: -1, y: -1},
+            {x: 0, y: -1},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 1, y: -2},
+        ],
+    },
+    [Piece.L]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 2, y: 0},
+            {x: 0, y: -1}
+        ],
+        [90]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+            {x: 1, y: -2},
+        ],
+        [180]: [
+            {x: 1, y: 0},
+            {x: -1, y: -1},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 0, y: -2},
+            {x: 1, y: -2},
+        ],
+    },
+    [Piece.LR]: {
+        [0]: [
+            {x: -1, y: 0},
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+        ],
+        [90]: [
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+            {x: 0, y: -2},
+            {x: 1, y: -2},
+        ],
+        [180]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 2, y: -1},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 0, y: -2},
+        ],
+    },
+    [Piece.T]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 1, y: 0},
+            {x: 2, y: 0},
+            {x: 1, y: -1},
+        ],
+        [90]: [
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 1, y: -2},
+        ],
+        [180]: [
+            {x: 1, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 2, y: -1},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 0, y: -2},
+        ],
+    },
 }
