@@ -8,6 +8,7 @@ export const Piece = {
     L: 4,
     LR: 5,
     T: 6,
+    Y: 7,
 } as const;
 
 export type PieceType = typeof Piece[keyof typeof Piece];
@@ -215,6 +216,32 @@ const PieceOffsets: {
             {x: 0, y: 0},
             {x: 0, y: -1},
             {x: 1, y: -1},
+            {x: 0, y: -2},
+        ],
+    },
+    [Piece.Y]: {
+        [0]: [
+            {x: 0, y: 0},
+            {x: 2, y: 0},
+            {x: 1, y: -1},
+            {x: 1, y: -2},
+        ],
+        [90]: [
+            {x: 2, y: 0},
+            {x: 0, y: -1},
+            {x: 1, y: -1},
+            {x: 2, y: -2},
+        ],
+        [180]: [
+            {x: 1, y: 0},
+            {x: 1, y: -1},
+            {x: 0, y: -2},
+            {x: 2, y: -2},
+        ],
+        [270]: [
+            {x: 0, y: 0},
+            {x: 1, y: -1},
+            {x: 2, y: -1},
             {x: 0, y: -2},
         ],
     },
